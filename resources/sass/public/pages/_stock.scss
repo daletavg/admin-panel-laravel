@@ -1,0 +1,140 @@
+.stock-title {
+    position: relative;
+    display: inline-block;
+
+    span {
+        position: relative;
+        z-index: 2;
+        color: $white;
+        font-size: 25px;
+        font-weight: 300;
+        letter-spacing: -0.42px;
+        line-height: 24px;
+    }
+
+    &:after {
+        content: "";
+        width: 126px;
+        height: 28px;
+        background-color: $orange;
+        position: absolute;
+        top: 12px;
+        right: -9px;
+    }
+}
+
+.stock__item {
+    padding: 20px;
+    background-color: #f6f6f6;
+    margin-bottom: 20px;
+}
+
+.stock-item-title {
+    line-height: 25px;
+    font-size: 20px;
+    margin-bottom: 22px;
+}
+
+.stock-item-title-desc {
+    line-height: 25px;
+}
+
+.stock-text {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+.stock-new-price,
+.stock-old-price {
+    display: block;
+    line-height: 18px;
+    margin-bottom: 10px;
+}
+
+.stock-price-box {
+    margin-bottom: 20px;
+}
+
+.stock-new-price {
+    font-size: 20px;
+}
+
+.stock-old-price {
+    font-size: 16px;
+    text-decoration: line-through;
+}
+
+.stock-type {
+    font-size: 12px;
+    letter-spacing: 1.63px;
+    color: $white;
+    padding: 8px 0;
+    display: block;
+    background-color: $orange;
+    text-align: center;
+    max-width: 120px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.stock-img-box {
+    width: 100%;
+    max-height: 210px;
+    img {
+        width: calc(100% + 40px);
+        height: 100%;
+        object-fit: cover;
+        margin-left: -20px;
+        margin-top: -20px;
+    }
+}
+
+.show-more {
+    margin-top: 10px;
+    margin-bottom: -30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show-more-link {
+    color: #979797;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    margin-bottom: 30px;
+
+    &:hover {
+        color: #979797;
+    }
+}
+
+.stock-decor {
+    position: absolute;
+}
+
+.stock-decor-1 {
+    top: 243px;
+    right: -60px;
+}
+
+.stock-decor-2 {
+    bottom: 255px;
+    left: 0;
+}
+@media (min-width: 768px) {
+    .stock-img-box {
+        img {
+            width: 100%;
+            margin: 0;
+            transform: scale(1.165);
+        }
+    }
+    .stock-type {
+        margin: 0 -5px;
+    }
+    .stock-price-box {
+        margin: 0 -5px;
+    }
+}

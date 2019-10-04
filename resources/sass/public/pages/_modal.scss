@@ -1,0 +1,215 @@
+
+#phoneModal {
+  .modal-body {
+    padding: 42px 22px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feedBack-modal-title {
+    color: $black;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+  }
+
+  .modal-text {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 38px;
+    &-decor {
+      margin-bottom: 60px;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        width: 200%;
+        height: 1px;
+        background-color: #d8d8d8;
+      }
+
+    }
+  }
+
+  .feedBack-modal-form {
+    max-width: 270px;
+    margin: 0 auto;
+  }
+
+  .feedBack-modal-input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 13px 15px 11px;
+    border: 1px solid #979797;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1;
+    color: #979797;
+
+    &::placeholder {
+      color: #e2ab1c;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: -0.27px;
+    }
+  }
+}
+
+.maxWth730 {
+  max-width: 730px;
+}
+
+.custom-cross {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  outline: none !important;
+
+  span {
+    font-size: 34px;
+    font-weight: 100;
+    color: $orange!important;;
+  }
+;
+
+}
+
+.btn-custom {
+  width: 246px;
+  height: 40px;
+  border-radius: 23px;
+  background-color: #e2ab1c;
+  display: flex;
+  justify-content: center;
+  padding: 9px 0 10px;
+  color: $white;
+  outline: none !important;
+  margin-bottom: 75px;
+  border: none;
+}
+
+.modal-sm-desc {
+  color: $black;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 18px;
+  text-align: left;
+  margin-bottom: 0;
+  position: relative;
+  max-width: 525px;
+  &:after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    right: 0;
+    width: 200%;
+    height: 1px;
+    background-color: #d8d8d8;
+  }
+}
+
+.modal-decor-line {
+
+}
+
+@media (min-width: 992px) {
+  #phoneModal {
+    .modal-body {
+      padding: 60px  25px;
+    }
+
+    .feedBack-modal-title {
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .modal-text {
+      margin-bottom: 68px;
+      font-size: 20px;
+    }
+
+    .feedBack-modal-form {
+      max-width: 350px;
+    }
+    .modal-sm-desc{
+      font-size: 14px;
+    }
+  }
+}
+.themeNight #phoneModal .modal-body{
+  background-color:rgba(0,0,0,0.8);
+  .feedBack-modal-title {
+    color: $white;
+  }
+  .feedBack-modal-input{
+    background-color:rgba(255,255,255,0.3);
+  }
+}
+#callModal {
+  .border-bottom {
+      border-bottom: 1px solid #e5e5e5 !important;
+      &:last-child {
+          border-bottom: none;
+      }
+  }
+  .phone-mobile-title {
+      color: #8f8e94;
+      font-size: 14px;
+      font-weight: 500;
+  }
+  .modal-content {
+      transform: translateY(-50px);
+      background-color: transparent;
+      font-size: 20px;
+      position: relative;
+      border: none;
+      &-box {
+          position: relative;
+          overflow: hidden;
+          border-radius: 13px;
+      }
+      .phone {
+          color: #f4c247;
+          font-size: 16px;
+      }
+  }
+  .modal-header {
+      position: relative;
+      border-bottom: 1px solid #e5e5e5 !important;
+      p {
+          position: relative;
+          z-index: 1;
+      }
+      &:before {
+          content: "";
+          width: 100%;
+          height: 295px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background-color: #fff;
+          opacity: 0.5;
+      }
+      &:after {
+          content: "";
+          width: 100%;
+          height: 295px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          backdrop-filter: blur(20px);
+          background-color: rgba(252, 252, 252, 1);
+      }
+  }
+  .modal-footer {
+      transform: translateY(15px);
+      background-color: rgba(252, 252, 252, 1);
+      border-radius: 13px;
+      span {
+          color: #f4c247;
+          font-size: 16px;
+      }
+  }
+}
