@@ -9,16 +9,9 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
     });
     Route::group(['middleware'=>'auth'],function (){
         Route::get('/', 'IndexController@index')->name('index');
-        Route::resource('stocks', 'StockController',['except'=>['show']]);
-        Route::resource('services', 'ServiceController',['except'=>['show','create','store','destroy']]);
-        Route::group(['as'=>'settings.'],function () {
-            Route::get('settings', 'SettingsController@index')->name('index');
-            Route::put('settings', 'SettingsController@update')->name('update-all');
-        });
-        Route::group(['as'=>'settings.'],function () {
-            Route::get('settings', 'SettingsController@index')->name('index');
-            Route::put('settings', 'SettingsController@update')->name('update-all');
-        });
+
+        Route::resource('/posters','PosterController',['except'=>['show']]);
+
         Route::group(['as'=>'profile.'],function () {
             Route::get('profile', 'ProfileController@index')->name('index');
             Route::put('profile/update-user-data/{user}', 'ProfileController@updateUserData')->name('update.data');

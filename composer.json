@@ -50,7 +50,8 @@
             "app/Helpers/ImageHelper.php",
             "app/Helpers/VideoHelper.php",
             "app/Helpers/SettingsHelper.php",
-            "app/Helpers/Mailer.php"
+            "app/Helpers/Mailer.php",
+            "app/Helpers/LocalizationHelper.php"
         ]
     },
     "autoload-dev": {

@@ -2005,7 +2005,7 @@ Object(_mainPage__WEBPACK_IMPORTED_MODULE_0__["onResize"])($('.stock-img-box'));
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/kostia/Documents/1618_back/resources/js/public/index.js */"./resources/js/public/index.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/js/public/index.js */"./resources/js/public/index.js");
 
 
 /***/ })

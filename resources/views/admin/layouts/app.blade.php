@@ -21,7 +21,7 @@
     <div class="sidebar" data-color="purple" data-background-color="white"
          data-image="">
         <div class="logo text-center">
-            <a href="{{ route('home')}}" class="simple-text logo-normal">1618</a>
+            <a href="{{ route('home')}}" class="simple-text logo-normal">ARTPOINT</a>
             <small>{{ Auth::user()->name }}</small>
         </div>
         <div class="sidebar-wrapper position-static">

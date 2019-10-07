@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "flatpickr": "^4.6.3",
         "zuck": "0.0.28",
         "zuck.js": "^1.5.3"
     }

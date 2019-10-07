@@ -9,14 +9,14 @@ class MenuRepository
     static  function getMenu(){
 
         return [
-            ['link'=>'admin.stocks.index',
-                'name'=>'Акции',
-                'icon'=>'accessibility_new'],
+            ['link'=>'admin.posters.index',
+                'name'=>'Афиши',
+                'icon'=>'list_alt'],
 
-            ['link'=>'admin.services.index',
-                'name'=>'Услуги',
-                'icon'=>'group'],
-            ['link'=>'admin.settings.index',
+            ['link'=>'admin.posters.index',
+                'name'=>'О компании',
+                'icon'=>'description'],
+            ['link'=>'admin.posters.index',
                 'name'=>'Настройки',
                 'icon'=>'settings'],
         ];

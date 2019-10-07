@@ -24,3 +24,27 @@ $('[data-img-delete]').on('click', function () {
         }
     });
 });
+const flatpickr = require("flatpickr");
+
+// es modules are recommended, if available, especially for typescript
+const Russian = require("flatpickr/dist/l10n/ru.js").default.ru;
+flatpickr("[flatpicker-date-time]", {
+    time_24hr:true,
+    enableTime: true,
+    locale: Russian,
+    altInput: true,
+    dateFormat: "Y-m-d H:i",
+});
+flatpickr("[flatpicker-date]", {
+    altInput: true,
+    dateFormat: "Y-m-d",
+});
+// $("[flatpicker-date]").flatpickr({
+//     enableTime: true,
+//     dateFormat: "Y-m-d H:i",
+// });
+// $("[flatpicker-date-time]").flatpickr({
+//     altInput: true,
+//     altFormat: "F j, Y",
+//     dateFormat: "Y-m-d",
+// });

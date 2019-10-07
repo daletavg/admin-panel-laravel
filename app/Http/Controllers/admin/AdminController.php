@@ -15,7 +15,6 @@ abstract class AdminController extends BaseController
 
         if (\Arr::get($data, 'content') AND ($data['content'] instanceof \Illuminate\View\View)) {
             $data['sections'] = $data['content']->renderSections();
-//            dd($data['sections']);
         }
         return view('admin.layouts.app',$data);
     }

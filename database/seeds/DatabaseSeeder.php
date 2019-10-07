@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSettingsSeeder::class);
         $this->call(GroupSeeder::class);
         $this->call(SettingsSeeder::class);
-//        $this->call(StockSeeder::class);
+        $this->call(LanguagesSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(CitiesSeeder::class);
 
     }
 }
