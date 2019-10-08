@@ -12,11 +12,13 @@ class MenuRepository
             ['link'=>'admin.posters.index',
                 'name'=>'Афиши',
                 'icon'=>'list_alt'],
-
-            ['link'=>'admin.posters.index',
+            ['link'=>'admin.about.index',
                 'name'=>'О компании',
                 'icon'=>'description'],
-            ['link'=>'admin.posters.index',
+            ['link'=>'admin.partners.index',
+                'name'=>'Партнеры',
+                'icon'=>'people_alt'],
+            ['link'=>'admin.settings.index',
                 'name'=>'Настройки',
                 'icon'=>'settings'],
         ];

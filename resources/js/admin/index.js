@@ -33,7 +33,7 @@ flatpickr("[flatpicker-date-time]", {
     enableTime: true,
     locale: Russian,
     altInput: true,
-    dateFormat: "Y-m-d H:i",
+    dateFormat: "Y-m-d H:i:s",
 });
 flatpickr("[flatpicker-date]", {
     altInput: true,

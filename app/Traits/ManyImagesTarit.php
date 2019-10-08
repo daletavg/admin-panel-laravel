@@ -33,6 +33,13 @@ trait ManyImagesTarit
 
         }
     }
+    public function deleteManyImages()
+    {
+        foreach ($this->manyImages()->get() as  $item)
+        {
+            $item->delete();
+        }
+    }
 
 
 }

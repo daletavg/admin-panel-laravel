@@ -18,4 +18,5 @@ abstract class AdminController extends BaseController
         }
         return view('admin.layouts.app',$data);
     }
+
 }

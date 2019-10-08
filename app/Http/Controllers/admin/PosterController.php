@@ -21,6 +21,7 @@ class PosterController extends AdminController
     public function index()
     {
         $data = $vars = [];
+        $vars['items'] = Poster::with('city.lang','lang')->get();
         $data['cardTitle']='Афиши';
         $data['content']=view('admin.poster.index',$vars);
         return $this->main($data);
@@ -48,8 +49,7 @@ class PosterController extends AdminController
      */
     public function store(Request $request)
     {
-
-        $posterData = $request->except('_token','date','data');
+        $posterData = $request->except('_token','data');
         $city = City::find($request->get('city'));
         $poster = new Poster();
         $poster->city()->associate($city);
@@ -96,22 +96,44 @@ class PosterController extends AdminController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Poster $poster
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Poster $poster)
     {
-        //
+
+        $data = $request->except('_token','_method','data','video','gallery');
+        $data += ['video'=>json_encode($request->get('video'))];
+        $city = City::find($request->get('city'));
+        $poster->city()->associate($city);
+        $poster = $poster->fill($data);
+        $poster->save();
+        $poster->saveImage($request);
+        $poster->saveManyImages($request,'gallery');
+        $langData = $request->get('data');
+        foreach ($langData as $langKey => $data)
+        {
+            $poster->lang($langKey)->first()->update($data);
+        }
+
+
+        if($request->has('saveClose')){
+            return redirect()->route('admin.posters.index')->with('success','Запись успешно отредактирована!');
+        }
+
+        return redirect()->route('admin.posters.edit',$poster)->with('success','Запись успешно создана!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Poster $poster
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Poster $poster)
     {
-        //
+        $poster->deleteManyImages();
+        $poster->delete();
+        return redirect()->route('admin.posters.index')->with('success','Запись успешно удалена!');
     }
 }

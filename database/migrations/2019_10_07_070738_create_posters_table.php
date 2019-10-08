@@ -18,7 +18,7 @@ class CreatePostersTable extends Migration
             $table->boolean('on_general')->default(false);
             $table->dateTime('date')->nullable();
             $table->string('pay_link')->nullable();
-            $table->text('videos')->nullable();
+            $table->text('video')->nullable();
             $table->float('price_before')->nullable();
             $table->float('price_to')->nullable();
             $table->boolean('active')->default(false);

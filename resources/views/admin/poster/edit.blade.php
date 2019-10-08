@@ -1,6 +1,6 @@
 <form method="post" action="{{route('admin.posters.update',$edit)}}" enctype="multipart/form-data">
     @csrf
-
+    @method('put')
     <ul class="nav nav-tabs mb-5" role="tablist">
         <li role="presentation">
             <a class="active" href="#dataDefault"  role="tab"

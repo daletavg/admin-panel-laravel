@@ -10,6 +10,6 @@ class PosterLang extends Model
     use LanguageTrait;
 
     protected $table = 'poster_lang';
-    protected $fillable = ['title','description'];
+    protected $fillable = ['title','description','short_description'];
     public $timestamps = false;
 }

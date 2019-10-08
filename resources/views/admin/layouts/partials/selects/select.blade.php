@@ -4,7 +4,7 @@
     <select class="{{ $inputClass ?? 'form-control' }}" id="{{$name ??''}}" name="{{$name??''}}" {!! $props ?? '' !!}>
         @foreach($values as $value)
             @if(isset($check) && $check == $value['id'])
-                <option checked value="{{$value['id']}}">{{$value['value']}}</option>
+                <option selected value="{{$value['id']}}">{{$value['value']}}</option>
             @else
                 <option value="{{$value['id']}}">{{$value['value']}}</option>
             @endif

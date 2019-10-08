@@ -20,6 +20,7 @@ class CreatePosterLangTable extends Migration
 
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->text('short_description')->nullable();
 
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
