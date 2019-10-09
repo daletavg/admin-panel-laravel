@@ -12,10 +12,12 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
 
         Route::resource('/posters','PosterController',['except'=>['show']]);
         Route::resource('/partners','PartnerController',['except'=>['show']]);
+        Route::resource('/cities','CityController',['except'=>['show']]);
         Route::group(['as'=>'about.'], function () {
             Route::get('/about', 'AboutController@index')->name('index');
             Route::put('/about', 'AboutController@update')->name('update');
         });
+
 
         Route::group(['as'=>'profile.'],function () {
             Route::get('profile', 'ProfileController@index')->name('index');

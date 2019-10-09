@@ -27,9 +27,16 @@
     <div class="col-md-6">
         @include('admin.layouts.partials.inputs.date-time',['name'=>'date','title'=>'Дата:'])
     </div>
+</div>
+<div class="row">
     <div class="col-md-6">
         @include('admin.layouts.partials.selects.select',['title'=>'Город','name'=>'city','values'=>$cities, 'check'=>$edit->city_id??''])
     </div>
+    <div class="col-md-6">
+        @include('admin.layouts.partials.selects.select',['title'=>'Заведение','name'=>'palace','values'=>$cities, 'check'=>$edit->city_id??''])
+    </div>
+</div>
+<div class="row">
     <div class="col-md-6">
         @include('admin.layouts.partials.inputs.default-input',['name'=>'pay_link','title'=>'Ссылка на страницу оплаты:'])
     </div>
@@ -46,5 +53,6 @@
             {!! showEditor('data['.$i->locale.'][description]') !!}
             @endforeach
         });
+
     </script>
 @endsection

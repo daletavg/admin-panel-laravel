@@ -63,6 +63,13 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+        'elfinder' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/elfinder'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'glideURL' => '/glide',
+        ],
     ],
 
 ];

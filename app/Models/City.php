@@ -19,6 +19,11 @@ class City extends Model implements HasLangData
         $this->setLangClass(CityLang::class);
     }
 
+    public function place():HasMany
+    {
+        return $this->hasMany(Place::class,'city_id','id');
+    }
+
     public function setLangClass(string $className)
     {
         $this->langClass = $className;
