@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\PosterGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,11 @@ class GroupController extends AdminController
      */
     public function index()
     {
-        //
+        $data = $vars = [];
+        $vars['items'] = PosterGroup::all();
+        $data['cardTitle']='Гастроли';
+        $data['content']=view('admin.group.index',$vars);
+        return $this->main($data);
     }
 
     /**

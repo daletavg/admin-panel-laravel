@@ -1,73 +1,110 @@
-<div class="table-responsive">
-    <table class="table table-shopping">
-        <thead>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Изображение</th>
-            <th>Название партнера</th>
+{{--<div class="table-responsive">--}}
+{{--    <table class="table table-shopping">--}}
+{{--        <thead>--}}
+{{--        <tr>--}}
+{{--            <th>ID</th>--}}
+{{--            <th>Название тура</th>--}}
+{{--            <th class="text-right">--}}
+{{--                <a href="{{route('admin.tour.create')}}" class="btn btn-primary">Создать</a>--}}
+{{--            </th>--}}
+{{--        </tr>--}}
+{{--        </thead>--}}
+{{--        <tbody >--}}
+{{--        @isset($items)--}}
+{{--            @foreach($items as $item)--}}
+{{--                <tr>--}}
+{{--                    <th>{{$loop->iteration}}</th>--}}
+
+{{--                    <td>--}}
+{{--                        {{ $item->lang->title }}--}}
+{{--                    </td>--}}
 
 
-            <th class="text-right">
-                <a href="{{route('admin.partners.create')}}" class="btn btn-primary">Создать</a>
-            </th>
-        </tr>
-        </thead>
-        <tbody data-sortable-container="true" data-table="partners">
-        @isset($items)
-            @foreach($items as $item)
-                <tr class="draggable" data-sort="{{$item->sort}}" data-id="{{ $item->id }}">
-
-                    <td>
-                        <div class="handle">
-                            <i class="fa fa-arrows" aria-hidden="true"></i>
-                        </div>
-                    </td>
-                    <th>{{$loop->iteration}}</th>
-                    <td>
-                        {!! GetImageAdmin(\Illuminate\Support\Arr::first($item->images)->path??'',asset('img/header-logo.svg')) !!}
-
-                    </td>
-                    <td>
-                        {{ $item->lang->title }}
-                    </td>
+{{--                    <td class="text-primary text-right">--}}
+{{--                        <div class="dropdown menu_drop">--}}
+{{--                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_1"--}}
+{{--                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                <i class="material-icons">menu</i>--}}
+{{--                            </button>--}}
+{{--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">--}}
+{{--                                <a href="{{route('admin.tour.edit',$item)}}" class="dropdown-item">️Редактировать</a>--}}
+{{--                                <form method="POST" action={{route('admin.tour.destroy',$item)}}""--}}
+{{--                                      accept-charset="UTF-8"--}}
+{{--                                      onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">--}}
+{{--                                    @csrf--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    <button type="submit" class="dropdown-item">Удалить</button>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </td>--}}
 
 
-                    <td class="text-primary text-right">
-                        <div class="dropdown menu_drop">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">menu</i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
-                                <a href="{{route('admin.partners.edit',$item)}}" class="dropdown-item">️Редактировать</a>
-                                <form method="POST" action={{route('admin.partners.destroy',$item)}}""
-                                      accept-charset="UTF-8"
-                                      onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item">Удалить</button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
+{{--                </tr>--}}
+{{--            @endforeach--}}
+{{--        @endisset--}}
+{{--        </tbody>--}}
+{{--    </table>--}}
+{{--</div>--}}
+{{--@section('javascript')--}}
+{{--    <script type="text/javascript" defer>--}}
+{{--        $(document).ready(function (e) {--}}
+{{--            var $selectpicker = $('.selectpicker');--}}
+{{--            if ($selectpicker.length) $selectpicker.selectpicker();--}}
+{{--            //--}}
+{{--            $sort = sort;--}}
+{{--            $sort.url = '{{ route('admin.sort') }}';--}}
+{{--            $sort.init();--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}
+<section id="connected" class=" justify-content-center ">
+    <h2>Connected Sortable Lists</h2>
 
+    <div class="row">
+        <div class="col-md-6 min-vh-100">
+            <label for="all-items" class=" control-label">Все афиши</label>
+            <ul id="all-items" style="min-height: 200px" class="connected list card  min-vh-100 m-2">
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 1</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 2</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 3</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 4</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 5</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 6</li>
+            </ul>
+        </div>
+        <div class="col-md-6 min-vh-100">
+            <label for="current-items" class=" control-label">Афиши в текущщей группе</label>
+            <ul id="current-items" style="min-height: 200px" class="connected list not card   m-2">
+                <li class="card bg-secondary rounded m-2 p-1">
+                   Item 1
+                </li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 2</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 3</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 4</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 5</li>
+                <li class="card bg-secondary rounded m-2 p-1" data-id="">Item 6</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-                </tr>
-            @endforeach
-        @endisset
-        </tbody>
-    </table>
-</div>
 @section('javascript')
-    <script type="text/javascript" defer>
-        $(document).ready(function (e) {
-            var $selectpicker = $('.selectpicker');
-            if ($selectpicker.length) $selectpicker.selectpicker();
-            //
-            $sort = sort;
-            $sort.url = '{{ route('admin.sort') }}';
-            $sort.init();
+    <script src="{{asset('js/admin/jquery.sortable.min.js')}}"></script>
+    <script>
+
+        $(function () {
+            $('.sortable').sortable();
+            $('.handles').sortable({
+                handle: 'span'
+            });
+            $('.connected').sortable({
+                connectWith: '.connected'
+            });
+            $('.exclude').sortable({
+                items: ':not(.disabled)'
+            });
         });
+
     </script>
-@endsection
+@stop

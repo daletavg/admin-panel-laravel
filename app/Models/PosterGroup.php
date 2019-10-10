@@ -10,7 +10,7 @@ use App\Traits\LangDataTrait;
 class PosterGroup extends Model implements HasLangData
 {
     use LangDataTrait;
-    protected $table = 'poster_lang';
+    protected $table = 'poster_group';
     private $langClass ='';
 
     public function __construct(array $attributes = [])

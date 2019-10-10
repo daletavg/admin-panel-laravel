@@ -10,6 +10,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
     Route::group(['middleware'=>'auth'],function (){
         Route::get('/', 'IndexController@index')->name('index');
 
+
+        Route::resource('/tour','GroupController',['except'=>['show']]);
         Route::resource('/posters','PosterController',['except'=>['show']]);
         Route::get('/city-places','PosterController@getCityPlaces')->name('posters.city-places');
         Route::resource('/partners','PartnerController',['except'=>['show']]);
