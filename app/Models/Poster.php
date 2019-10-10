@@ -16,7 +16,7 @@ class Poster extends Model implements HasLangData,HasImageContract,HasManyImages
     use ManyImagesTarit;
     use ImageTrait;
     protected $table = 'posters';
-    protected $fillable = ['date','pay_link','video','price_before','price_to','active','on_general'];
+    protected $fillable = ['date','pay_link','video','price_before','price_to','active','on_general','color'];
     private $langClass = '';
 
     public function __construct(array $attributes = [])
@@ -38,6 +38,10 @@ class Poster extends Model implements HasLangData,HasImageContract,HasManyImages
     public function city():BelongsTo
     {
         return $this->belongsTo(City::class,'city_id','id');
+    }
+    public function place():BelongsTo
+    {
+        return $this->belongsTo(Place::class,'place_id','id');
     }
 
 

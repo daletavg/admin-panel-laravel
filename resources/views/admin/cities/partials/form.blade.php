@@ -1,7 +1,7 @@
 @php
     if(isset($edit))
     {
-        $langs = $edit->langs()->get()->toArray();
+        $langs = $edit->langs()->orderBy('language_id')->get()->toArray();
     }
     $dataLang = [];
     array_push($dataLang,

@@ -11,6 +11,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
         Route::get('/', 'IndexController@index')->name('index');
 
         Route::resource('/posters','PosterController',['except'=>['show']]);
+        Route::get('/city-places','PosterController@getCityPlaces')->name('posters.city-places');
         Route::resource('/partners','PartnerController',['except'=>['show']]);
         Route::resource('/cities','CityController',['except'=>['show']]);
         Route::group(['as'=>'about.'], function () {

@@ -38,7 +38,7 @@
         </div>
         <div role="tabpanel" class="tab-pane " id="galleryTab">
             <div class="panel-body">
-                @include('admin.service.partials.gallery')
+                @include('admin.layouts.partials.other.gallery')
             </div>
         </div>
 

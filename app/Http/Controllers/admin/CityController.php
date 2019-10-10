@@ -101,35 +101,41 @@ class CityController extends AdminController
      */
     public function update(Request $request, City $city)
     {
+        $deleted = $request->get('deleted');
+        if(!is_null($deleted))
+        {
+            $deleted = explode(',',$deleted);
+
+            foreach ($deleted as $id)
+            {
+                Place::where('id',$id)->first()->delete();
+            }
+        }
         $langData = $request->get('data');
         foreach ($langData as $langKey => $data)
         {
             $city->lang($langKey)->first()->update($data);
         }
         $placesLang = $request->get('place');
-        foreach ($placesLang as $placeLang)
-        {
-            if(array_key_exists('id',$placeLang))
-            {
-                $place  = Place::with('lang')->where('id',$placeLang['id'])->first();
-                Arr::forget($placeLang, 'id');
-                foreach ($placeLang as $langKey => $data)
-                {
-                    $place->lang($langKey)->first()->update($data);
-                }
+        if(!is_null($placesLang)) {
+            foreach ($placesLang as $placeLang) {
+                if (array_key_exists('id', $placeLang)) {
+                    $place = Place::with('lang')->where('id', $placeLang['id'])->first();
+                    Arr::forget($placeLang, 'id');
+                    foreach ($placeLang as $langKey => $data) {
+                        $place->lang($langKey)->first()->update($data);
+                    }
 
-            }
-            else
-            {
+                } else {
 
-                $place = new Place();
-                $city->place()->save($place);
+                    $place = new Place();
+                    $city->place()->save($place);
 
-                foreach ($placeLang as $langKey => $data)
-                {
-                    $lang = (new PlaceLang())->fill($data);
-                    $lang->language()->associate(Language::getLanguageByKey($langKey));
-                    $place->lang()->save($lang);
+                    foreach ($placeLang as $langKey => $data) {
+                        $lang = (new PlaceLang())->fill($data);
+                        $lang->language()->associate(Language::getLanguageByKey($langKey));
+                        $place->lang()->save($lang);
+                    }
                 }
             }
         }

@@ -1,4 +1,5 @@
-<div class="mb-5" data-price>
+<div class="mb-5" data-place>
+    <input type="hidden" data-remove-id name="deleted">
     @php
         $places = $edit->place;
     @endphp
@@ -12,7 +13,7 @@
             <div class="form-group row" data-cloneable-row="">
                 <div class="col-12">
                     <hr>
-                    <input type="hidden" name="place[{!! $loop->iteration !!}][id]" value="{{$place->id}}">
+                    <input type="hidden" data-place-id name="place[{!! $loop->iteration !!}][id]" value="{{$place->id}}">
                 </div>
 
                 @foreach($placesTitles as $title)
@@ -27,10 +28,10 @@
 
                 <div class="col-2">
                     <div class="deleteRow row">
-                        <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-price="" title=" ">
+                        <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-place="" title=" ">
                             <i class="fa fa-minus-circle"></i>
                         </a>
-                        <button type="button" class="btn btn-success btn-sm" data-additional-field-price="">
+                        <button type="button" class="btn btn-success btn-sm" data-additional-field-place="">
                             <i class="fa fa-plus-circle"></i>
                         </button>
                     </div>
@@ -58,10 +59,10 @@
             </div>
             <div class="col-2">
                 <div class="deleteRow row">
-                    <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-price="" title=" ">
+                    <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-place="" title=" ">
                         <i class="fa fa-minus-circle"></i>
                     </a>
-                    <button type="button" class="btn btn-success btn-sm" data-additional-field-price="">
+                    <button type="button" class="btn btn-success btn-sm" data-additional-field-place="">
                         <i class="fa fa-plus-circle"></i>
                     </button>
                 </div>
@@ -76,17 +77,39 @@
     <script defer>
         $(document).ready(function () {
             var i = {!! count($places)?count($places)+1:2 !!};
-            $(document).on('click', '[data-additional-field-price]', function (e) {
+            $(document).on('click', '[data-additional-field-place]', function (e) {
 
                 e.preventDefault();
                 let data = getDataSend(i);
-                $('[data-price]').append(data);
+                $('[data-place]').append(data);
                 i++;
             });
-            $(document).on('click', '[data-remove-suffix-price]', function (e) {
+            $(document).on('click', '[data-remove-suffix-place]', function (e) {
                 e.preventDefault();
-                $findParent = $(this).parents('[data-cloneable-row]');
-                if (confirm('Удалить запись?')) $findParent.remove();
+                let findParent = $(this).parents('[data-cloneable-row]');
+                let placeId  = findParent.find('[data-place-id]').val();
+                let deletableInput =  $('[data-remove-id ]');
+                let dataRemove ;
+                if(deletableInput.val() ==="")
+                {
+                    dataRemove= [];
+                    deletableInput.val(dataRemove.toString());
+                }
+                else{
+                    dataRemove = deletableInput.val().split(',');
+                }
+
+
+
+
+                if (confirm('Удалить запись?')){
+                    if(placeId!==undefined){
+                        dataRemove.push(placeId) ;
+
+                        deletableInput.val(dataRemove.toString());
+                    }
+                    findParent.remove();
+                }
             });
         });
 
@@ -110,10 +133,10 @@
                 </div>
                 <div class="col-2">
                     <div class="deleteRow row">
-                        <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-price="" title=" ">
+                        <a href="#" class="btn btn-dark btn-sm" data-remove-suffix-place="" title=" ">
                             <i class="fa fa-minus-circle"></i>
                         </a>
-                        <button type="button" class="btn btn-success btn-sm" data-additional-field-price="">
+                        <button type="button" class="btn btn-success btn-sm" data-additional-field-place="">
                             <i class="fa fa-plus-circle"></i>
                         </button>
                 </div>

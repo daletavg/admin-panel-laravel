@@ -45,6 +45,7 @@ class City extends Model implements HasLangData
         {
             array_push($data,['id'=>$item['id'], 'value'=>$item['lang']['title']]);
         }
+
         return $data;
     }
 

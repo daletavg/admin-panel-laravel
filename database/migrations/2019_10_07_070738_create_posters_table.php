@@ -22,8 +22,11 @@ class CreatePostersTable extends Migration
             $table->float('price_before')->nullable();
             $table->float('price_to')->nullable();
             $table->boolean('active')->default(false);
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('no action');
+            $table->string('color')->default('black');
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
+            $table->unsignedBigInteger('place_id')->nullable();
+            $table->foreign('place_id')->references('id')->on('places')->onDelete('set null');
             $table->timestamps();
         });
     }

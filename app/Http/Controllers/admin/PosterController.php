@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\PosterRequest;
 use App\Models\City;
 use App\Models\CityLang;
 use App\Models\Language;
+use App\Models\Place;
 use App\Models\Poster;
 use App\Models\PosterLang;
 use Illuminate\Http\Request;
@@ -44,14 +46,26 @@ class PosterController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PosterRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PosterRequest $request)
     {
         $posterData = $request->except('_token','data');
         $city = City::find($request->get('city'));
+
+
+
         $poster = new Poster();
+        $request->has('active')?$poster->active = 1 : $poster->active = 0;
+        $request->has('on_general')?$poster->on_general = 1 : $poster->on_general = 0;
+        if(!is_null($request->get('place')))
+        {
+            $place = Place::where('id', $request->get('place'))->first();
+            if ($city->id == $place->city_id) {
+                $poster->place()->associate($place);
+            }
+        }
         $poster->city()->associate($city);
         $poster->fill($posterData)->save();
         $poster->saveImage($request);
@@ -95,16 +109,27 @@ class PosterController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PosterRequest  $request
      * @param  Poster $poster
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Poster $poster)
+    public function update(PosterRequest $request, Poster $poster)
     {
+
 
         $data = $request->except('_token','_method','data','video','gallery');
         $data += ['video'=>json_encode($request->get('video'))];
+
+
         $city = City::find($request->get('city'));
+        if(!is_null($request->get('place'))) {
+            $place = Place::where('id', $request->get('place'))->first();
+            if ($city->id == $place->city_id) {
+                $poster->place()->associate($place);
+            }
+        }
+        $request->has('active')?$poster->active = 1 : $poster->active = 0;
+        $request->has('on_general')?$poster->on_general = 1 : $poster->on_general = 0;
         $poster->city()->associate($city);
         $poster = $poster->fill($data);
         $poster->save();
@@ -135,5 +160,25 @@ class PosterController extends AdminController
         $poster->deleteManyImages();
         $poster->delete();
         return redirect()->route('admin.posters.index')->with('success','Запись успешно удалена!');
+    }
+
+
+    public function getCityPlaces(Request $request)
+    {
+        $request->validate([
+            'id'=>'required'
+        ]);
+        $id = $request->get('id');
+        $places = Place::with('lang')->where('city_id',$id)->get()->toArray();
+        $responce = [];
+        foreach ($places as $place)
+        {
+            array_push($responce, [
+                'id'=>$place['id'],
+                'title'=>$place['lang']['title']
+            ]);
+        }
+
+        return response($responce,200);
     }
 }
