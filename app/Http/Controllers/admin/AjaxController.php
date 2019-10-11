@@ -110,7 +110,7 @@ class AjaxController extends Controller
                         \DB::table($childTable)->where('id', $id)->update([ 'poster_group_id' => $parentId ]);
                     }
                     $data[ 'status' ] = 'success';
-                    $data[ 'message' ] = 'Порядок сортировки успешно обновлен';
+                    $data[ 'message' ] = 'Тур успешно изменен!';
                 }
             } catch ( \Exception $e ) {
                 $data[ 'message' ] = $e->getMessage();

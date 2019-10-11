@@ -76,7 +76,7 @@
                             cache: false,
                             success: function (res) {
                                 if (res.status === 'success') {
-                                    $this.onUpdateSuccess(res);
+                                    messageResponse(res);
                                 }
                             }
 
@@ -113,7 +113,7 @@
                             cache: false,
                             success: function (res) {
                                 if (res.status === 'success') {
-                                    $this.onUpdateSuccess(res);
+                                    messageResponse(res);
                                 }
                             }
 

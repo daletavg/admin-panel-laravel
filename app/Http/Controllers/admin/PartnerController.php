@@ -113,7 +113,7 @@ class PartnerController extends AdminController
             return redirect()->route('admin.partners.index')->with('success','Запись успешно отредактирована!');
         }
 
-        return redirect()->route('admin.partners.edit',$partner)->with('success','Запись успешно создана!');
+        return redirect()->route('admin.partners.edit',$partner)->with('success','Запись успешно отредактирована!');
     }
 
     /**

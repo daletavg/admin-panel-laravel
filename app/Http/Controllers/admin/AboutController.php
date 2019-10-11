@@ -48,6 +48,6 @@ class AboutController extends AdminController
         {
             $about->lang($langKey)->first()->update($data);
         }
-        return redirect()->back()->with('success','Запись успешно создана!');
+        return redirect()->back()->with('success','Запись успешно отредактирована!');
     }
 }

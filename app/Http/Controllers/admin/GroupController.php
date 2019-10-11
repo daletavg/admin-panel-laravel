@@ -98,7 +98,23 @@ class GroupController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token','_method','data');
+        $poster = PosterGroup::where('id',$id)->first();
+        $poster = $poster->fill($data);
+        $poster->save();
+
+        $langData = $request->get('data');
+        foreach ($langData as $langKey => $data)
+        {
+            $poster->lang($langKey)->first()->update($data);
+        }
+
+
+        if($request->has('saveClose')){
+            return redirect()->route('admin.tour.index')->with('success','Запись успешно отредактирована!');
+        }
+
+        return redirect()->route('admin.tour.edit',$poster)->with('success','Запись успешно отредактирована!');
     }
 
     /**
@@ -109,6 +125,8 @@ class GroupController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        $group =PosterGroup::where('id',$id)->first();
+        $group->delete();
+        return redirect()->back()->with('success','Запись успешно удалена!');
     }
 }

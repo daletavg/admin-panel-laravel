@@ -9,6 +9,7 @@ use App\Traits\ImageTrait;
 use App\Traits\LangDataTrait;
 use App\Traits\ManyImagesTarit;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Poster extends Model implements HasLangData,HasImageContract,HasManyImagesContract
 {
@@ -42,6 +43,10 @@ class Poster extends Model implements HasLangData,HasImageContract,HasManyImages
     public function place():BelongsTo
     {
         return $this->belongsTo(Place::class,'place_id','id');
+    }
+    public function group():BelongsTo
+    {
+        return $this->belongsTo(PosterGroup::class,'poster_group_id','id');
     }
 
 

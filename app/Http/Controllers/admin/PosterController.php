@@ -97,7 +97,7 @@ class PosterController extends AdminController
      */
     public function edit(Poster $poster)
     {
-        $poster = $poster->load('city.lang','langs');
+        $poster = $poster->load('city.lang','langs','group.poster');
         $data = $vars = [];
         $vars['cities']=City::getCities();
         $vars['edit']=$poster;
@@ -146,7 +146,7 @@ class PosterController extends AdminController
             return redirect()->route('admin.posters.index')->with('success','Запись успешно отредактирована!');
         }
 
-        return redirect()->route('admin.posters.edit',$poster)->with('success','Запись успешно создана!');
+        return redirect()->route('admin.posters.edit',$poster)->with('success','Запись успешно отредактирована!');
     }
 
     /**
@@ -159,7 +159,7 @@ class PosterController extends AdminController
     {
         $poster->deleteManyImages();
         $poster->delete();
-        return redirect()->route('admin.posters.index')->with('success','Запись успешно удалена!');
+        return redirect()->back()->with('success','Запись успешно удалена!');
     }
 
 
