@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Language;
+use App\Models\Poster;
 use App\Models\PosterGroup;
+use App\Models\PosterGroupLang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +32,10 @@ class GroupController extends AdminController
      */
     public function create()
     {
-        //
+        $data = $vars = [];
+        $data['cardTitle']='Создание гастролей';
+        $data['content']=view('admin.group.create',$vars);
+        return $this->main($data);
     }
 
     /**
@@ -40,29 +46,47 @@ class GroupController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        $posterGroupData = $request->except('_token','data');
+        $posterGroup = new PosterGroup();
+        $posterGroup->fill($posterGroupData);
+        $posterGroup->save();
+
+
+        $langData = $request->get('data');
+        foreach ($langData as $langKey => $data)
+        {
+            $lang = (new PosterGroupLang())->fill($data);
+            $lang->language()->associate(Language::getLanguageByKey($langKey));
+            $posterGroup->lang()->save($lang);
+        }
+
+
+
+
+        if($request->has('saveClose')){
+            return redirect()->route('admin.tour.index')->with('success','Запись успешно создана!');
+        }
+
+        return redirect()->route('admin.tour.edit',$posterGroup)->with('success','Запись успешно создана!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $posterGroup = PosterGroup::with('langs','poster')->where('id',$id)->first();
+        $data = $vars = [];
+        $vars['edit']=$posterGroup;
+        $vars['posters']=Poster::whereNull('poster_group_id')->get()->load('lang');
+        $data['cardTitle']='Редактирование гастролей';
+        $data['content']=view('admin.group.edit',$vars);
+        return $this->main($data);
     }
 
     /**

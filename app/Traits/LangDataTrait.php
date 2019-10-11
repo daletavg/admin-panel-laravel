@@ -5,6 +5,7 @@ namespace App\Traits;
 
 
 use App\Models\Language;
+use App\Models\PosterGroupLang;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

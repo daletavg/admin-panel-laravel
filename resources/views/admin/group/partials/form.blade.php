@@ -13,8 +13,4 @@
 
 @include('admin.layouts.partials.tabs.lang-tab',['tabs'=>$dataLang])
 
-<div class="row">
-    <div class="col-md-6">
-        @include('admin.layouts.partials.inputs.default-input',['name'=>'link','title'=>'Ссылка на партнера'])
-    </div>
-</div>
+

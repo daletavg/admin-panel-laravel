@@ -90,4 +90,34 @@ class AjaxController extends Controller
 
         return $data;
     }
+    public function group(Request $request)
+    {
+        $data = [
+            'status'  => 'error',
+            'message' => 'Переданы не все нужные данные',
+        ];
+
+        $childTable = $request->get('childTable');
+        $parentTable = $request->get('parentTable');
+        $parentId = $request->has('parentId')?$request->get('parentId'):null;
+        $dataId = is_array($request->get('dataId'))?$request->get('dataId'):[];
+
+        if ( $childTable AND $parentTable) {
+            try {
+
+                if ( Schema::hasTable($childTable) AND Schema::hasTable($parentTable) ) {
+                    foreach( $dataId as $id ) {
+                        \DB::table($childTable)->where('id', $id)->update([ 'poster_group_id' => $parentId ]);
+                    }
+                    $data[ 'status' ] = 'success';
+                    $data[ 'message' ] = 'Порядок сортировки успешно обновлен';
+                }
+            } catch ( \Exception $e ) {
+                $data[ 'message' ] = $e->getMessage();
+            }
+        }
+
+        return $data;
+
+    }
 }

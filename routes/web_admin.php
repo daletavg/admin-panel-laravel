@@ -35,10 +35,12 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
 
         Route::group(['prefix'=>'ajax'],function () {
             Route::post('delete-image', 'AjaxController@deleteImage')->name('ajax.deleteImage');
+            Route::post('sort', 'AjaxController@sort')->name('sort');
+            Route::post('group','AjaxController@group')->name('ajax.group');
         });
     });
     Route::group(['prefix' => 'ajax'], function () {
-        Route::post('/sort', 'AjaxController@sort')->name('sort');
+
     });
 
 
