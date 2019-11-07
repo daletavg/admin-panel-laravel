@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\City;
-use App\Models\CityLang;
+use App\Models\City\City;
+use App\Models\City\CityLang;
 use App\Models\Language;
 use App\Models\Place;
 use App\Models\PlaceLang;
@@ -23,9 +23,9 @@ class CityController extends AdminController
     {
         $data = $vars = [];
         $vars['items'] = City::with('lang')->get();
-        $data['cardTitle']='Города';
-        $data['content']=view('admin.cities.index',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Города');
+        $this->setContent(view('admin.cities.index',$vars));
+        return $this->main();
     }
 
 
@@ -36,10 +36,10 @@ class CityController extends AdminController
      */
     public function create()
     {
-        $data = $vars = [];
-        $data['cardTitle']='Создание города';
-        $data['content']=view('admin.cities.create',$vars);
-        return $this->main($data);
+        $vars = [];
+        $this->setCardTitle('Создание города');
+        $this->setContent(view('admin.cities.create',$vars));
+        return $this->main();
     }
 
     /**
@@ -55,14 +55,7 @@ class CityController extends AdminController
         $city->fill($cityData);
         $city->save();
 
-        $langData = $request->get('data');
-        foreach ($langData as $langKey => $data)
-        {
-            $lang = (new CityLang())->fill($data);
-            $lang->language()->associate(Language::getLanguageByKey($langKey));
-            $city->lang()->save($lang);
-        }
-
+        $city->saveLang($request->get('data'));
 
 
 
@@ -84,11 +77,12 @@ class CityController extends AdminController
     {
 
         $city = $city->load('langs','place.langs');
-        $data = $vars = [];
+         $vars = [];
         $vars['edit']=$city;
-        $data['cardTitle']='Редактирование города';
-        $data['content']=view('admin.cities.edit',$vars);
-        return $this->main($data);
+
+        $this->setCardTitle('Редактирование города');
+        $this->setContent(view('admin.cities.edit',$vars));
+        return $this->main();
 
     }
 
@@ -120,7 +114,7 @@ class CityController extends AdminController
         if(!is_null($placesLang)) {
             foreach ($placesLang as $placeLang) {
                 if (array_key_exists('id', $placeLang)) {
-                    $place = Place::with('lang')->where('id', $placeLang['id'])->first();
+                    $place = Place\Place::with('lang')->where('id', $placeLang['id'])->first();
                     Arr::forget($placeLang, 'id');
                     foreach ($placeLang as $langKey => $data) {
                         $place->lang($langKey)->first()->update($data);
@@ -128,11 +122,11 @@ class CityController extends AdminController
 
                 } else {
 
-                    $place = new Place();
+                    $place = new Place\Place();
                     $city->place()->save($place);
 
                     foreach ($placeLang as $langKey => $data) {
-                        $lang = (new PlaceLang())->fill($data);
+                        $lang = (new Place\PlaceLang())->fill($data);
                         $lang->language()->associate(Language::getLanguageByKey($langKey));
                         $place->lang()->save($lang);
                     }

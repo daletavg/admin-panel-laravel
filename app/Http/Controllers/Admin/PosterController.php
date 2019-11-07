@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\PosterRequest;
-use App\Models\City;
-use App\Models\CityLang;
+use App\Models\City\City;
+use App\Models\City\CityLang;
 use App\Models\Language;
-use App\Models\Place;
-use App\Models\Poster;
-use App\Models\PosterLang;
+use App\Models\Place\Place;
+use App\Models\Poster\Poster;
+use App\Models\Poster\PosterLang;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
@@ -24,9 +25,9 @@ class PosterController extends AdminController
     {
         $data = $vars = [];
         $vars['items'] = Poster::with('city.lang','lang')->get();
-        $data['cardTitle']='Афиши';
-        $data['content']=view('admin.poster.index',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Афиши');
+        $this->setContent(view('admin.poster.index',$vars));
+        return $this->main();
     }
 
     /**
@@ -38,9 +39,10 @@ class PosterController extends AdminController
     {
         $data = $vars = [];
         $vars['cities']=City::getCities();
-        $data['cardTitle']='Создание афиши';
-        $data['content']=view('admin.poster.create',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Создание афиши');
+        $this->setContent(view('admin.poster.create',$vars));
+
+        return $this->main();
     }
 
     /**
@@ -70,13 +72,7 @@ class PosterController extends AdminController
         $poster->fill($posterData)->save();
         $poster->saveImage($request);
 
-        $langData = $request->get('data');
-        foreach ($langData as $langKey => $data)
-        {
-            $city = (new PosterLang())->fill($data);
-            $city->language()->associate(Language::getLanguageByKey($langKey));
-            $poster->lang()->save($city);
-        }
+        $poster->saveLang( $request->get('data'));
 
 
 
@@ -101,9 +97,9 @@ class PosterController extends AdminController
         $data = $vars = [];
         $vars['cities']=City::getCities();
         $vars['edit']=$poster;
-        $data['cardTitle']='Редактирование афиши';
-        $data['content']=view('admin.poster.edit',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Редактирование афиши');
+        $this->setContent(view('admin.poster.edit',$vars));
+        return $this->main();
     }
 
     /**
@@ -180,5 +176,18 @@ class PosterController extends AdminController
         }
 
         return response($responce,200);
+    }
+
+    public function leaveGroup(Request $request)
+    {
+        if($request->has('poster'))
+        {
+            $id = $request->get('poster');
+            $poster = Poster::where('id',$id)->first();
+            $poster->poster_group_id = null;
+            $poster->save();
+            return redirect()->back()->with('success','Афиша удалена из группы!');
+        }
+        return redirect()->back()->with('error','Что-то пошло не так!');
     }
 }

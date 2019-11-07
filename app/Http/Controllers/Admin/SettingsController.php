@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Setting;
+use App\Models\Settings\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,9 +17,9 @@ class SettingsController extends AdminController
     {
         $data = $vars = [];
         $vars['settings']=Setting::getData();
-        $data['content']=view('admin.settings.index',$vars);
-        $data['cardTitle']='Настройки';
-        return $this->main($data);
+        $this->setCardTitle('Настройки');
+        $this->setContent(view('admin.settings.index',$vars));
+        return $this->main();
     }
 
     /**

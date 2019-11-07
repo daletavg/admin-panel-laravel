@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\About;
 use App\Models\AboutLang;
-use App\Models\Language;
+
 use App\Repository\LanguageRepository;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
@@ -36,9 +36,9 @@ class AboutController extends AdminController
             }
         }
         $vars['edit']=$about;
-        $data['cardTitle']='О компании';
-        $data['content']=view('admin.about.index',$vars);
-        return $this->main($data);
+        $this->setCardTitle('О компании');
+        $this->setContent(view('admin.about.index',$vars));
+        return $this->main();
     }
     public function update(Request $request)
     {

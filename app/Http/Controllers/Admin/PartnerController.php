@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
-use App\Models\Partner;
-use App\Models\PartnerLang;
+use App\Models\Partner\Partner;
+use App\Models\Partner\PartnerLang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,9 +19,9 @@ class PartnerController extends AdminController
     {
         $data = $vars = [];
         $vars['items'] = Partner::all();
-        $data['cardTitle']='Партнеры';
-        $data['content']=view('admin.partner.index',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Партнеры');
+        $this->setContent(view('admin.partner.index',$vars));
+        return $this->main();
     }
 
     /**
@@ -32,9 +32,10 @@ class PartnerController extends AdminController
     public function create()
     {
         $data = $vars = [];
-        $data['cardTitle']='Создание партнера';
-        $data['content']=view('admin.partner.create',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Создание партнера');
+        $this->setContent(view('admin.partner.create',$vars));
+
+        return $this->main();
     }
 
     /**
@@ -52,13 +53,7 @@ class PartnerController extends AdminController
 
         $partner->saveImage($request);
 
-        $langData = $request->get('data');
-        foreach ($langData as $langKey => $data)
-        {
-            $lang = (new PartnerLang())->fill($data);
-            $lang->language()->associate(Language::getLanguageByKey($langKey));
-            $partner->lang()->save($lang);
-        }
+        $partner->saveLang($request->get('data'));
 
 
 
@@ -82,9 +77,9 @@ class PartnerController extends AdminController
         $partner = $partner->load('langs');
         $data = $vars = [];
         $vars['edit']=$partner;
-        $data['cardTitle']='Редактирование партнера';
-        $data['content']=view('admin.partner.edit',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Редактирование партнера');
+        $this->setContent(view('admin.partner.edit',$vars));
+        return $this->main();
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UpdateUserDataRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
@@ -16,9 +16,9 @@ class ProfileController extends AdminController
     {
         $data = $vars = [];
         $vars['user']= Auth::user();
-        $data['cardTitle']='Редактирование профиля';
-        $data['content']=view('admin.profile.index',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Редактирование профиля');
+         $this->setContent(view('admin.profile.index',$vars));
+        return $this->main();
     }
 
     public function updateUserData(UpdateUserDataRequest $request,User $user)

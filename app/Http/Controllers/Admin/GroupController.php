@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
-use App\Models\Poster;
-use App\Models\PosterGroup;
-use App\Models\PosterGroupLang;
+
+use App\Models\Poster\Poster;
+use App\Models\PosterGroup\PosterGroup;
+use App\Models\PosterGroup\PosterGroupLang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,9 +21,9 @@ class GroupController extends AdminController
     {
         $data = $vars = [];
         $vars['items'] = PosterGroup::all();
-        $data['cardTitle']='Гастроли';
-        $data['content']=view('admin.group.index',$vars);
-        return $this->main($data);
+       $this->setCardTitle('Гастроли');
+        $this->setContent(view('admin.group.index',$vars));
+        return $this->main();
     }
 
     /**
@@ -33,9 +34,9 @@ class GroupController extends AdminController
     public function create()
     {
         $data = $vars = [];
-        $data['cardTitle']='Создание гастролей';
-        $data['content']=view('admin.group.create',$vars);
-        return $this->main($data);
+        $this->setCardTitle('Создание гастролей');
+        $this->setContent(view('admin.group.create',$vars));
+        return $this->main();
     }
 
     /**
@@ -84,9 +85,10 @@ class GroupController extends AdminController
         $data = $vars = [];
         $vars['edit']=$posterGroup;
         $vars['posters']=Poster::whereNull('poster_group_id')->get()->load('lang');
-        $data['cardTitle']='Редактирование гастролей';
-        $data['content']=view('admin.group.edit',$vars);
-        return $this->main($data);
+
+        $this->setCardTitle('Редактирование гастролей');
+        $this->setContent(view('admin.group.edit',$vars));
+        return $this->main();
     }
 
     /**
