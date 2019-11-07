@@ -4,7 +4,11 @@
 namespace App\Contracts;
 
 
-class LangDataContract
+use App\Models\Language;
+
+interface LangDataContract
 {
+    public function setLanguage(Language $language);
+    public function setData(array $data);
 
 }

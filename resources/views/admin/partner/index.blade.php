@@ -20,7 +20,7 @@
 
                     <td>
                         <div class="handle">
-                            <i class="fa fa-arrows" aria-hidden="true"></i>
+                            <i class="fas fa-arrows-alt" aria-hidden="true"></i>
                         </div>
                     </td>
                     <th>{{$loop->iteration}}</th>

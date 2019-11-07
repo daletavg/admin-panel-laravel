@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\PosterGroup;
 
 
 
 use App\Contracts\HasLangData;
+use App\Models\Model;
+use App\Models\Poster\Poster;
 use App\Traits\LangDataTrait;
 
 class PosterGroup extends Model implements HasLangData

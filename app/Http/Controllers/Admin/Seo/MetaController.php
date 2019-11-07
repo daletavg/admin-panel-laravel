@@ -36,7 +36,7 @@ class MetaController extends AdminController
     {
         $metaWithoutLang = $request->except('data','_token');
         $metaWithoutLang['url'] = getUrlWithoutHost($metaWithoutLang['url']);
-        $metaWithoutLang['power']=isActive($metaWithoutLang);
+        $metaWithoutLang['active']=isActive($metaWithoutLang);
         $metaWithoutLang['type']=0;
         $meta  =  (new Meta())->fill($metaWithoutLang);
         $meta->save();
@@ -53,40 +53,41 @@ class MetaController extends AdminController
     }
 
     /**
-     * @param Meta $mete
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Meta $meta)
+    public function edit(int $id)
     {
-        $edit = $meta->load('langs');
-        $title =
-        $this->setTitle($title)->addBreadCrumb($title);
-        $data['content'] = view('admin.meta.edit', compact('edit'));
+        $vars['edit'] = Meta::find($id)->load('langs');
+        $this->setCardTitle('Редактирование');
+        $this->setContent(view('admin.seo.meta.edit', $vars));
 
-        return $this->main($data);
+        return $this->main();
     }
 
-    public function update(MetaRequest $request, Meta $meta)
+    public function update(Request $request,int $id)
     {
-        $input = $request->all();
-        $meta->fillExisting($input);
-        if ($meta->save()) {
-            $meta->lang()->first()->fillExisting($input)->save();
-            $this->setSuccessUpdate();
-        }
+        $meta = Meta::find($id);
+        $meta->update($request->except('data','_token','_method')+['active'=>isActive($request->except('data','_token','_method'))]);
+        $meta->updateLang($request->get('data'));
+
         if ($request->has('saveClose')) {
             return redirect($this->resourceRoute('index'))->with($this->getResponseMessage());
         }
 
-        return redirect()->back()->with($this->getResponseMessage());
-    }
-
-    public function destroy(Meta $meta)
-    {
-        if ($meta->delete()) {
-            $this->setSuccessDestroy();
+        if($request->has('saveClose')){
+            return redirect()->route('admin.seo.meta.index')->with('success','Запись успешно изменена!');
         }
 
-        return redirect($this->resourceRoute('index'))->with($this->getResponseMessage());
+        return redirect()->route('admin.seo.meta.edit',$meta)->with('success','Запись успешно изменена!');
+
+    }
+
+    public function destroy(int $id)
+    {
+        $meta = Meta::find($id);
+        $meta->delete();
+
+        return redirect()->route('admin.seo.meta.index')->with('success','Запись успешно удалена!');
     }
 }

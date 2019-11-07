@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 abstract class AdminController extends BaseController
 {
     public function main(){
-
+        $this->checkCardTitle();
         $this->setMenu(MenuRepository::getMenu());
 
         if (\Arr::get($this->data, 'content') AND ($this->data['content'] instanceof \Illuminate\View\View)) {
@@ -23,6 +23,14 @@ abstract class AdminController extends BaseController
     protected function setCardTitle(string $title): void
     {
         $this->data['cardTitle'] = $title;
+    }
+
+    private function checkCardTitle()
+    {
+        if(array_key_exists('cardTitle',$this->data) && $this->data['cardTitle']===null)
+        {
+            $this->setCardTitle('empty');
+        }
     }
 
     private function setMenu($menu)

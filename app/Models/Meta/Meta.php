@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Meta;
 
 use App\Contracts\HasLangData;
+use App\Models\Model;
 use App\Traits\LangDataTrait;
 use App\Traits\Singleton;
 use Illuminate\Support\Arr;
@@ -38,7 +39,7 @@ class Meta extends Model implements HasLangData
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['url','type','power'];
+    protected $fillable = ['url','type','active'];
 
     public static function getMetaData($url = null, $fromCache = true)
     {

@@ -8,3 +8,9 @@ function getCurrentLocale()
 
     return $lang;
 }
+if (!function_exists('getLang')) {
+    function getLang()
+    {
+        return \App\Helpers\LanguageHelper::getLanguageId() ?? getDefaultLang();
+    }
+}

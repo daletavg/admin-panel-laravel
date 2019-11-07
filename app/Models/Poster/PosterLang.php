@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Poster;
 
+use App\Contracts\LangDataContract;
 use App\Traits\LanguageTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class PosterLang extends Model
+class PosterLang extends Model implements LangDataContract
 {
     use LanguageTrait;
 

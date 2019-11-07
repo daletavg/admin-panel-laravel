@@ -11,10 +11,9 @@ class IndexController extends AdminController
 
     public function index()
     {
-        $data=[];
         $this->setCardTitle('Главная страница');
         $this->setContent(view('admin.index.index'));
-        return $this->main($data);
+        return $this->main();
     }
 
     public function clearCache()

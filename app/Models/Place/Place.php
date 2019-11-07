@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Place;
 
 use App\Contracts\HasLangData;
+use App\Models\Model;
 use App\Traits\LangDataTrait;
 
 

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\City;
 
 
 use App\Contracts\HasLangData;
+use App\Models\Model;
+use App\Models\Place\Place;
+use App\Models\Poster\Poster;
 use App\Traits\LangDataTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

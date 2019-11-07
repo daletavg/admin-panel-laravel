@@ -9,10 +9,14 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
     });
     Route::group(['middleware'=>'auth'],function (){
         Route::get('/', 'IndexController@index')->name('index');
+        Route::get('/clear-cache', 'IndexController@clearCache')->name('index.clear-cache');
 
 
         Route::resource('/tour','GroupController',['except'=>['show']]);
+
         Route::resource('/posters','PosterController',['except'=>['show']]);
+        Route::get('/leave-group','PosterController@leaveGroup')->name('posters.leave-group');
+
         Route::get('/city-places','PosterController@getCityPlaces')->name('posters.city-places');
         Route::resource('/partners','PartnerController',['except'=>['show']]);
         Route::resource('/cities','CityController',['except'=>['show']]);
@@ -32,6 +36,9 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
             Route::put('settings', 'SettingsController@update')->name('update-all');
         });
 
+        Route::group(['as'=>'seo.','namespace'=>'Seo'],function () {
+            Route::resource('/meta','MetaController');
+        });
 
         Route::group(['prefix'=>'ajax'],function () {
             Route::post('delete-image', 'AjaxController@deleteImage')->name('ajax.deleteImage');
@@ -39,9 +46,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
             Route::post('group','AjaxController@group')->name('ajax.group');
         });
     });
-    Route::group(['prefix' => 'ajax'], function () {
 
-    });
 
 
 });

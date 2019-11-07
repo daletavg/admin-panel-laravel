@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "artesaos/seotools": "^0.16.0",
         "barryvdh/elfinder-flysystem-driver": "^0.2.1",
         "barryvdh/laravel-elfinder": "^0.4.3",
         "doctrine/dbal": "^2.9",
@@ -47,13 +48,14 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/ActiveLinkHelper.php",
+            "app/Helpers/UrlHelper.php",
             "app/Helpers/ImageSaver.php",
             "app/Helpers/ImageHelper.php",
             "app/Helpers/VideoHelper.php",
             "app/Helpers/SettingsHelper.php",
             "app/Helpers/Mailer.php",
-            "app/Helpers/LocalizationHelper.php"
+            "app/Helpers/LocalizationHelper.php",
+            "app/Helpers/SEOHelper.php"
         ]
     },
     "autoload-dev": {

@@ -7,7 +7,7 @@
             <th>Город</th>
             <th class="th-description">Описание</th>
             <th class="text-right">
-
+                <a href="{{route('admin.posters.leave-group',['poster'=>$edit->id??null])}}" class="btn btn-danger">Удалить из тура</a>
             </th>
         </tr>
         </thead>

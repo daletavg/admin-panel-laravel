@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Meta;
 
 
 use App\Contracts\LangDataContract;
+use App\Models\Model;
 use App\Traits\EloquentMultipleForeignKeyUpdate;
 use App\Traits\LanguageTrait;
 use App\Traits\Models\BelongsToLanguage;
@@ -11,6 +12,7 @@ use App\Traits\Models\BelongsToLanguage;
 class MetaLang extends Model implements LangDataContract
 {
     use LanguageTrait;
+    use EloquentMultipleForeignKeyUpdate;
     protected $table = 'meta_lang';
     protected $primaryKey = ['meta_id', 'language_id'];
 
@@ -18,7 +20,7 @@ class MetaLang extends Model implements LangDataContract
 
     public $incrementing = false;
 
-    protected $guarded = [];
+    protected $guarded = ['meta_id', 'language_id'];
 
     public $timestamps = false;
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Settings;
 
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use phpDocumentor\Reflection\Types\Collection;
 

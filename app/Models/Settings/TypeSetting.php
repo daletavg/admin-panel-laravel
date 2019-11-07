@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Settings;
 
+
+use App\Models\Model;
 
 class TypeSetting extends Model
 {

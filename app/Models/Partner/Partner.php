@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Partner;
 
 
 
 use App\Contracts\HasImageContract;
 use App\Contracts\HasLangData;
+use App\Models\Model;
 use App\Scopes\SortScope;
 use App\Traits\ImageTrait;
 use App\Traits\LangDataTrait;

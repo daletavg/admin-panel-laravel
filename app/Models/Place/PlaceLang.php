@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Place;
 
 
 
+use App\Contracts\LangDataContract;
+use App\Models\Model;
 use App\Traits\LanguageTrait;
 
-class PlaceLang extends Model
+class PlaceLang extends Model implements LangDataContract
 {
     use LanguageTrait;
     protected $table = 'place_lang';

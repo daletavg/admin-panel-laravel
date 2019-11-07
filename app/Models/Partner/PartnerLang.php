@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Partner;
 
 
+use App\Contracts\LangDataContract;
+use App\Models\Model;
 use App\Traits\LanguageTrait;
 
-class PartnerLang extends Model
+class PartnerLang extends Model implements LangDataContract
 {
     use LanguageTrait;
 

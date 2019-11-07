@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Poster;
 
 use App\Contracts\HasImageContract;
 use App\Contracts\HasLangData;
 use App\Contracts\HasManyImagesContract;
+use App\Models\City\City;
+use App\Models\Model;
+use App\Models\Place\Place;
+use App\Models\PosterGroup\PosterGroup;
 use App\Traits\ImageTrait;
 use App\Traits\LangDataTrait;
 use App\Traits\ManyImagesTarit;
