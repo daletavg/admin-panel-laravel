@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() {
+Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() {
 
     Route::group(['namespace'=>'Auth'],function () {
         Route::get('login', 'LoginController@showLoginForm')->name('login.show');
@@ -36,8 +36,17 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','as'=>'admin.'],function() 
             Route::put('settings', 'SettingsController@update')->name('update-all');
         });
 
-        Route::group(['as'=>'seo.','namespace'=>'Seo'],function () {
+        Route::group(['prefix'=>'seo','as'=>'seo.','namespace'=>'Seo'],function () {
+            Route::get('/','SeoController@index')->name('index');
             Route::resource('/meta','MetaController');
+
+            Route::get('/robots','RobotsController@index')->name('robots.index');
+            Route::put('/robots/update','RobotsController@update')->name('robots.update');
+
+
+            Route::get('/sitemap','SitemapController@index')->name('sitemap.index');
+            Route::get('/sitemap/edit','SitemapController@edit')->name('sitemap.edit');
+            Route::put('/sitemap/update','SitemapController@update')->name('sitemap.update');
         });
 
         Route::group(['prefix'=>'ajax'],function () {

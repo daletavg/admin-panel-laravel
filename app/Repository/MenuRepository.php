@@ -24,7 +24,7 @@ class MenuRepository
             ['link'=>'admin.cities.index',
                 'name'=>'Города',
                 'icon'=>'location_city'],
-            ['link'=>'admin.seo.meta.index',
+            ['link'=>'admin.seo.index',
                 'name'=>'SEO',
                 'icon'=>'emoji_objects'],
             ['link'=>'admin.settings.index',
