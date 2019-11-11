@@ -12,7 +12,7 @@
     <div role="tabpanel" class="tab-pane active" id="dataDefault">
         @include('admin.seo.meta.partials.pages.seo-from-page')
     </div>
-    <div role="tabpanel" class="tab-pane active" id="dataDefaultSeo">
+    <div role="tabpanel" class="tab-pane" id="dataDefaultSeo">
         @include('admin.seo.meta.partials.pages.seo-default')
     </div>
 </section>

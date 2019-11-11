@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 abstract class SiteController extends BaseController
 {
-    public function main($data){
+    public function main(){
         $this->generateSeoMeta();
 //        $data['phones']=[
 //            getSettingData('contacts.first_num_contact'),
@@ -27,7 +27,7 @@ abstract class SiteController extends BaseController
 //        $data['pilingUrl'] =  \App\Models\Service::getUrlById(4)??'';
 //        $data['plazmaUrl'] = \App\Models\Service::getUrlById(8)??'';
 
-        return view('public.layouts.app',$data);
+        return view('public.layouts.app',$this->data);
     }
 
     protected function generateSeoMeta()

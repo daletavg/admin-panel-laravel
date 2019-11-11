@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
         Route::group(['prefix'=>'seo','as'=>'seo.','namespace'=>'Seo'],function () {
             Route::get('/','SeoController@index')->name('index');
             Route::resource('/meta','MetaController');
+            Route::post('/meta/store-default-meta','MetaController@storeDefaultMeta')->name('meta.store-default-meta');
 
             Route::get('/robots','RobotsController@index')->name('robots.index');
             Route::put('/robots/update','RobotsController@update')->name('robots.update');

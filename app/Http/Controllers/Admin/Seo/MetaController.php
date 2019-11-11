@@ -17,8 +17,8 @@ class MetaController extends AdminController
     public function index()
     {
         $this->setCardTitle('Мета');
-        $vars['items'] = Meta::WithLang()->paginate(15);
-
+        $vars['items'] = Meta::WithLang()->MetaWithoutDefault()->paginate(15);
+        $vars['edit']=Meta::DefaultMeta();
         $this->setContent(view('admin.seo.meta.index', $vars));
 
         return $this->main();
@@ -37,7 +37,7 @@ class MetaController extends AdminController
         $metaWithoutLang = $request->except('data','_token');
         $metaWithoutLang['url'] = getUrlWithoutHost($metaWithoutLang['url']);
         $metaWithoutLang['active']=isActive($metaWithoutLang);
-        $metaWithoutLang['type']=0;
+        $metaWithoutLang['type']=Meta::ONLY_ONE_PAGE_TYPE;
         $meta  =  (new Meta())->fill($metaWithoutLang);
         $meta->save();
         $meta->saveLang($request->get('data'));
@@ -83,11 +83,30 @@ class MetaController extends AdminController
 
     }
 
+
     public function destroy(int $id)
     {
         $meta = Meta::find($id);
         $meta->delete();
 
         return redirect()->route('admin.seo.meta.index')->with('success','Запись успешно удалена!');
+    }
+
+
+    public function storeDefaultMeta(Request $request)
+    {
+        if(($meta = Meta::DefaultMeta())===null) {
+            $meta = new Meta([
+                'type' => Meta::DEFAULT_TYPE,
+                'url' => '*',
+                'active'=>true
+            ]);
+            $meta->save();
+            $meta->saveLang($request->get('data'));
+        }
+        else{
+            $meta->updateLang($request->get('data'));
+        }
+        return redirect()->route('admin.seo.meta.index')->with('success','Мата по умолчанию установленна!');
     }
 }

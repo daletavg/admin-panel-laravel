@@ -9,8 +9,8 @@ use Mcamara\LaravelLocalization\LaravelLocalization;
 class IndexController extends SiteController
 {
     public function index(){
-        $data = [];
-        $data['content']= view('public.index');
-        return $this->main($data);
+//        $data = [];
+//        $data['content']= view('public.index');
+//        return $this->main($data);
     }
 }
