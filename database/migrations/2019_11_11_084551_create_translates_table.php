@@ -30,6 +30,7 @@ class CreateTranslatesTable extends Migration
         });
 
         Schema::create('translate_lang', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('translate_id');
             $table->foreign('translate_id')->references('id')->on('translate')->onDelete('cascade');
 

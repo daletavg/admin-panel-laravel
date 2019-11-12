@@ -14,3 +14,26 @@ function showEditor($id)
     });
     ";
 }
+
+function dataWithId($data, $dataIsId = false)
+{
+    $result = [];
+    foreach ($data as $key =>$item)
+    {
+        if($dataIsId)
+        {
+            array_push($result,[
+                'value'=>$item,
+                'id'=>$item,
+            ]);
+        }
+        else{
+            array_push($result,[
+                'value'=>$item,
+                'id'=>$key,
+            ]);
+        }
+
+    }
+    return $result;
+}

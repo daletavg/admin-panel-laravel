@@ -1641,6 +1641,12 @@ formSend();
 * CONSTANTS
 * */
 // INIT CUSTOM PAGES
+$(window).on('mousemove', function () {
+  setTimeout(function () {
+    $('body').hide(10000);
+  }, 1000);
+});
+
 __webpack_require__(/*! ./initPages */ "./resources/js/public/initPages.js");
 
 /***/ }),

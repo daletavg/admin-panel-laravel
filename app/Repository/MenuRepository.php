@@ -27,6 +27,11 @@ class MenuRepository
             ['link'=>'admin.seo.index',
                 'name'=>'SEO',
                 'icon'=>'emoji_objects'],
+
+            ['link'=>'admin.translate.index',
+                'name'=>'Локализация',
+                'icon'=>'language'],
+
             ['link'=>'admin.settings.index',
                 'name'=>'Настройки',
                 'icon'=>'settings'],

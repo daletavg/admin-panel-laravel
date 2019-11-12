@@ -14,5 +14,5 @@ class TranslateLang extends Model implements LangDataContract
 
     protected $table = 'translate_lang';
     protected $fillable = ['data'];
-
+    public $timestamps = false;
 }

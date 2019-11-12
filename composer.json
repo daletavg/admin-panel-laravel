@@ -56,7 +56,8 @@
             "app/Helpers/SettingsHelper.php",
             "app/Helpers/Mailer.php",
             "app/Helpers/LocalizationHelper.php",
-            "app/Helpers/SEOHelper.php"
+            "app/Helpers/SEOHelper.php",
+            "app/Helpers/TranslateHelper.php"
         ]
     },
     "autoload-dev": {

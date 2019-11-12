@@ -5,6 +5,7 @@ namespace App\Repository;
 
 
 use App\Models\Language;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 
 class LanguageRepository
@@ -43,6 +44,13 @@ class LanguageRepository
             Cache::forever('getLocaleById['.$localeId.']',$data);
         }
         return Cache::get('getLocaleById['.$localeId.']');
+    }
+    static function getCurrentLocaleId()
+    {
+        $lang = self::getLanguage();
 
+        $lang = $lang->where('locale',getCurrentLocale());
+
+        return Arr::get($lang[0],'id');
     }
 }

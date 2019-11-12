@@ -50,6 +50,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
             Route::put('/sitemap/update','SitemapController@update')->name('sitemap.update');
         });
 
+        Route::resource('/translate','TranslateController',['except'=>['show']]);
+
         Route::group(['prefix'=>'ajax'],function () {
             Route::post('delete-image', 'AjaxController@deleteImage')->name('ajax.deleteImage');
             Route::post('sort', 'AjaxController@sort')->name('sort');

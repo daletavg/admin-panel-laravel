@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/material-dashboard.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/admin/styles.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/admin/color-picker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/select2.min.css')}}">
     <script type="text/javascript" src="{{ asset( 'js/core/jquery.min.js') }}"></script>
 
 </head>
