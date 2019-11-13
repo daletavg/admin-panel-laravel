@@ -17,7 +17,7 @@
                         </a>
                     </div>
                     @endif
-                    <img width="150" id="upload-{{$name}}" src="{{GetPathToPhoto($image->path??'',asset('img/header-logo.svg')) }}" alt="">
+                    <img width="150" id="upload-{{$name}}" src="{{GetPathToPhoto($image->path??'') }}" alt="">
                 </div>
             </div>
         </div>

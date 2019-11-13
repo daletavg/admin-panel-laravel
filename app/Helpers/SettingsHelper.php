@@ -37,3 +37,15 @@ function dataWithId($data, $dataIsId = false)
     }
     return $result;
 }
+
+function dataWithKeyName($data)
+{
+    $result = [];
+    foreach ($data as $key =>$item) {
+        array_push($result, [
+            'value' => $key.' '.$item,
+            'id' => $key,
+        ]);
+    }
+    return $result;
+}

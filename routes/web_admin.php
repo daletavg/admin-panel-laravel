@@ -48,6 +48,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
             Route::get('/sitemap','SitemapController@index')->name('sitemap.index');
             Route::get('/sitemap/edit','SitemapController@edit')->name('sitemap.edit');
             Route::put('/sitemap/update','SitemapController@update')->name('sitemap.update');
+
+            Route::resource('/redirects','RedirectsController');
         });
 
         Route::resource('/translate','TranslateController',['except'=>['show']]);

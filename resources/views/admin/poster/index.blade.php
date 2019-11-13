@@ -26,7 +26,7 @@
                     {{--                    </td>--}}
                     <th>{{$loop->iteration}}</th>
                     <td>
-                        {!! GetImageAdmin(\Illuminate\Support\Arr::first($item->images)->path??'',asset('img/header-logo.svg')) !!}
+                        {!! GetImageAdmin(\Illuminate\Support\Arr::first($item->images)->path??'') !!}
 
                     </td>
                     <td>

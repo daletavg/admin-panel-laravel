@@ -23,6 +23,10 @@ class SeoController extends AdminController
                 'name'=>'Редактирование метатегов',
                 'url'=>route('admin.seo.meta.index'),
             ],
+            [
+                'name'=>'Перенаправления',
+                'url'=>route('admin.seo.redirects.index'),
+            ],
 
 
         ];
