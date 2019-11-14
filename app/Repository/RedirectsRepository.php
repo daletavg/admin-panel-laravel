@@ -20,6 +20,9 @@ class RedirectsRepository extends BaseRepository
         return Redirect::class;
     }
 
-
+    public function findByUrl($url)
+    {
+        return $this->model->where('from','=',$url)->first();
+    }
 
 }
