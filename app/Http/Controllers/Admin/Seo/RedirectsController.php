@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Seo;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Redirect;
+use App\Repository\RedirectsRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,10 @@ class RedirectsController extends AdminController
     public function index()
     {
         $this->setCardTitle('Перенаправления');
-        $vars['items']= Redirect::paginate(15);
+
+
+        $rd = new RedirectsRepository(app());
+        $vars['items']= $rd->paginate(15);
         $this->setContent(view('admin.seo.redirects.index',$vars));
         return $this->main();
     }
@@ -50,8 +54,9 @@ class RedirectsController extends AdminController
         $data['to']= getUrlWithoutHost($data['to']);
         $data['active'] = isActive($data);
 
-        $redirect = (new Redirect())->fill($data);
-        $redirect->save();
+        $rd = new RedirectsRepository(app());
+        $redirect =$rd->create($data);
+
 
         if($request->has('saveClose')){
             return redirect()->route('admin.seo.redirects.index')->with('success','Запись успешно создана!');
@@ -60,16 +65,6 @@ class RedirectsController extends AdminController
         return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success','Запись успешно создана!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -79,7 +74,12 @@ class RedirectsController extends AdminController
      */
     public function edit($id)
     {
-        //
+        $rd = new RedirectsRepository(app());
+        $vars['edit']=$rd->find($id);
+        $vars['codes'] = Redirect::getCodes();
+        $this->setCardTitle('Редактирование перенаправления');
+        $this->setContent(view('admin.seo.redirects.edit',$vars));
+        return $this->main();
     }
 
     /**
@@ -91,7 +91,17 @@ class RedirectsController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $rd = new RedirectsRepository(app());
+        $data =  $request->except('_token','_method');
+        $data['from']= getUrlWithoutHost($data['from']);
+        $data['to']= getUrlWithoutHost($data['to']);
+        $data['active'] = isActive($data);
+        $redirect =$rd->update($data,$id);
+        if($request->has('saveClose')){
+            return redirect()->route('admin.seo.redirects.index')->with('success','Запись успешно обновлена!');
+        }
+
+        return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success','Запись успешно обновлена!');
     }
 
     /**
@@ -102,6 +112,8 @@ class RedirectsController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        $rd = new RedirectsRepository(app());
+        $rd->delete($id);
+        return redirect()->route('admin.seo.redirects.index')->with('success','Запись успешно удалена!');
     }
 }

@@ -3,11 +3,39 @@
 
 namespace App\Repository;
 
+use App\Contracts\Repository\SaveLangDataContract;
+use App\Models\Translate\TranslateLang;
+use App\Traits\Repository\SaveLangDataTrait;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Translate\Translate;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class TranslateRepository
+class TranslateRepository extends BaseRepository implements SaveLangDataContract
 {
+    use SaveLangDataTrait;
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return Translate::class;
+    }
+
+    public function langModel()
+    {
+        return TranslateLang::class;
+    }
+
+
+    public function whereGroupWithLang( string $group)
+    {
+
+        return $this->model->where('group',$group)->with('lang')->get();
+    }
+
 
     public function addTranslate(Translate $translate)
     {
@@ -51,4 +79,6 @@ class TranslateRepository
         }
         return $translate;
     }
+
+
 }

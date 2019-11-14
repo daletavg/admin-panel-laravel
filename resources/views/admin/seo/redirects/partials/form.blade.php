@@ -13,6 +13,6 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        @include('admin.layouts.partials.selects.select',['name'=>'code','title'=>'Код перенаправления','values'=>dataWithKeyName($codes)])
+        @include('admin.layouts.partials.selects.select',['check'=>$edit->code??'','name'=>'code','title'=>'Код перенаправления','values'=>dataWithKeyName($codes)])
     </div>
 </div>

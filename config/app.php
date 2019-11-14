@@ -180,6 +180,7 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
     ],
 

@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class TranslateController extends AdminController
 {
+    protected $translateRepository;
+
+    public function __construct()
+    {
+        $this->translateRepository= new TranslateRepository(app());
+    }
+
     public function index()
     {
         $this->setCardTitle('Локализация');
@@ -34,28 +41,33 @@ class TranslateController extends AdminController
     {
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
-        $transalte = (new Translate())->fill($nonLocalizeData);
-        $transalte->save();
-        $transalte->saveLang($data);
 
-        $tr = new TranslateRepository();
-        $tr->addTranslate($transalte);
+        $transalteRepository = new TranslateRepository(app());
+        $transalte = $transalteRepository->create($nonLocalizeData);
+        $transalteRepository->createLangData($transalte->id, $data);
+        $transalteRepository->addTranslate($transalte);
+//        $transalte = (new Translate())->fill($nonLocalizeData);
+//        $transalte->save();
+//        $transalte->saveLang($data);
 
-        if($request->has('saveClose')){
-            return redirect()->route('admin.translate.index')->with('success','Запись успешно создана!');
+//        $tr = new TranslateRepository();
+//        $tr->addTranslate($transalte);
+
+        if ($request->has('saveClose')) {
+            return redirect()->route('admin.translate.index')->with('success', 'Запись успешно создана!');
         }
 
-        return redirect()->route('admin.translate.edit',$transalte)->with('success','Запись успешно создана!');
+        return redirect()->route('admin.translate.edit', $transalte)->with('success', 'Запись успешно создана!');
 
     }
 
     /**
-     * @param Translate $translate
+     * @param int $id
      */
-    public function edit(Translate $translate)
+    public function edit(int $id)
     {
         //$checkGroup
-        $vars['edit'] = $translate->load('langs');
+        $vars['edit'] = ((app()));
         $vars['groups'] = Translate::getGroups();
         $this->setCardTitle('Редактирование локализации');
 
@@ -65,32 +77,36 @@ class TranslateController extends AdminController
 
     /**
      * @param Request $request
-     * @param Translate $translate
+     * @param int $id
      */
-    public function update(Request $request, Translate $translate)
+    public function update(Request $request, int $id)
     {
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
-        $oldKey = getTranslateKey($translate);
-        $translate = $translate->load('langs');
-        $translate->fill($nonLocalizeData);
-        $translate->save();
-        $translate->updateLang($data);
+        $translateRepository = new TranslateRepository(app());
+        $oldKey = getTranslateKey($translateRepository->find($id));
 
-        $tr = new TranslateRepository();
-        $tr->updateTranslate($oldKey,$translate);
+        $translate = $translateRepository->update($nonLocalizeData, $id);
+        $translateRepository->updateLang($id, $data);
+        $translateRepository->updateTranslate($oldKey, $translate);
 
-        if($request->has('saveClose')){
-            return redirect()->route('admin.translate.index')->with('success','Запись успешно создана!');
+
+        if ($request->has('saveClose')) {
+            return redirect()->route('admin.translate.index')->with('success', 'Запись успешно создана!');
         }
 
-        return redirect()->route('admin.translate.edit',$translate)->with('success','Запись успешно создана!');
+        return redirect()->route('admin.translate.edit', $translate)->with('success', 'Запись успешно создана!');
     }
 
-    public function destroy(Translate $translate)
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
     {
-        $translate->delete();
-        return redirect()->route('admin.translate.index')->with('success','Запись успешно удалена!');
+        $translateRepository = new TranslateRepository(app());
+        $translateRepository->delete($id);
+        return redirect()->route('admin.translate.index')->with('success', 'Запись успешно удалена!');
     }
 
 }
