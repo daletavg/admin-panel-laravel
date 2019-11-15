@@ -1,9 +1,4 @@
 {
-    "/js/admin/admin.js": "/js/admin/admin.js",
-    "/css/admin/material-dashboard.css": "/css/admin/material-dashboard.css",
-    "/css/admin/admin-main.css": "/css/admin/admin-main.css",
-    "/css/admin/styles.css": "/css/admin/styles.css",
-    "/css/main.css": "/css/main.css",
-    "/js/main.js": "/js/main.js",
-    "/js/admin/libraries.js": "/js/admin/libraries.js"
+    "/js/public/index.js": "/js/public/index.js",
+    "/css/public/style.css": "/css/public/style.css"
 }
