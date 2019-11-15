@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CitiesSeeder::class);
         $this->call(GlobalSeoSettingsSeeder::class);
         $this->call(UsersSeeder::class);
+        $this->call(TranslateSeeder::class);
 
     }
 }
