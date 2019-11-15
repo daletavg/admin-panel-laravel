@@ -7,7 +7,9 @@
             <th>Значение</th>
             <th>Группа</th>
             <th class="text-right">
-                <a href="{{route('admin.translate.create',['group'=>$group])}}" class="btn btn-primary">Создать</a>
+                @can('create_translate')
+                    <a href="{{route('admin.translate.create',['group'=>$group])}}" class="btn btn-primary">Создать</a>
+                @endcan
             </th>
         </tr>
         </thead>
@@ -28,24 +30,32 @@
                     <td>
                         {{$item->group}}
                     </td>
+
                     <td class="text-primary text-right">
-                        <div class="dropdown menu_drop">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">menu</i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
-                                <a href="{{route('admin.translate.edit',$item)}}"
-                                   class="dropdown-item">️Редактировать</a>
-                                <form method="POST" action="{{route('admin.translate.destroy',$item)}}"
-                                      accept-charset="UTF-8"
-                                      onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item">Удалить</button>
-                                </form>
+                        @if(auth()->user()->can('edit_translate')|| auth()->user()->can('remove_translate'))
+                            <div class="dropdown menu_drop">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton_1"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">menu</i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
+                                    @can('edit_translate')
+                                        <a href="{{route('admin.translate.edit',$item)}}"
+                                           class="dropdown-item">️Редактировать</a>
+                                    @endcan
+                                    @can('remove_translate')
+                                        <form method="POST" action="{{route('admin.translate.destroy',$item)}}"
+                                              accept-charset="UTF-8"
+                                              onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item">Удалить</button>
+                                        </form>
+                                    @endcan
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </td>
 
 

@@ -31,7 +31,7 @@ class TypeSettingsSeeder extends Seeder
         ];
         foreach ($data as $item)
         {
-            (new \App\Models\TypeSetting())->fill($item)->save();
+            (new \App\Models\Settings\TypeSetting())->fill($item)->save();
         }
     }
 }

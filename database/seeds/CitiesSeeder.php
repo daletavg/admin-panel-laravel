@@ -23,13 +23,14 @@ class CitiesSeeder extends Seeder
                 'ru'=>['title'=>'Николаев']
             ]
         ];
+
         foreach ($data as $item) {
-            $city = new \App\Models\City();
+            $city = new  \App\Models\City\City();
             $city->save();
             foreach ($item as $key => $langData) {
                 $langData+= ['language_id'=>\App\Models\Language::getLangIdByKey($key)];
 
-                $lang = (new \App\Models\CityLang())->fill($langData);
+                $lang = (new  \App\Models\City\CityLang())->fill($langData);
 
                 $city->lang($key)->save($lang);
             }

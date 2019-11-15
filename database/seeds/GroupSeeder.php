@@ -15,6 +15,6 @@ class GroupSeeder extends Seeder
             'name'=>'Контакты',
             'name_key'=>'contacts'
         ];
-        (new \App\Models\GroupSetting())->fill($data)->save();
+        (new \App\Models\Settings\GroupSetting())->fill($data)->save();
     }
 }

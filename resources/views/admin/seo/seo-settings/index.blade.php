@@ -4,14 +4,14 @@
     @php
       $yesNoData =['Нет','Да']
     @endphp
-    <div class="row">
-        <div class="col-md-6">
-            @include('admin.layouts.partials.selects.select',['check'=>checkYesNo($edit->end_slesh_redirect),'name'=>'end_slesh_redirect','title'=>'Перенаправлять со слеша на без слеша','values'=>dataWithId($yesNoData)])
-        </div>
-        <div class="col-md-6">
-            @include('admin.layouts.partials.selects.select',['check'=>$edit->end_slesh_code??'','name'=>'end_slesh_code','title'=>'Код перенаправления','values'=>dataWithKeyName($codes)])
-        </div>
-    </div>
+{{--    <div class="row">--}}
+{{--        <div class="col-md-6">--}}
+{{--            @include('admin.layouts.partials.selects.select',['check'=>checkYesNo($edit->end_slesh_redirect),'name'=>'end_slesh_redirect','title'=>'Перенаправлять со слеша на без слеша','values'=>dataWithId($yesNoData)])--}}
+{{--        </div>--}}
+{{--        <div class="col-md-6">--}}
+{{--            @include('admin.layouts.partials.selects.select',['check'=>$edit->end_slesh_code??'','name'=>'end_slesh_code','title'=>'Код перенаправления','values'=>dataWithKeyName($codes)])--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <hr/>
     <div class="row">
         <div class="col-md-6">

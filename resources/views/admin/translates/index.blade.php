@@ -16,6 +16,7 @@
     use \App\Repository\TranslateRepository;
     $translateRepository = new TranslateRepository(app());
 @endphp
+
 <section class="tab-content">
     @foreach($groups as $group)
         <div role="tabpanel" class="{{$loop->iteration==1?'show active':''}} tab-pane " id="group-{{ $group }}">

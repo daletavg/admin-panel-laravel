@@ -30,6 +30,10 @@ class TranslateController extends AdminController
      */
     public function create(Request $request)
     {
+        if(!auth()->user()->can('create_translate'))
+        {
+            return redirect()->back();
+        }
         $this->setCardTitle('Создание локализации');
         $vars['groups'] = Translate::getGroups();
 
@@ -65,7 +69,10 @@ class TranslateController extends AdminController
      */
     public function edit(int $id)
     {
-        //$checkGroup
+        if(!auth()->user()->can('edit_translate'))
+        {
+            return redirect()->back();
+        }
         $vars['edit'] = $this->itemRepository->find($id);
         $vars['groups'] = Translate::getGroups();
         $this->setCardTitle('Редактирование локализации');
@@ -80,6 +87,10 @@ class TranslateController extends AdminController
      */
     public function update(Request $request, int $id)
     {
+        if(!auth()->user()->can('edit_translate'))
+        {
+            return redirect()->back();
+        }
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
 
@@ -103,7 +114,10 @@ class TranslateController extends AdminController
      */
     public function destroy(int $id)
     {
-
+        if(!auth()->user()->can('remove_translate'))
+        {
+            return redirect()->back();
+        }
         $this->itemRepository->delete($id);
         return redirect()->route('admin.translate.index')->with('success', 'Запись успешно удалена!');
     }

@@ -9,7 +9,7 @@ class GlobalSeoSetting extends Model
 {
 //    use Singleton;
     protected $table = 'global_seo_settings';
-    protected $fillable = ['end_slesh_redirect','end_slesh_code','www_redirect','www_code','index_php_redirect','index_php_code'];
+    protected $fillable = ['www_redirect','www_code','index_php_redirect','index_php_code'];
     public $timestamps = false;
 
     protected static $codes = [

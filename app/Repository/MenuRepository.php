@@ -8,34 +8,39 @@ class MenuRepository
 {
     static  function getMenu(){
 
-        return [
-            ['link'=>'admin.posters.index',
-                'name'=>'Афиши',
-                'icon'=>'list_alt'],
-            ['link'=>'admin.tour.index',
-                'name'=>'Гастроли',
-                'icon'=>'flight_takeoff'],
-            ['link'=>'admin.about.index',
-                'name'=>'О компании',
-                'icon'=>'description'],
-            ['link'=>'admin.partners.index',
-                'name'=>'Партнеры',
-                'icon'=>'people_alt'],
-            ['link'=>'admin.cities.index',
-                'name'=>'Города',
-                'icon'=>'location_city'],
-            ['link'=>'admin.seo.index',
-                'name'=>'SEO',
-                'icon'=>'emoji_objects'],
+       $data = [
+           ['link'=>'admin.posters.index',
+               'name'=>'Афиши',
+               'icon'=>'list_alt'],
+           ['link'=>'admin.tour.index',
+               'name'=>'Гастроли',
+               'icon'=>'flight_takeoff'],
+           ['link'=>'admin.about.index',
+               'name'=>'О компании',
+               'icon'=>'description'],
+           ['link'=>'admin.partners.index',
+               'name'=>'Партнеры',
+               'icon'=>'people_alt'],
+           ['link'=>'admin.cities.index',
+               'name'=>'Города',
+               'icon'=>'location_city'],
+           ['link'=>'admin.seo.index',
+               'name'=>'SEO',
+               'icon'=>'emoji_objects'],
 
-            ['link'=>'admin.translate.index',
-                'name'=>'Локализация',
-                'icon'=>'language'],
 
-            ['link'=>'admin.settings.index',
-                'name'=>'Настройки',
-                'icon'=>'settings'],
-        ];
+       ];
 
+       if(auth()->user()->can('translate'))
+       {
+           array_push($data,['link'=>'admin.translate.index',
+               'name'=>'Локализация',
+               'icon'=>'language']);
+       }
+       array_push($data,['link'=>'admin.settings.index',
+           'name'=>'Настройки',
+           'icon'=>'settings']);
+
+        return $data;
     }
 }

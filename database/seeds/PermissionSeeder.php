@@ -22,20 +22,32 @@ class PermissionSeeder extends Seeder
             \Spatie\Permission\Models\Permission::create(['name' => 'posters']),
             \Spatie\Permission\Models\Permission::create(['name' => 'about']),
             \Spatie\Permission\Models\Permission::create(['name' => 'settings']),
+
             \Spatie\Permission\Models\Permission::create(['name' => 'create_posters']),
             \Spatie\Permission\Models\Permission::create(['name' => 'edit_posters']),
             \Spatie\Permission\Models\Permission::create(['name' => 'remove_posters']),
+
             \Spatie\Permission\Models\Permission::create(['name' => 'create_about']),
             \Spatie\Permission\Models\Permission::create(['name' => 'edit_about']),
             \Spatie\Permission\Models\Permission::create(['name' => 'remove_about']),
+
              \Spatie\Permission\Models\Permission::create(['name' => 'create_settings']),
             \Spatie\Permission\Models\Permission::create(['name' => 'edit_settings']),
             \Spatie\Permission\Models\Permission::create(['name' => 'remove_settings'])
             );
+        $superAdminPermission = array();
+        array_push($superAdminPermission,
+            \Spatie\Permission\Models\Permission::create(['name' => 'translate']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'create_translate']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'edit_translate']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'remove_translate']));
 
         foreach ($permissions as $perm){
             $superadmin->givePermissionTo($perm);
             $admin->givePermissionTo($perm);
+        }
+        foreach ($superAdminPermission as $perm){
+            $superadmin->givePermissionTo($perm);
         }
 
     }

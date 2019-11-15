@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguagesSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(CitiesSeeder::class);
+        $this->call(GlobalSeoSettingsSeeder::class);
+        $this->call(UsersSeeder::class);
 
     }
 }
