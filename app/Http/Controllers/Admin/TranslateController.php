@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 
 class TranslateController extends AdminController
 {
-    protected $translateRepository;
 
-    public function __construct()
+
+    public function __construct(TranslateRepository $redirectsRepository)
     {
-        $this->translateRepository= new TranslateRepository(app());
+        $this->itemRepository = $redirectsRepository;
     }
 
     public function index()
@@ -42,10 +42,9 @@ class TranslateController extends AdminController
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
 
-        $transalteRepository = new TranslateRepository(app());
-        $transalte = $transalteRepository->create($nonLocalizeData);
-        $transalteRepository->createLangData($transalte->id, $data);
-        $transalteRepository->addTranslate($transalte);
+        $transalte = $this->itemRepository->create($nonLocalizeData);
+        $this->itemRepository->createLangData($transalte->id, $data);
+        $this->itemRepository->addTranslate($transalte);
 //        $transalte = (new Translate())->fill($nonLocalizeData);
 //        $transalte->save();
 //        $transalte->saveLang($data);
@@ -67,7 +66,7 @@ class TranslateController extends AdminController
     public function edit(int $id)
     {
         //$checkGroup
-        $vars['edit'] = ((app()));
+        $vars['edit'] = $this->itemRepository->find($id);
         $vars['groups'] = Translate::getGroups();
         $this->setCardTitle('Редактирование локализации');
 
@@ -83,12 +82,12 @@ class TranslateController extends AdminController
     {
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
-        $translateRepository = new TranslateRepository(app());
-        $oldKey = getTranslateKey($translateRepository->find($id));
 
-        $translate = $translateRepository->update($nonLocalizeData, $id);
-        $translateRepository->updateLang($id, $data);
-        $translateRepository->updateTranslate($oldKey, $translate);
+        $oldKey = getTranslateKey($this->itemRepository->find($id));
+
+        $translate = $this->itemRepository->update($nonLocalizeData, $id);
+        $this->itemRepository->updateLang($id, $data);
+        $this->itemRepository->updateTranslate($oldKey, $translate);
 
 
         if ($request->has('saveClose')) {
@@ -104,8 +103,8 @@ class TranslateController extends AdminController
      */
     public function destroy(int $id)
     {
-        $translateRepository = new TranslateRepository(app());
-        $translateRepository->delete($id);
+
+        $this->itemRepository->delete($id);
         return redirect()->route('admin.translate.index')->with('success', 'Запись успешно удалена!');
     }
 

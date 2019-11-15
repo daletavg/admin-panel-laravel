@@ -49,6 +49,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
             Route::get('/sitemap/edit','SitemapController@edit')->name('sitemap.edit');
             Route::put('/sitemap/update','SitemapController@update')->name('sitemap.update');
 
+            Route::get('/global-seo','GeneralSeoSettingsController@index')->name('global-seo.index');
+            Route::put('/global-seo/update','GeneralSeoSettingsController@update')->name('global-seo.update');
+
             Route::resource('/redirects','RedirectsController');
         });
 

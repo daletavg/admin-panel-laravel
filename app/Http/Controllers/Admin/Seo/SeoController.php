@@ -12,6 +12,10 @@ class SeoController extends AdminController
     {
         $vars['items'] =[
             [
+                'name'=>'Глобальные перенаправления',
+                'url'=>route('admin.seo.global-seo.index'),
+            ],
+            [
                 'name'=>'Генерация sitemap',
                 'url'=>route('admin.seo.sitemap.index'),
             ],

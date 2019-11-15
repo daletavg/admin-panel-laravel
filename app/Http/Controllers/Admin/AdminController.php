@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 abstract class AdminController extends BaseController
 {
+    protected $itemRepository;
     public function main(){
         $this->checkCardTitle();
         $this->setMenu(MenuRepository::getMenu());
