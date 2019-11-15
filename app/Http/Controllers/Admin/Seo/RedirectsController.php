@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Seo;
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Requests\RedirectsRequest;
 use App\Models\Redirect;
 use App\Repository\RedirectsRepository;
 use Illuminate\Http\Request;
@@ -50,10 +51,10 @@ class RedirectsController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  RedirectsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RedirectsRequest $request)
     {
         $data = $request->except('_token');
 
@@ -91,11 +92,11 @@ class RedirectsController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  RedirectsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RedirectsRequest $request, $id)
     {
         $data =  $request->except('_token','_method');
         $data['from']= getUrlWithoutHost($data['from']);

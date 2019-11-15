@@ -1,6 +1,6 @@
-
-
-
+<div class=" text-right">
+    <a href="{{route('admin.translate.create')}}" class="btn btn-primary" style="color: white">Создать</a>
+</div>
 <ul class="nav nav-tabs mb-5" role="tablist">
 
     @foreach($groups as $group)
@@ -26,5 +26,6 @@
         </div>
     @endforeach
 </section>
+
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\TranslateRequest;
 use App\Models\Translate\Translate;
 use App\Repository\TranslateRepository;
 use Illuminate\Http\Request;
@@ -30,18 +31,19 @@ class TranslateController extends AdminController
      */
     public function create(Request $request)
     {
-        if(!auth()->user()->can('create_translate'))
-        {
+        if (!auth()->user()->can('create_translate')) {
             return redirect()->back();
         }
         $this->setCardTitle('Создание локализации');
         $vars['groups'] = Translate::getGroups();
-
+        if ($request->has('group')) {
+            $vars['checkGroup'] = $request->get('group');
+        }
         $this->setContent(view('admin.translates.create', $vars));
         return $this->main();
     }
 
-    public function store(Request $request)
+    public function store(TranslateRequest $request)
     {
         $data = $request->get('data');
         $nonLocalizeData = $request->except('data', '_token');
@@ -69,8 +71,7 @@ class TranslateController extends AdminController
      */
     public function edit(int $id)
     {
-        if(!auth()->user()->can('edit_translate'))
-        {
+        if (!auth()->user()->can('edit_translate')) {
             return redirect()->back();
         }
         $vars['edit'] = $this->itemRepository->find($id);
@@ -85,10 +86,9 @@ class TranslateController extends AdminController
      * @param Request $request
      * @param int $id
      */
-    public function update(Request $request, int $id)
+    public function update(TranslateRequest $request, int $id)
     {
-        if(!auth()->user()->can('edit_translate'))
-        {
+        if (!auth()->user()->can('edit_translate')) {
             return redirect()->back();
         }
         $data = $request->get('data');
@@ -114,8 +114,7 @@ class TranslateController extends AdminController
      */
     public function destroy(int $id)
     {
-        if(!auth()->user()->can('remove_translate'))
-        {
+        if (!auth()->user()->can('remove_translate')) {
             return redirect()->back();
         }
         $this->itemRepository->delete($id);

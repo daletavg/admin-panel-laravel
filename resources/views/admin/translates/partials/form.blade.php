@@ -29,7 +29,7 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        @include('admin.layouts.partials.selects.select2',['name'=>'group','inputClass'=>'group-select','check'=>$edit->group??'','title'=>'Группа', 'values'=>dataWithId($groups,true)])
+        @include('admin.layouts.partials.selects.select2',['name'=>'group','inputClass'=>'group-select','check'=>$edit->group??$checkGroup??'','title'=>'Группа', 'values'=>dataWithId($groups,true)])
     </div>
 </div>
 <div class="row">
