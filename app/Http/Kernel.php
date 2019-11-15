@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\GlobalSeoMiddleware;
 use App\Http\Middleware\RedirectsMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -20,7 +21,10 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
+        //This middleware to do redirects from seo
         \App\Http\Middleware\RedirectsMiddleware::class,
+        \App\Http\Middleware\GlobalSeoMiddleware::class
     ];
 
     /**
