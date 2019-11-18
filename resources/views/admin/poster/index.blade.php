@@ -6,7 +6,7 @@
             <th>Изображение</th>
             <th>Заголовок</th>
             <th >Город</th>
-            <th class="th-description">Описание</th>
+            <th class="th-description max-width-420">Описание</th>
 
 
             <th class="text-right">
@@ -33,7 +33,7 @@
                         {{ $item->lang->title }}
                     </td>
                     <td>{{$item->city->lang->title ?? ''}}</td>
-                    <td> {!! $item->lang->description ?? '' !!}</td>
+                    <td class="max-width-420"> {!! $item->lang->description ?? '' !!}</td>
 
                     <td class="text-primary text-right">
                         <div class="dropdown menu_drop">
@@ -60,6 +60,7 @@
         @endisset
         </tbody>
     </table>
+    {{$items->links()}}
 </div>
 @section('javascript')
     <script type="text/javascript" defer>

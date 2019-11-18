@@ -26,6 +26,7 @@ class Meta extends Model implements HasLangData
     {
         $this->langClass = $className;
     }
+
     public function getLangClass(): string
     {
         return $this->langClass;
@@ -41,19 +42,21 @@ class Meta extends Model implements HasLangData
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['url','type','active'];
+    protected $fillable = ['url', 'type', 'active'];
 
     public static function getMetaData($url = null, $fromCache = true)
     {
         if ($url === null) {
             $url = getUrlWithoutHost(getNonLocaledUrl());
         }
-        if (($meta = static::WhereUrl($url)->Active(true)->lang()->first()) !== null) {
+
+        if (($meta = static::WhereUrl($url)->Active(true)->with('lang')->first()) !== null) {
 
             $meta = self::DefaultMeta();
         }
 
-         return $meta;
+
+        return $meta;
     }
 
     public function isDefault()
@@ -63,8 +66,9 @@ class Meta extends Model implements HasLangData
 
     static function DefaultMeta()
     {
-        return self::where('type',self::DEFAULT_TYPE)->with('langs')->first();
+        return self::where('type', self::DEFAULT_TYPE)->with('langs')->first();
     }
+
     public function scopeWhereUrl($query, $url)
     {
         return $query->where('url', '=', $url);
@@ -72,6 +76,6 @@ class Meta extends Model implements HasLangData
 
     public function scopeMetaWithoutDefault($query)
     {
-        return $query->where([['url', '!=', '*'],['type','!=',self::DEFAULT_TYPE]]);
+        return $query->where([['url', '!=', '*'], ['type', '!=', self::DEFAULT_TYPE]]);
     }
 }

@@ -34,6 +34,13 @@ class LanguageRepository
         return Cache::get('allLocales');
 
     }
+
+    static function getLanguageByKey($key)
+    {
+        $data = self::getAllLocales();
+        return $data->where('locale',$key)->first();
+    }
+
     static function getLocaleById(int $localeId)
     {
         $data = null;
@@ -45,12 +52,23 @@ class LanguageRepository
         }
         return Cache::get('getLocaleById['.$localeId.']');
     }
+
+    static function getLocaleIdByLocale($locale):int
+    {
+        $lang = self::getLanguage();
+        $lang = $lang->where('locale',$locale);
+        $lang=Arr::first($lang);
+
+        return $lang->id??1;
+    }
+
     static function getCurrentLocaleId()
     {
         $lang = self::getLanguage();
 
         $lang = $lang->where('locale',getCurrentLocale());
+        $lang=Arr::first($lang);
 
-        return Arr::get($lang[0],'id');
+        return $lang->id??1;
     }
 }

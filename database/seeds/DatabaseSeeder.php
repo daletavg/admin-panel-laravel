@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GlobalSeoSettingsSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(TranslateSeeder::class);
+        $this->call(AboutSeeder::class);
+        $this->call(PartnersSeeder::class);
 
     }
 }

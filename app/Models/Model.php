@@ -12,7 +12,7 @@ abstract class Model extends BaseModel
 
     public function scopeActive($query,bool $active)
     {
-        return $query->where('power', '=', $active);
+        return $query->where('active', '=', $active);
     }
     public function scopeWithLang($query)
     {

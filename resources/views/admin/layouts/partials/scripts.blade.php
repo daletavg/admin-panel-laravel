@@ -11,13 +11,13 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/globals.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/functions.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/admin/globals.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/admin/functions.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/admin/functions-admin.js') }}" defer></script>
 
 <script type="text/javascript" src="{{ asset('js/admin/admin-triggers.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/admin/admin-init.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/init.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/admin/init.js') }}" defer></script>
 <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/color-picker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/select2.full.min.js')}}"></script>

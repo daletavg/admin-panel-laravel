@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 abstract class SiteController extends BaseController
 {
+    protected $itemRepository;
     public function main(){
         $this->generateSeoMeta();
 //        $data['phones']=[
@@ -33,10 +34,12 @@ abstract class SiteController extends BaseController
     protected function generateSeoMeta()
     {
         $meta = getMeta();
-        SEOMeta::setTitle($meta->lang->title);
-        SEOMeta::setKeywords($meta->lang->keywords);
-        SEOMeta::setDescription($meta->lang->description);
-
+        if($meta!==null) {
+            SEOMeta::setTitle($meta->lang->title);
+            SEOMeta::setKeywords($meta->lang->keywords);
+            SEOMeta::setDescription($meta->lang->description);
+        }
     }
+
 
 }

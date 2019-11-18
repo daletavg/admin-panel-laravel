@@ -12,7 +12,7 @@ if (!function_exists('getTranslate')) {
 
     function getTranslate($key)
     {
-        $tr = new \App\Repository\TranslateRepository();
+        $tr = new \App\Repository\TranslateRepository(app());
         $translate = $tr->getTranslateByKey($key);
         if($translate === null)
         {

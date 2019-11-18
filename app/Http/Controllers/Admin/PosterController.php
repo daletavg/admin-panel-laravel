@@ -24,7 +24,7 @@ class PosterController extends AdminController
     public function index()
     {
         $data = $vars = [];
-        $vars['items'] = Poster::with('city.lang','lang')->get();
+        $vars['items'] = Poster::with('city.lang','lang')->paginate(15);
         $this->setCardTitle('Афиши');
         $this->setContent(view('admin.poster.index',$vars));
         return $this->main();

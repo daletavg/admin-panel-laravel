@@ -7,6 +7,7 @@ namespace App\Traits;
 use App\Contracts\LangDataContract;
 use App\Models\Language;
 use App\Models\PosterGroupLang;
+use App\Repository\LanguageRepository;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -15,9 +16,9 @@ trait LangDataTrait
     public function lang($locale = null): HasOne
     {
         if (is_null($locale)) {
-            $locale = Language::getLangIdByKey(getCurrentLocale());
+            $locale = LanguageRepository::getCurrentLocaleId();
         } else {
-            $locale = Language::getLangIdByKey($locale);
+            $locale = LanguageRepository::getLocaleIdByLocale($locale);
         }
 
         return $this->hasOne($this->getLangClass())->where('language_id', $locale);
