@@ -16,6 +16,7 @@ class IndexController extends SiteController
     }
 
     public function index(){
+
         $allItems = $this->itemRepository->active()->get()->load('lang','images','city.lang','place.lang');
 
         $vars['general']= $allItems->where('on_general',true);

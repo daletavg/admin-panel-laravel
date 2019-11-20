@@ -18,34 +18,47 @@ class PostersSeeder extends Seeder
      */
     public function run()
     {
-        foreach(range(1,15) as $i)
-        {
+//        $interval = new DateInterval('P3M');
+//        $date = new DateTime();
+//        dump($date);
+//        dd($date->sub($interval));
+        foreach (range(1, 30) as $i) {
             $this->createPosters();
+        }
+        foreach (range(1, 30) as $i) {
+            $this->createPosters(false);
         }
     }
 
-    private function createPosters()
+    private function createPosters(bool $isNew = true)
     {
+
+        $interval = new DateInterval('P3M');
+
+
         $poster = $this->postersRepository->create([
-            'price_before'=>1,
-            'price_to'=>2,
+            'price_before' => 1,
+            'price_to' => 2,
+            'active'=>true,
+            'url'=>\Illuminate\Support\Str::random(15),
+            'date' => $isNew?(new DateTime())->add($interval)->format('Y-m-d H:i:s'):(new DateTime())->sub($interval)->format('Y-m-d H:i:s')
         ]);
         $radomDescription = \Illuminate\Support\Str::random(500);
-        $data=[
+        $data = [
             'ru' => [
                 'title' => \Illuminate\Support\Str::random(10),
-                'description'=>$radomDescription,
-                'short_description'=>$radomDescription
+                'description' => $radomDescription,
+                'short_description' => $radomDescription
             ],
             'uk' => [
                 'title' => \Illuminate\Support\Str::random(10),
-                'description'=>$radomDescription,
-                'short_description'=>$radomDescription
+                'description' => $radomDescription,
+                'short_description' => $radomDescription
             ],
             'en' => [
                 'title' => \Illuminate\Support\Str::random(10),
-                'description'=>$radomDescription,
-                'short_description'=>$radomDescription
+                'description' => $radomDescription,
+                'short_description' => $radomDescription
             ],
         ];
         $this->postersRepository->createLangData($poster->id, $data);

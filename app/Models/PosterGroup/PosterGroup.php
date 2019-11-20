@@ -35,4 +35,9 @@ class PosterGroup extends Model implements HasLangData
     {
         return $this->hasMany(Poster::class,'poster_group_id','id');
     }
+
+    public function posterWithData()
+    {
+        return $this->hasMany(Poster::class,'poster_group_id','id')->with('lang','city.lang','place.lang');
+    }
 }

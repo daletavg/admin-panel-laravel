@@ -17,7 +17,10 @@ Route::group([
 ], function() {
     Route::group(['namespace' => 'Front'], function () {
         Route::get('/', 'IndexController@index')->name('home.index');
-        Route::get('/events', 'EventsController@index')->name('events.index');
+        //Route::get('/events', 'EventsController@index')->name('events.index');
+        Route::get('/event/search','EventsController@search')->name('events.search');
+        Route::get('/event/{url}', 'EventsController@show')->name('events.show');
+
         Route::get('/about', 'AboutController@index')->name('about.index');
         Route::get('/history', 'HistoryController@index')->name('history.index');
         Route::get('/partners', 'PartnersController@index')->name('partners.index');

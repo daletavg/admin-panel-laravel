@@ -17,6 +17,7 @@ class CreatePostersTable extends Migration
             $table->bigIncrements('id');
             $table->boolean('on_general')->default(false);
             $table->dateTime('date')->nullable();
+            $table->string('url',255);
             $table->string('pay_link')->nullable();
             $table->text('video')->nullable();
             $table->float('price_before')->nullable();
@@ -28,6 +29,9 @@ class CreatePostersTable extends Migration
             $table->unsignedBigInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onDelete('set null');
             $table->timestamps();
+        });
+        Schema::table('posters', function (Blueprint $table) {
+            $table->string('url',255)->unique()->change();
         });
     }
 

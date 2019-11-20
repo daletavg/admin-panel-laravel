@@ -35,17 +35,9 @@
                     data-aos-duration="1000"
                 >
                     <p class="become_section__subtitle mb-20">
-                        Как стать нашим партнером
+                        {{getTranslate('how_to.partners')}}
                     </p>
-                    <p class="become_section__text">
-                        ARTPOINT - международное агентство, успешно развивающееся в сфере
-                        концертной деятельности уже более 10 лет. Диапазон наших проектов
-                        разнообразен: от классического и модерн балета, танго до современных
-                        шоу-программ. <br />
-                        <br />
-                        Мы сотрудничаем с лучшими концертными и театральными площадками
-                        Украины и ближнего зарубежья.
-                    </p>
+                    {!! getTranslate('how_to_text.partners')!!}
                 </div>
             </div>
         </div>
@@ -153,21 +145,21 @@
                         <input
                             type="text"
                             class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
-                            placeholder="Имя"
+                            placeholder="{{getTranslate('name.form')}}"
                         />
                         <input
                             type="tel"
                             class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
-                            placeholder="Номер телефона"
+                            placeholder="{{getTranslate('phone.form')}}"
                         />
                         <input
                             type="text"
                             class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
-                            placeholder="Сообщение"
+                            placeholder="{{getTranslate('message.form')}}"
                         />
                         <button type="submit" class="mobile-feedback__btn">
               <span>
-                Отправить
+                {{getTranslate('send.form')}}
               </span>
                         </button>
                     </form>

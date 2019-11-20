@@ -1,10 +1,6 @@
 <div class="menu">
     <div class="menu__container">
-        <div class="menu__languages">
-            <div class="menu__languages-item">Uk</div>
-            <div class="menu__languages-item active">Ru</div>
-            <div class="menu__languages-item">En</div>
-        </div>
+        @include('public.layouts.partials.locale-selector-mobile')
         <div class="menu__list">
             <a href="{{route('home.index')}}" class="menu__list-item">{{getTranslate('posters.global')}}</a>
             <a href="{{route('about.index')}}" class="menu__list-item">{{getTranslate('about_company.global')}}</a>

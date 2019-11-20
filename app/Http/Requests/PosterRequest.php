@@ -24,9 +24,22 @@ class PosterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'price_before'=>'numeric',
-            'price_to'=>'numeric',
-        ];
+        $data = [];
+        switch ($this->getMethod())
+        {
+            case 'POST':
+                $data =[
+                    'price_before'=>'numeric',
+                    'price_to'=>'numeric',
+                    'url'=>'required|string|max:255|unique:posters,url'
+                ];
+            case 'PUT':
+                $data =[
+                    'price_before'=>'numeric',
+                    'price_to'=>'numeric',
+                    'url'=>'required|string|max:255'
+                ];
+        }
+        return $data;
     }
 }

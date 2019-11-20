@@ -20,7 +20,7 @@ class GroupController extends AdminController
     public function index()
     {
         $data = $vars = [];
-        $vars['items'] = PosterGroup::all();
+        $vars['items'] = PosterGroup::all()->load('lang');
        $this->setCardTitle('Гастроли');
         $this->setContent(view('admin.group.index',$vars));
         return $this->main();
@@ -54,12 +54,7 @@ class GroupController extends AdminController
 
 
         $langData = $request->get('data');
-        foreach ($langData as $langKey => $data)
-        {
-            $lang = (new PosterGroupLang())->fill($data);
-            $lang->language()->associate(Language::getLanguageByKey($langKey));
-            $posterGroup->lang()->save($lang);
-        }
+        $posterGroup->saveLang($langData);
 
 
 

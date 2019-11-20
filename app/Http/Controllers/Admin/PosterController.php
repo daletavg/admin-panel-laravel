@@ -9,6 +9,7 @@ use App\Models\Language;
 use App\Models\Place\Place;
 use App\Models\Poster\Poster;
 use App\Models\Poster\PosterLang;
+use App\Repository\PostersRepository;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,15 +17,39 @@ use Illuminate\Support\Arr;
 
 class PosterController extends AdminController
 {
+
+    public function __construct(PostersRepository $postersRepository)
+    {
+        $this->itemRepository = $postersRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = $vars = [];
-        $vars['items'] = Poster::with('city.lang','lang')->paginate(15);
+        $vars = [];
+        if($request->has('search') && $request->has('type'))
+        {
+            switch ($request->get('type')){
+                case 'new':
+                    $vars['items'] = $this->itemRepository->search($request->get('search'));
+                    $vars['history'] = $this->itemRepository->paginateHistoryWithData(15);
+                    $vars['search']=$request->get('search');
+                    break;
+                case 'history':
+                    $vars['items'] = $this->itemRepository->paginateWithData(15);
+                    $vars['history'] = $this->itemRepository->searchHistory($request->get('search'));
+                    $vars['searchHistory']=$request->get('search');
+                    break;
+            }
+        }else {
+            $vars['items'] = $this->itemRepository->paginateWithData(15);
+            $vars['history'] = $this->itemRepository->paginateHistoryWithData(15);
+        }
         $this->setCardTitle('Афиши');
         $this->setContent(view('admin.poster.index',$vars));
         return $this->main();

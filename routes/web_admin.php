@@ -15,6 +15,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
         Route::resource('/tour','GroupController',['except'=>['show']]);
 
         Route::resource('/posters','PosterController',['except'=>['show']]);
+        Route::get('/posters/search','PosterController@search')->name('posters.search');
+
         Route::get('/leave-group','PosterController@leaveGroup')->name('posters.leave-group');
 
         Route::get('/city-places','PosterController@getCityPlaces')->name('posters.city-places');

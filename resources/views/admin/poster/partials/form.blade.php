@@ -48,6 +48,9 @@
     <div class="col-md-6">
         @include('admin.layouts.partials.inputs.date-time',['name'=>'date','title'=>'Дата:'])
     </div>
+    <div class="col-md-6">
+        @include('admin.layouts.partials.inputs.default-input',['name'=>'url','title'=>'URL:'])
+    </div>
 </div>
 <div class="row">
     <div class="col-md-6">

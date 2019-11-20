@@ -128,11 +128,7 @@
                 </div>
             </div>
             <div class="header__search">
-                <div class="header__languages d-none d-lg-flex">
-                    <a href="#" class="header__languages-item">Uk</a>
-                    <a href="#" class="header__languages-item active">Ru</a>
-                    <a href="#" class="header__languages-item">En</a>
-                </div>
+                @include('public.layouts.partials.locale-selector-desktop')
                 <div
                     class="header__search__label  cursor-pointer position-relative d-flex align-items-center"
                 >
@@ -146,14 +142,14 @@
                         </svg>
                         <p class="header__text d-none d-lg-block">{{getTranslate('search.global')}}</p>
                     </div>
-                    <div class="header__search__input" data-submit="url">
+                    <div class="header__search__input" data-submit="{{route('events.search')}}">
                         <input
                             type="text"
                             placeholder="{{getTranslate('search.global')}}"
                             class="header__search__input-item"
                         />
                         <img
-                            src="img/close-search.svg"
+                            src="{{asset('img/public/close-search.svg')}}"
                             alt=""
                             class="header__search__input-close"
                         />

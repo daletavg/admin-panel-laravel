@@ -43,23 +43,25 @@ $(".header__search__input-item").on("input", function() {
   let search = $(this).val();
   let url = $(".header__search__input").attr("data-submit");
   let parent = $(".header__search__list-box");
-  timer = setTimeout(() => {
-    // $.ajax({
-    //   body: {search},
-    //   url,
-    //   success(data) {
-    //     data.forEach(item => {
-    //       appendElem(parent, itemTemplate(item))
-    //     })
-    //   },
-    //   erorr(err) {
-    //     console.log(err)
-    //   }
-    // })
-    dataArray.forEach(item => {
-      // $('.header__search__list-box').append(itemTemplate(item))
-      appendElem(parent, itemTemplate(item));
-    });
+    console.log(search);
+    timer = setTimeout(() => {
+    $.ajax({
+      method:'GET',
+      data: {search},
+      url,
+      success(data) {
+        data.forEach(item => {
+          appendElem(parent, itemTemplate(item))
+        })
+      },
+      erorr(err) {
+        console.log(err)
+      }
+    })
+    // dataArray.forEach(item => {
+    //    $('.header__search__list-box').append(itemTemplate(item))
+    //   appendElem(parent, itemTemplate(item));
+    // });
   }, 500);
 });
 const dataArray = [

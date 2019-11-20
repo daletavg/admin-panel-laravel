@@ -10,7 +10,7 @@
                         data-aos-delay="30"
                         data-aos-duration="1000"
                     >
-                        {{getTranslate('about_company.global')}}
+                        {{getTranslate('about_company_p.about')}}
                     </p>
                     {!! $item->lang->description !!}
                 </div>
@@ -25,8 +25,8 @@
              data-aos-duration="1000"
     >
         <div class="wrapper position-relative">
-            @php//todo add translate @endphp
-            <p class="about_section__title mb-20 mb-lg-25">наши партнеры</p>
+
+            <p class="about_section__title mb-20 mb-lg-25">{{getTranslate('our_partners.about')}}</p>
             <div class="partners_section__slider">
                 <div class="slider">
                     @foreach($partners as $item)

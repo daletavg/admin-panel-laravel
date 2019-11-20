@@ -5,7 +5,7 @@
             <div class="first-section__slider">
             <div class="slider first-slider">
                 @foreach($general as $item)
-                    <div class="slide" data-href="/event.html">
+                    <div class="slide" data-href="{{route('events.show',$item->url)}}">
                         <div class="first-section__box">
                             <img src="{{GetPathToPhoto(imgOrig(\Illuminate\Support\Arr::first($item->images)->path??''))}}" alt="" class="first-section__image">
                             <div class="first-section__text d-lg-none">
@@ -44,14 +44,12 @@
                                     <div class="first-section__bottom-box">
                                         <p class="first-section__bottom-text">{{$item->city->lang->title??''}}
                                             , {{$item->place->lang->title??''}}</p>
-                                        <p class="first-section__bottom-text-second">Цена: от
-                                            <span>{{$item->price_before}}</span> до
-                                            <span>{{$item->price_to}} </span>грн.</p>
+                                        <p class="first-section__bottom-text-second">{!!getTranslate('price.events',[$item->price_before??'',$item->price_to??''])!!}</p>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <a href="/event1" class="first-section__bottom-btn red-btn">Подробнее</a>
+                        <a href="{{route('events.show',$item->url)}}" class="first-section__bottom-btn red-btn">{{getTranslate('more.other')}}</a>
                     </div>
                 </div>
             </div>
@@ -67,5 +65,5 @@
             </div>
         </div>
     </section>
-    @include('public.layouts.partials.event-list')
+    @include('public.partials.event-list')
 </main>

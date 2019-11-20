@@ -19,7 +19,7 @@ trait SaveLangDataTrait
         foreach ($langData as $langKey => $data) {
             /** @var LangDataContract $langData * */
             $langData = new $className();
-            $
+
             $langData->setLanguage(Language::getLanguageByKey($langKey));
             $langData->setData($data);
 

@@ -136,23 +136,26 @@ $(".header__search__input-item").on("input", function () {
   var search = $(this).val();
   var url = $(".header__search__input").attr("data-submit");
   var parent = $(".header__search__list-box");
+  console.log(search);
   timer = setTimeout(function () {
-    // $.ajax({
-    //   body: {search},
-    //   url,
-    //   success(data) {
-    //     data.forEach(item => {
-    //       appendElem(parent, itemTemplate(item))
-    //     })
-    //   },
-    //   erorr(err) {
-    //     console.log(err)
-    //   }
-    // })
-    dataArray.forEach(function (item) {
-      // $('.header__search__list-box').append(itemTemplate(item))
-      appendElem(parent, itemTemplate(item));
-    });
+    $.ajax({
+      method: 'GET',
+      data: {
+        search: search
+      },
+      url: url,
+      success: function success(data) {
+        data.forEach(function (item) {
+          appendElem(parent, itemTemplate(item));
+        });
+      },
+      erorr: function erorr(err) {
+        console.log(err);
+      }
+    }); // dataArray.forEach(item => {
+    //    $('.header__search__list-box').append(itemTemplate(item))
+    //   appendElem(parent, itemTemplate(item));
+    // });
   }, 500);
 });
 var dataArray = [{

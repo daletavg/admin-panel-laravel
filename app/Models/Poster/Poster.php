@@ -21,7 +21,7 @@ class Poster extends Model implements HasLangData,HasImageContract,HasManyImages
     use ManyImagesTarit;
     use ImageTrait;
     protected $table = 'posters';
-    protected $fillable = ['date','pay_link','video','price_before','price_to','active','on_general','color'];
+    protected $fillable = ['date','pay_link','video','price_before','price_to','active','on_general','color','url'];
     private $langClass = '';
 
     public function __construct(array $attributes = [])

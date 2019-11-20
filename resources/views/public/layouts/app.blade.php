@@ -9,14 +9,14 @@
     {!! showMeta('', 'header') !!}
 </head>
 <body>
-@include('public.layouts.partials.header')
+@include('public.partials.header')
 
  {!! $content ?? ''!!}
 
 
-@include('public.layouts.partials.footer')
-@include('public.layouts.partials.menu')
-@include('public.layouts.partials.modal')
+@include('public.partials.footer')
+@include('public.partials.menu')
+@include('public.partials.modal')
 <!--   Core JS Files   -->
 @include('public.layouts.partials.scripts')
 {!! showMeta('', 'footer') !!}

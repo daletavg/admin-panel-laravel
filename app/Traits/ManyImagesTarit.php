@@ -16,7 +16,7 @@ trait ManyImagesTarit
      */
     public function manyImages()
     {
-        return $this->morphOne('App\Models\ManyImages', 'model');
+        return $this->morphOne(ManyImages::class, 'model');
     }
 
     public function saveManyImages(Request $request, string $nameKey = 'images')

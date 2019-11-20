@@ -1,3 +1,3 @@
 <main id="history-page">
-    @include('public.layouts.partials.event-list')
+    @include('public.partials.event-list')
 </main>
