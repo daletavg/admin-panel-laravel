@@ -29,7 +29,10 @@ trait LangDataTrait
         return $this->hasMany($this->getLangClass());
     }
 
-
+    /**
+     * @deprecated
+     * @param array $langData
+     */
     public function saveLang(array $langData)
     {
         $className = $this->getLangClass();
