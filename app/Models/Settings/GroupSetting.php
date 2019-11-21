@@ -13,7 +13,7 @@ class GroupSetting extends Model
 
     public function settings()
     {
-        return $this->hasMany(Setting::class, 'type_id', 'id');
+        return $this->hasMany(Setting::class, 'group_id', 'id');
     }
     public static function getGroup(string $groupKey)
     {

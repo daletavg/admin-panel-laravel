@@ -21,6 +21,7 @@ class CreateSettingsTable extends Migration
             $table->foreign('group_id')->references('id')->on('group_setting')->onDelete('cascade');
             $table->string('name');
             $table->string('name_key');
+            $table->boolean('has_lang_data')->default(false);
             $table->text('data')->nullable();
             $table->timestamps();
         });

@@ -45,19 +45,19 @@
                 <p class="footer-contacts__title mb-10">{{getTranslate('contacts.global')}}</p>
                 <a class="footer-contacts__box d-flex align-items-center mb-15">
                     <img src="img/XL/mail.svg" alt="" class="footer-contacts__icon">
-                    <span class="footer-contacts__text">artpoint2004@gmail.com</span>
+                    <span class="footer-contacts__text">{{getSettingData('first_email_contact.emails')}}</span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-center mb-20">
                     <img src="img/XL/mail.svg" alt="" class="footer-contacts__icon">
-                    <span class="footer-contacts__text">titar.yura@gmail.com</span>
+                    <span class="footer-contacts__text">{{getSettingData('second_email_contact.emails')}}</span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-start mb-15">
                     <img src="img/XL/Phone.svg" alt="" class="footer-contacts__icon">
-                    <span class="footer-contacts__text text-lg-right">+38 (066) 634-09-55 <br> Юрий Иванов </span>
+                    <span class="footer-contacts__text text-lg-right">{{getSettingData('first_num_contact.contacts')}} <br>{{getSettingData('first_person_contact.contacts')}} </span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-start">
                     <img src="img/XL/Phone.svg" alt="" class="footer-contacts__icon">
-                    <span class="footer-contacts__text text-lg-right">+38 (063) 181-87-28 <br> Юрий Титарь </span>
+                    <span class="footer-contacts__text text-lg-right">{{getSettingData('second_num_contact.contacts')}} <br> {{getSettingData('second_person_contact.contacts')}} </span>
                 </a>
                 <p class="footer-social__title mt-4">{{getTranslate('social.global')}}</p>
                 <div class="footer-social w-100 mb-10">

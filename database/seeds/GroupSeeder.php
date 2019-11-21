@@ -12,9 +12,21 @@ class GroupSeeder extends Seeder
     public function run()
     {
         $data =[
-            'name'=>'Контакты',
-            'name_key'=>'contacts'
+            [
+                'name'=>'Контакты',
+                'name_key'=>'contacts'
+            ],
+            [
+                'name'=>'Емейл',
+                'name_key'=>'emails'
+            ],
+            [
+                'name'=>'Соц. сети',
+                'name_key'=>'social'
+            ],
         ];
-        (new \App\Models\Settings\GroupSetting())->fill($data)->save();
+        foreach($data as $item) {
+            (new \App\Models\Settings\GroupSetting())->fill($item)->save();
+        }
     }
 }

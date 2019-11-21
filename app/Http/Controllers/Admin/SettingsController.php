@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Settings\Setting;
+use App\Models\Settings\GroupSetting;
+use App\Repository\SettingsRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SettingsController extends AdminController
 {
+
+    public function __construct(SettingsRepository $settingsRepository)
+    {
+        $this->itemRepository = $settingsRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,54 +22,14 @@ class SettingsController extends AdminController
     public function index()
     {
         $data = $vars = [];
-        $vars['settings']=Setting::getData();
+        $vars['groupSettings'] = GroupSetting::all()->load('settings.lang');
+//        dd($vars['groutSettings']);
+//        $vars['settings']=Setting::getData();
         $this->setCardTitle('Настройки');
         $this->setContent(view('admin.settings.index',$vars));
         return $this->main();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -74,14 +40,27 @@ class SettingsController extends AdminController
      */
     public function update(Request $request)
     {
+//        dd($request->all());
         $data = $request->except('_token','_method');
-        foreach ($data as $key=>$name)
+        foreach ( $data as $key=>$data)
         {
-            Setting::updateSetting([
-                'key'=>$key,
-                'data'=>$name
-            ]);
+
+            $setting = $this->itemRepository->findByKey($key);
+            if(is_array($data)){
+                $this->itemRepository->updateLangSetting($setting->id,$data);
+                $this->itemRepository->updateLang($setting->id,$data);
+
+            }
+            else{
+//                dd($data);
+                $this->itemRepository->update(['data'=>$data],$setting->id);
+
+            }
+            $newSetting = $this->itemRepository->findByKey($key);
+            $this->itemRepository->updateCache(getSettingKey($newSetting),$newSetting);
         }
+
+
         return redirect()->back()->with('success','Настройки успешно обновлены!');
     }
 

@@ -4,15 +4,28 @@ namespace App\Models\Settings;
 
 
 
+use App\Contracts\HasLangData;
+use App\Contracts\LangDataContract;
+use App\Models\Language;
+use App\Traits\LangDataTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use phpDocumentor\Reflection\Types\Collection;
 
-class Setting extends Model
+class Setting extends Model implements HasLangData
 {
+    use LangDataTrait;
     protected $table = 'settings';
 
-    protected $fillable = ['data','name','name_key'];
+    protected $fillable = ['data','name','name_key','has_lang_data'];
+
+    private $langClass;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->setLangClass(SettingLang::class);
+    }
 
     public function type():BelongsTo
     {
@@ -23,18 +36,6 @@ class Setting extends Model
         return $this->belongsTo(GroupSetting::class,'group_id','id');
     }
 
-    public function getSettingKey():string
-    {
-        return $this->group->name_key.'.'.$this->name_key;
-    }
-
-    public function setSetting(TypeSetting $type,GroupSetting $group,string $nameKey,string $name){
-        $this->type()->associate($type);
-        $this->group()->associate($group);
-        $this->name_key = $nameKey;
-        $this->name = $name;
-        return $this;
-    }
 
     public static function findBySettingKey(string $key):Setting
     {
@@ -69,5 +70,16 @@ class Setting extends Model
             'data'=>$data['data']
         ]);
         $setting->save();
+    }
+
+
+    function setLangClass(string $className)
+    {
+        $this->langClass = $className;
+    }
+
+    function getLangClass(): string
+    {
+        return $this->langClass;
     }
 }
