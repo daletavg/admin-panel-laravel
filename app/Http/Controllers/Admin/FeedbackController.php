@@ -23,4 +23,9 @@ class FeedbackController extends AdminController
         $this->setContent(view('admin.feedback.index',$vars));
         return $this->main();
     }
+
+    public function destroy(int $id){
+        $this->itemRepository->delete($id);
+        return redirect()->back()->with('success','Запись успешно удалена!');
+    }
 }

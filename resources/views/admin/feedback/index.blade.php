@@ -36,7 +36,7 @@
                                 <i class="material-icons">menu</i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
-                                <form method="POST" action={{route('admin.feedback.destroy',$item)}}""
+                                <form method="POST" action={{route('admin.feedback.destroy',$item)}}
                                       accept-charset="UTF-8"
                                       onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
                                     @csrf
