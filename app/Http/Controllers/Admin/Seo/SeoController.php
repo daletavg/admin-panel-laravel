@@ -12,23 +12,23 @@ class SeoController extends AdminController
     {
         $vars['items'] =[
             [
-                'name'=>'Глобальные перенаправления',
+                'name'=>__('admin.SEO.global_redirects'),
                 'url'=>route('admin.seo.global-seo.index'),
             ],
             [
-                'name'=>'Генерация sitemap',
+                'name'=>__('admin.SEO.sitemap'),
                 'url'=>route('admin.seo.sitemap.index'),
             ],
             [
-                'name'=>'Редактирование robots.txt',
+                'name'=>__('admin.SEO.robots'),
                 'url'=>route('admin.seo.robots.index'),
             ],
             [
-                'name'=>'Редактирование метатегов',
+                'name'=>__('admin.SEO.meta'),
                 'url'=>route('admin.seo.meta.index'),
             ],
             [
-                'name'=>'Перенаправления',
+                'name'=>__('admin.SEO.redirects'),
                 'url'=>route('admin.seo.redirects.index'),
             ],
 

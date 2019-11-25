@@ -26,7 +26,6 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end">
 
-
             <ul class="navbar-nav">
 
                 <li class="nav-item dropdown">
@@ -39,14 +38,14 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
 {{--                        <a class="dropdown-item" href="{{ route('admin.profile') }}">{{ __('modules.users.profile.title') }}</a>--}}
-                        <a class="dropdown-item" href="{{route('admin.profile.index')}}">Профиль</a>
+                        <a class="dropdown-item" href="{{route('admin.profile.index')}}">@lang('admin.profile.profile')</a>
                         {{--<a class="dropdown-item" href="#">Settings</a>--}}
                         <div class="dropdown-divider"></div>
                         <div class="text-center">
                             <form action="{{ route('admin.logout') }}" method="POST">
                                 @csrf
                                 <button class="btn btn-primary">
-                                    <b>Выход</b>
+                                    <b>@lang('admin.exit')</b>
                                 </button>
                             </form>
                         </div>

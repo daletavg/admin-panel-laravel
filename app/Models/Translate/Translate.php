@@ -12,25 +12,17 @@ use App\Traits\Singleton;
 class Translate extends Model implements HasLangData
 {
     use LangDataTrait;
-    use Singleton;
     protected $table = 'translate';
     protected $fillable = ['key','comment','group','type'];
-    private $langClass = '';
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->setLangClass(TranslateLang::class);
-    }
-
-    function setLangClass(string $className)
-    {
-        $this->langClass= $className;
     }
 
     function getLangClass(): string
     {
-        return $this->langClass;
+        return TranslateLang::class;
     }
 
 

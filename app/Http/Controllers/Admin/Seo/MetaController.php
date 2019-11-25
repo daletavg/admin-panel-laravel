@@ -24,7 +24,6 @@ class MetaController extends AdminController
         $vars['items'] = $this->itemRepository->metaWithLang()->paginate(15);
         $vars['edit']=$this->itemRepository->getDefaultMeta();
         $this->setContent(view('admin.seo.meta.index', $vars));
-
         return $this->main();
     }
 

@@ -11,7 +11,7 @@
                                 <i class="material-icons">menu</i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
-                                <a href="{{\Arr::get($item,'url')}}" class="dropdown-item">Открыть</a>
+                                <a href="{{\Arr::get($item,'url')}}" class="dropdown-item">@lang('admin.open')</a>
                             </div>
                         </div>
                     </td>

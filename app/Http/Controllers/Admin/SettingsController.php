@@ -25,7 +25,7 @@ class SettingsController extends AdminController
         $vars['groupSettings'] = GroupSetting::all()->load('settings.lang');
 //        dd($vars['groutSettings']);
 //        $vars['settings']=Setting::getData();
-        $this->setCardTitle('Настройки');
+        $this->setCardTitle(__('admin.settings'));
         $this->setContent(view('admin.settings.index',$vars));
         return $this->main();
     }
@@ -40,7 +40,6 @@ class SettingsController extends AdminController
      */
     public function update(Request $request)
     {
-//        dd($request->all());
         $data = $request->except('_token','_method');
         foreach ( $data as $key=>$data)
         {
@@ -52,7 +51,6 @@ class SettingsController extends AdminController
 
             }
             else{
-//                dd($data);
                 $this->itemRepository->update(['data'=>$data],$setting->id);
 
             }
@@ -61,17 +59,6 @@ class SettingsController extends AdminController
         }
 
 
-        return redirect()->back()->with('success','Настройки успешно обновлены!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->back()->with('success',__('admin.row.edit_settings'));
     }
 }

@@ -1,5 +1,5 @@
 <div class=" text-right">
-    <a href="{{route('admin.translate.create')}}" class="btn btn-primary" style="color: white">Создать</a>
+    <a href="{{route('admin.translate.create')}}" class="btn btn-primary" style="color: white">@lang('admin.create')</a>
 </div>
 <ul class="nav nav-tabs mb-5" role="tablist">
 

@@ -16,7 +16,7 @@ class RobotsController extends AdminController
         }
 
         $vars['item'] = (string)file_get_contents(public_path('robots.txt'));
-        $this->setCardTitle('Редактирование robot.txt');
+        $this->setCardTitle(__('admin.SEO.robots'));
         $this->setContent(view('admin.seo.robots.index',$vars));
         return $this->main();
     }
@@ -28,6 +28,6 @@ class RobotsController extends AdminController
         file_put_contents(public_path('robots.txt'),$robots);
 
 
-        return redirect()->route('admin.seo.robots.index')->with('success','robots.txt успешно отредоктирован!');
+        return redirect()->route('admin.seo.robots.index')->with('success',__('admin.row.edit_robots'));
     }
 }

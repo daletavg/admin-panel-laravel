@@ -19,7 +19,7 @@ class TranslateController extends AdminController
 
     public function index()
     {
-        $this->setCardTitle('Локализация');
+        $this->setCardTitle(__('admin.localization'));
         $vars['groups'] = Translate::getGroups();
 
         $this->setContent(view('admin.translates.index', $vars));
@@ -51,12 +51,6 @@ class TranslateController extends AdminController
         $transalte = $this->itemRepository->create($nonLocalizeData);
         $this->itemRepository->createLangData($transalte->id, $data);
         $this->itemRepository->addTranslate($transalte);
-//        $transalte = (new Translate())->fill($nonLocalizeData);
-//        $transalte->save();
-//        $transalte->saveLang($data);
-
-//        $tr = new TranslateRepository();
-//        $tr->addTranslate($transalte);
 
         if ($request->has('saveClose')) {
             return redirect()->route('admin.translate.index')->with('success', 'Запись успешно создана!');

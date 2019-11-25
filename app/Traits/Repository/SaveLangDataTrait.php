@@ -17,12 +17,11 @@ trait SaveLangDataTrait
         $className = $this->langModel();
 
         foreach ($langData as $langKey => $data) {
-            /** @var LangDataContract $langData * */
+
             $langData = new $className();
 
             $langData->setLanguage(Language::getLanguageByKey($langKey));
             $langData->setData($data);
-
             $item->lang()->save($langData);
         }
     }

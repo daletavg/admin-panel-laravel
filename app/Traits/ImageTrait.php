@@ -19,7 +19,7 @@ trait ImageTrait
         return $this->morphMany('App\Models\Image', 'model');
     }
 
-    public function saveImage(Request $request,string $nameKey ='image'){
+    public function saveImage(Request $request,string $nameKey = "image"){
 
         if($request->has($nameKey) && $images = $this->images()->get()){
             foreach ($images as $image){

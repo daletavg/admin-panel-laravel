@@ -12,29 +12,14 @@ use Illuminate\Support\Arr;
 class Meta extends Model implements HasLangData
 {
     use LangDataTrait;
-    use Singleton;
-
-    private $langClass = '';
+    public const ONLY_ONE_PAGE_TYPE = 0;
+    public const DEFAULT_TYPE = 1;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->setLangClass(MetaLang::class);
+
     }
-
-    public function setLangClass(string $className)
-    {
-        $this->langClass = $className;
-    }
-
-    public function getLangClass(): string
-    {
-        return $this->langClass;
-    }
-
-
-    public const ONLY_ONE_PAGE_TYPE = 0;
-    public const DEFAULT_TYPE = 1;
 
 
     protected $table = 'meta';
@@ -43,6 +28,10 @@ class Meta extends Model implements HasLangData
 
     protected $fillable = ['url', 'type', 'active'];
 
+    function getLangClass(): string
+    {
+        return MetaLang::class;
+    }
 
 
     public function isDefault()

@@ -18,13 +18,15 @@ class Setting extends Model implements HasLangData
     protected $table = 'settings';
 
     protected $fillable = ['data','name','name_key','has_lang_data'];
+    function getLangClass(): string
+    {
+        return SettingLang::class;
+    }
 
-    private $langClass;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->setLangClass(SettingLang::class);
     }
 
     public function type():BelongsTo
@@ -73,13 +75,4 @@ class Setting extends Model implements HasLangData
     }
 
 
-    function setLangClass(string $className)
-    {
-        $this->langClass = $className;
-    }
-
-    function getLangClass(): string
-    {
-        return $this->langClass;
-    }
 }

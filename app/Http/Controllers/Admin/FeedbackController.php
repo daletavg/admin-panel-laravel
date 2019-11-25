@@ -16,7 +16,7 @@ class FeedbackController extends AdminController
 
     public function index()
     {
-        $this->setCardTitle('Заявки обратной связи');
+        $this->setCardTitle(__('admin.feedback'));
         $this->itemRepository->pushCriteria(new OrderByDescCriteria());
         $vars['items'] = $this->itemRepository->paginate(15);
 //        dd($vars['items']);
@@ -26,6 +26,6 @@ class FeedbackController extends AdminController
 
     public function destroy(int $id){
         $this->itemRepository->delete($id);
-        return redirect()->back()->with('success','Запись успешно удалена!');
+        return redirect()->back()->with('success',__('admin.row.delete'));
     }
 }

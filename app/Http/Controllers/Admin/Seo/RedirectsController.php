@@ -26,7 +26,7 @@ class RedirectsController extends AdminController
      */
     public function index()
     {
-        $this->setCardTitle('Перенаправления');
+        $this->setCardTitle(__('admin.SEO.redirects'));
 
 
         $vars['items']= $this->itemRepository->paginate(15);
@@ -67,10 +67,10 @@ class RedirectsController extends AdminController
 
 
         if($request->has('saveClose')){
-            return redirect()->route('admin.seo.redirects.index')->with('success','Запись успешно создана!');
+            return redirect()->route('admin.seo.redirects.index')->with('success',__('admin.row.create'));
         }
 
-        return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success','Запись успешно создана!');
+        return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success',__('admin.row.create'));
     }
 
 
@@ -104,10 +104,10 @@ class RedirectsController extends AdminController
         $data['active'] = isActive($data);
         $redirect =$this->itemRepository->update($data,$id);
         if($request->has('saveClose')){
-            return redirect()->route('admin.seo.redirects.index')->with('success','Запись успешно обновлена!');
+            return redirect()->route('admin.seo.redirects.index')->with('success',__('admin.row.edit'));
         }
 
-        return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success','Запись успешно обновлена!');
+        return redirect()->route('admin.seo.redirects.edit',$redirect)->with('success',__('admin.row.edit'));
     }
 
     /**

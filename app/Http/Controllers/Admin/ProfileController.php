@@ -16,7 +16,7 @@ class ProfileController extends AdminController
     {
         $data = $vars = [];
         $vars['user']= Auth::user();
-        $this->setCardTitle('Редактирование профиля');
+        $this->setCardTitle(__('admin.profile.edit'));
          $this->setContent(view('admin.profile.index',$vars));
         return $this->main();
     }
@@ -24,11 +24,11 @@ class ProfileController extends AdminController
     public function updateUserData(UpdateUserDataRequest $request,User $user)
     {
         $user->update(['name'=>$request->name]);
-        return redirect()->back()->with('success','Имя пользователя успешно обновлено!');
+        return redirect()->back()->with('success',__('admin.row.edit_name'));
     }
     public function updateUserPassword(UpdateUserPasswordRequest $request, User $user)
     {
         $user->update(['password'=>Hash::make($request->newPassword)]);
-        return redirect()->back()->with('success','Пароль успешно изменен!');
+        return redirect()->back()->with('success',__('admin.row.edit_password'));
     }
 }

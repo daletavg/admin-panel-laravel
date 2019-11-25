@@ -2,7 +2,7 @@
 <html lang="{{getCurrentLocale() }}">
 <head>
     <meta charset="utf-8"/>
-    <title>Админпанель</title>
+    <title>Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
@@ -22,7 +22,7 @@
     <div class="sidebar" data-color="purple" data-background-color="white"
          data-image="">
         <div class="logo text-center">
-            <a href="{{ route('admin.index')}}" class="simple-text logo-normal">ARTPOINT</a>
+            <a href="{{ route('admin.index')}}" class="simple-text logo-normal">{{env('APP_NAME')}}</a>
             <small>{{ Auth::user()->name }}</small>
         </div>
         <div class="sidebar-wrapper position-static">

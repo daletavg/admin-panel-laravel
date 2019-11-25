@@ -14,9 +14,9 @@ class SitemapController extends AdminController
         if($request->has('generate'))
         {
             Artisan::call('sitemap:generate');
-            return redirect()->route('admin.seo.sitemap.index')->with('success','sitemap.xml успешно сгенерирован!');
+            return redirect()->route('admin.seo.sitemap.index')->with('success',__('admin.generate.sitemap'));
         }
-        $this->setCardTitle('Sitemap');
+        $this->setCardTitle(__('admin.SEO.sitemap'));
         $this->setContent(view('admin.seo.sitemap.index'));
         return $this->main();
     }
@@ -39,7 +39,7 @@ class SitemapController extends AdminController
         $sitemap = (string)$request->get('sitemap');
 
         file_put_contents(public_path('sitemap.xml'),$sitemap);
-        return redirect()->route('admin.seo.sitemap.index')->with('success','sitemap.xml успешно изменен!');
+        return redirect()->route('admin.seo.sitemap.index')->with('success',__('admin.row.edit_sitemap'));
 
     }
 }

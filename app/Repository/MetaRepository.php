@@ -53,7 +53,9 @@ class MetaRepository extends BaseRepository implements SaveLangDataContract, Cac
         }
         else{
             $data = $this->model->where([['url','=','*'],['type','=',Meta::DEFAULT_TYPE]])->with('langs')->first();
-            $this->addCache($data);
+            if($data !== null) {
+                $this->addCache($data);
+            }
             return $data;
         }
     }

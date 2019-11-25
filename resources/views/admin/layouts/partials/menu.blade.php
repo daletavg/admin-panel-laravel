@@ -15,7 +15,7 @@
         <form action="{{ route('admin.logout') }}" method="POST">
             @csrf
             <button class="btn btn-primary">
-                <b>Выход</b>
+                <b>@lang('admin.exit')</b>
             </button>
         </form>
     </li>

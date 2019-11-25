@@ -4,15 +4,11 @@
 namespace App\Contracts;
 
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 interface HasLangData
 {
     function lang($locale = null);
-
-    /**
-     * @deprecated
-     * @param string $className
-     * @return mixed
-     */
-    function setLangClass(string $className) ;
+    function langs():HasMany;
     function getLangClass():string ;
 }
