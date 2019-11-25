@@ -11,6 +11,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
         Route::get('/', 'IndexController@index')->name('index');
         Route::get('/clear-cache', 'IndexController@clearCache')->name('index.clear-cache');
 
+        Route::get('/feedback','FeedbackController@index')->name('feedback.index');
+        Route::delete('/feedback/{testimonial}','FeedbackController@destroy')->name('feedback.destroy');
 
         Route::resource('/tour','GroupController',['except'=>['show']]);
 

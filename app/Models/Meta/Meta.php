@@ -32,7 +32,6 @@ class Meta extends Model implements HasLangData
         return $this->langClass;
     }
 
-    protected $hasOneLangArguments = [MetaLang::class];
 
     public const ONLY_ONE_PAGE_TYPE = 0;
     public const DEFAULT_TYPE = 1;
@@ -44,20 +43,7 @@ class Meta extends Model implements HasLangData
 
     protected $fillable = ['url', 'type', 'active'];
 
-    public static function getMetaData($url = null, $fromCache = true)
-    {
-        if ($url === null) {
-            $url = getUrlWithoutHost(getNonLocaledUrl());
-        }
 
-        if (($meta = static::WhereUrl($url)->Active(true)->with('lang')->first()) !== null) {
-
-            $meta = self::DefaultMeta();
-        }
-
-
-        return $meta;
-    }
 
     public function isDefault()
     {

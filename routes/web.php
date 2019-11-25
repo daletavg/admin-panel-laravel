@@ -17,6 +17,7 @@ Route::group([
 ], function() {
     Route::group(['namespace' => 'Front'], function () {
         Route::get('/', 'IndexController@index')->name('home.index');
+        Route::get('/show-more','IndexController@showMore')->name('home.show-more');
         //Route::get('/events', 'EventsController@index')->name('events.index');
         Route::get('/event/search','EventsController@search')->name('events.search');
         Route::get('/event/{url}', 'EventsController@show')->name('events.show');

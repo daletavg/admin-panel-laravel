@@ -2,18 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\Meta;
+
+use App\Contracts\Repository\CacheContract;
+use App\Contracts\Repository\SaveLangDataContract;
+use App\Models\Meta\Meta;
+use App\Models\Meta\MetaLang;
+use App\Traits\Repository\SaveLangDataTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use Illuminate\Support\Facades\Cache;
+use Prettus\Repository\Eloquent\BaseRepository;
+
 
 //use Your Model
 
 /**
  * Class MetaRepository.
  */
-class MetaRepository
+class MetaRepository extends BaseRepository implements SaveLangDataContract, CacheContract
 {
+    use SaveLangDataTrait;
     /**
      * @return string
      *  Return the model
@@ -23,26 +31,109 @@ class MetaRepository
         return Meta::class;
     }
 
-    public function findByUrl($url)
+    function langModel()
     {
-        return Meta::whereUrl($url)->first();
+        return MetaLang::class;
     }
 
-    public function getForAdminDisplay(Request $request)
+    public function findByUrl($url)
     {
-        /** @var  $query Builder */
-        $query = Meta::query()->with('lang');
-        if ($search = $request->get('search')) {
-            $query->where(function (Builder $builder) use ($search) {
-                $builder->where('url', 'like', '%' . $search . '%')
-                    ->orWhere('title', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%')
-                    ->orWhere('keywords', 'like', '%' . $search . '%');
-            });
-            $query->orderBy('url');
+        return $this->model->whereUrl($url)->first();
+    }
+
+    public function metaWithLang()
+    {
+       return $this->model->where([['url','!=','*'],['type','!=',Meta::DEFAULT_TYPE]])->with('lang');
+    }
+
+    public function getDefaultMeta()
+    {
+        if (Cache::has('*')) {
+            return Cache::get('*');
         }
-        $query->latest();
-        $result = $query->paginate();
-        return $result;
+        else{
+            $data = $this->model->where([['url','=','*'],['type','=',Meta::DEFAULT_TYPE]])->with('langs')->first();
+            $this->addCache($data);
+            return $data;
+        }
+    }
+
+    public function getMetaData(string $url = null)
+    {
+        if ($url === null) {
+            $url = getUrlWithoutHost(getNonLocaledUrl());
+        }
+        $meta = null;
+
+        if(Cache::has($url)){
+            $meta = Cache::get($url);
+        }
+        else {
+            $meta = $this->model->WhereUrl($url)->Active(true)->with('langs')->first();
+
+        }
+        if ($meta === null) {
+            $meta = $this->getDefaultMeta();
+        }
+        return $meta;
+    }
+
+    /**
+     * @param Meta $data
+     * @return mixed
+     */
+    public function addCache($data)
+    {
+        $key = $data->url;
+        if($key!= null && !Cache::has($key)) {
+            $data->load('langs');
+            Cache::forever($key, $data);
+        }
+        return Cache::get($key);
+    }
+    /**
+     * @param Meta $data
+     * @return mixed
+     */
+    public function removeCache($data)
+    {
+        $key =$data->url;
+        if($key!= null && Cache::has($key)) {
+            Cache::forget($key);
+        }
+    }
+    /**
+     * @param string $oldKey
+     * @param Meta $data
+     * @return mixed
+     */
+    public function updateCache(string $oldKey, $data)
+    {
+        if(Cache::has($oldKey)) {
+            Cache::forget($oldKey);
+        }
+        $this->addCache($data);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getCacheByKey(string $key)
+    {
+        $data = null;
+        if(Cache::has($key)) {
+            $data = Cache::get($key);
+        }
+        else{
+
+            $data =  $this->findByUrl($key);
+            if($data !== null )
+            {
+                $data->load('langs');
+                self::addCache($data);
+            }
+        }
+        return $data;
     }
 }

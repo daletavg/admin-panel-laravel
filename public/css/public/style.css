@@ -1012,6 +1012,23 @@
   }
 }
 
+.modal-k {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.modal-k.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .modal-k__overlay {
   background-color: rgba(49, 44, 76, 0.79);
   position: absolute;
@@ -1019,20 +1036,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
-  opacity: 0;
-  transition: all 0.3s ease-out;
-}
-
-.modal-k__overlay.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;
 }
 
 .modal-k__box {
-  opacity: 0;
-  visibility: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1047,11 +1053,6 @@
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-out;
-}
-
-.modal-k__box.active {
-  opacity: 1;
-  visibility: visible;
 }
 
 .modal-k__title {
@@ -2190,5 +2191,9 @@ input {
     font-weight: 400;
     transform: translateY(-32px);
   }
+}
+
+.error {
+  border-bottom: 1px solid red;
 }
 

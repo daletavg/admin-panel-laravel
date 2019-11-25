@@ -43,14 +43,7 @@ if (!function_exists('langUrl')) {
     }
 }
 
-if (!function_exists('isActive')) {
-    function isActive(array $data) :bool
-    {
-        $result = array_key_exists('active',$data);
-        return $result;
-    }
 
-}
 
 if (!function_exists('getUrlWithoutHost')) {
     function getUrlWithoutHost($url)

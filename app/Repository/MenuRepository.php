@@ -9,6 +9,9 @@ class MenuRepository
     static  function getMenu(){
 
        $data = [
+           ['link'=>'admin.feedback.index',
+               'name'=>'Обратная связь',
+               'icon'=>'feedback'],
            ['link'=>'admin.posters.index',
                'name'=>'Афиши',
                'icon'=>'list_alt'],

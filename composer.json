@@ -50,6 +50,7 @@
             "database/factories"
         ],
         "files": [
+            "app/Helpers/Helpers.php",
             "app/Helpers/UrlHelper.php",
             "app/Helpers/ImageSaver.php",
             "app/Helpers/ImageHelper.php",

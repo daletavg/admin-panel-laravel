@@ -138,23 +138,26 @@
             <div class="row">
                 <div class="col-12 mb-50 col-lg-4 offset-lg-1">
                     <form
-                        action=""
-                        class="mobile-feedback__form d-flex flex-column align-items-center"
+                        action="{{route('mail.send')}}"
+                        class="mobile-feedback__form  d-flex flex-column align-items-center"
                     >
                         <p class="mobile-feedback__title mb-15">{{getTranslate('become_partner.partners')}}</p>
                         <input
                             type="text"
-                            class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
+                            name="name"
+                            class="mobile-feedback__input required_input mobile-feedback__input-bordered mb-15"
                             placeholder="{{getTranslate('name.form')}}"
                         />
                         <input
                             type="tel"
-                            class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
+                            name="phone"
+                            class="mobile-feedback__input required_input mobile-feedback__input-bordered mb-15"
                             placeholder="{{getTranslate('phone.form')}}"
                         />
                         <input
                             type="text"
-                            class="mobile-feedback__input mobile-feedback__input-bordered mb-15"
+                            name="message"
+                            class="mobile-feedback__input required_input mobile-feedback__input-bordered mb-15"
                             placeholder="{{getTranslate('message.form')}}"
                         />
                         <button type="submit" class="mobile-feedback__btn">
@@ -166,7 +169,7 @@
                 </div>
                 <div class="col-12 px-0 px-lg-3 col-lg-5 offset-lg-1">
                     <img
-                        src="img/partners-image.jpg"
+                        src="{{asset('img/public/partners-image.jpg')}}"
                         alt=""
                         class="feedback_section__image"
                     />

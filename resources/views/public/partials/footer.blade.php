@@ -4,11 +4,11 @@
          data-aos-duration="1000"
          data-aos-once=true>
     <div class="wrapper">
-        <form action="" class="mobile-feedback__form d-flex flex-column align-items-center">
+        <form action="{{route('mail.send')}}" class="mobile-feedback__form d-flex flex-column align-items-center">
             <p class="mobile-feedback__title">{{getTranslate('send_as.form')}}</p>
-            <input type="text" class="mobile-feedback__input mb-15" placeholder="{{getTranslate('name.form')}}">
-            <input type="tel" class="mobile-feedback__input mb-15" placeholder="{{getTranslate('phone.form')}}">
-            <input type="text" class="mobile-feedback__input mb-30" placeholder="{{getTranslate('message.form')}}">
+            <input type="text" name="name" class="mobile-feedback__input required_input mb-15" placeholder="{{getTranslate('name.form')}}">
+            <input type="tel" name="phone" class="mobile-feedback__input required_input mb-15" placeholder="{{getTranslate('phone.form')}}">
+            <input type="text" name="message" class="mobile-feedback__input required_input mb-30" placeholder="{{getTranslate('message.form')}}">
             <button type="submit" class="mobile-feedback__btn">{{getTranslate('send.form')}}</button>
         </form>
     </div>
@@ -33,37 +33,37 @@
                 <a href="{{route('partners.index')}}" class="footer-nav__link">{{getTranslate('our_services.global')}}</a>
             </div>
             <div class="col-4 pt-4 offset-lg-1 d-none d-lg-block">
-                <form action="" class="mobile-feedback__form d-flex flex-column align-items-center">
+                <form action="{{route('mail.send')}}" class="mobile-feedback__form d-flex flex-column align-items-center">
                     <p class="mobile-feedback__title">{{getTranslate('send_as.form')}}</p>
-                    <input type="text" class="mobile-feedback__input mb-15" placeholder="{{getTranslate('name.form')}}">
-                    <input type="tel" class="mobile-feedback__input mb-15" placeholder="{{getTranslate('phone.form')}}">
-                    <input type="text" class="mobile-feedback__input mb-30" placeholder="{{getTranslate('message.form')}}">
+                    <input type="text" name="name" class="mobile-feedback__input required_input mb-15" placeholder="{{getTranslate('name.form')}}">
+                    <input type="tel" name="phone" class="mobile-feedback__input required_input mb-15" placeholder="{{getTranslate('phone.form')}}">
+                    <input type="text" name="message" class="mobile-feedback__input required_input mb-30" placeholder="{{getTranslate('message.form')}}">
                     <button type="submit" class="mobile-feedback__btn"><span>{{getTranslate('send.form')}}</span></button>
                 </form>
             </div>
             <div class="col-8 offset-2 col-lg-3 offset-lg-1 footer-contacts d-flex flex-column align-items-center align-items-lg-end">
                 <p class="footer-contacts__title mb-10">{{getTranslate('contacts.global')}}</p>
                 <a class="footer-contacts__box d-flex align-items-center mb-15">
-                    <img src="img/XL/mail.svg" alt="" class="footer-contacts__icon">
+                    <img src="{{asset('img/public/XL/mail.svg')}}" alt="" class="footer-contacts__icon">
                     <span class="footer-contacts__text">{{getSettingData('first_email_contact.emails')}}</span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-center mb-20">
-                    <img src="img/XL/mail.svg" alt="" class="footer-contacts__icon">
+                    <img src="{{asset('img/public/XL/mail.svg')}}" alt="" class="footer-contacts__icon">
                     <span class="footer-contacts__text">{{getSettingData('second_email_contact.emails')}}</span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-start mb-15">
-                    <img src="img/XL/Phone.svg" alt="" class="footer-contacts__icon">
+                    <img src="{{asset('img/public/XL/Phone.svg')}}" alt="" class="footer-contacts__icon">
                     <span class="footer-contacts__text text-lg-right">{{getSettingData('first_num_contact.contacts')}} <br>{{getSettingData('first_person_contact.contacts')}} </span>
                 </a>
                 <a class="footer-contacts__box d-flex align-items-start">
-                    <img src="img/XL/Phone.svg" alt="" class="footer-contacts__icon">
+                    <img src="{{asset('img/public/XL/Phone.svg')}}" alt="" class="footer-contacts__icon">
                     <span class="footer-contacts__text text-lg-right">{{getSettingData('second_num_contact.contacts')}} <br> {{getSettingData('second_person_contact.contacts')}} </span>
                 </a>
                 <p class="footer-social__title mt-4">{{getTranslate('social.global')}}</p>
                 <div class="footer-social w-100 mb-10">
 
                     <div class="d-flex align-items-center justify-content-between">
-                        <a href="#" class="footer-social__icon">
+                        <a href="{{getSettingData('instagram.social')}}" class="footer-social__icon">
                             <svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
                                 <title>1384031</title>
@@ -85,7 +85,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="#" class="footer-social__icon">
+                        <a href="{{getSettingData('facebook.social')}}" class="footer-social__icon">
                             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
                                 <title></title>
@@ -103,7 +103,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="#" class="footer-social__icon">
+                        <a href="{{getSettingData('youtube.social')}}" class="footer-social__icon">
                             <svg width="32px" height="24px" viewBox="0 0 32 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
                                 <title></title>
@@ -121,7 +121,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="#" class="footer-social__icon">
+                        <a href="{{getSettingData('telegram.social')}}" class="footer-social__icon">
                             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
                                 <title></title>
@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="footer-contacts__time d-flex align-items-baseline">
-                    <img src="img/XL/Clock.svg" alt="" class="footer-contacts__time-icon">
+                    <img src="{{asset('img/public/XL/Clock.svg')}}" alt="" class="footer-contacts__time-icon">
                     <span class="footer-contacts__time-text">09:00-21:00 Пн.-Пт. <br> 10:00-19:00 Сб.-Вс. </span>
                 </div>
                 <a class="footer-contacts__text mt-4 d-block d-lg-none">Полная версия сайта</a>
@@ -160,7 +160,7 @@
     </div>
 </div>
 
-<div class="modal-k">
+<div class="modal-k" >
     <div class="modal-k__overlay"></div>
     <div class="modal-k__box">
         <p class="modal-k__title">Спасибо за Вашу заявку!</p>

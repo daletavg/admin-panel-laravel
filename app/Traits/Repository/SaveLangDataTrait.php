@@ -11,7 +11,7 @@ use App\Models\Language;
 
 trait SaveLangDataTrait
 {
-    public function saveLang(array $langData, HasLangData $item)
+    public function saveLang(array $langData, $item)
     {
         /** @var SaveLangDataContract $this  * */
         $className = $this->langModel();

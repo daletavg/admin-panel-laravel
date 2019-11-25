@@ -45,6 +45,7 @@ $(".header__search__input-item").on("input", function() {
   let parent = $(".header__search__list-box");
     console.log(search);
     timer = setTimeout(() => {
+        $('.header__search__list-box').html('')
     $.ajax({
       method:'GET',
       data: {search},
@@ -115,3 +116,63 @@ function itemTemplate({ title, date, image, place, url }) {
 
   return template;
 }
+
+$('.modal-k__btn, .modal-k__overlay').on('click', () => {
+    $('.modal-k').removeClass('active')
+})
+
+
+$("form").on("submit", function(e) {
+    // НАЗВАНИЕ КЛАССА ФОРМЫ
+    e.preventDefault();
+    // let response = grecaptcha.getResponse();
+    // if(response.length == 0) {
+    //   alert("Пожалуйста, подтвердите что вы не робот")
+    //   return false
+    // }
+    let url = $(this).attr('action')
+    let switcher;
+    let thatForm = $(this)
+    // let url = "/";
+    const $inputArr = $(this).find(".required_input"); // МАССИВ ИНПУТОВ ИЛИ СЕЛЕКТОВ (КОТОРЫЕ ДОЛЖНЫ ВАЛИДИРОВАТЬСЯ)
+    let dataObject = {};
+    $inputArr.each((key, el) => {
+        let inputName = $(el).attr("name");
+        let inputVal = $(el).val();
+
+        if ($(el).val() === "" || $(el).val() === null) {
+            $(el).addClass("error"); // ПОВЕСИТЬ СТИЛИ НА ЭТОТ КЛАСС
+            $(el).removeClass("success");
+        } else {
+            $(el).removeClass("error");
+            $(el).addClass("success");
+            //   console.log(inputName);
+
+            dataObject[inputName] = inputVal; // ОБЯЗАТЕЛЬНО ВСЕМ ИНПУТАМИ ПРИСВОИТЬ АТТРИБУТ "name"
+        }
+    });
+
+    switcher = !$inputArr.hasClass("error");
+    if (switcher === true) {
+        //     var msg   = $('#formX').serialize();
+        $.ajax({
+            // url: url,
+            type: "POST",
+            url: url,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: dataObject,
+            success: function(data) {
+                thatForm.find('input').val('')
+                $('.modal-k').addClass('active')
+            },
+            error: function() {
+                alert("Ошибка при отправке данных"); // ДЕЙСТВИЕ ПРИ ОШИБКЕ ОТПРАВКИ
+            }
+        })
+        //.then(responce => console.log(responce))
+        //.catch(err => console.log(err))
+
+    }
+});

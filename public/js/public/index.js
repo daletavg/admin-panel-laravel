@@ -138,6 +138,7 @@ $(".header__search__input-item").on("input", function () {
   var parent = $(".header__search__list-box");
   console.log(search);
   timer = setTimeout(function () {
+    $('.header__search__list-box').html('');
     $.ajax({
       method: 'GET',
       data: {
@@ -197,6 +198,63 @@ function itemTemplate(_ref) {
   var template = "<div class=\"header__search__list-item\">\n    <img src=\"".concat(image, "\" alt=\"\" class=\"search__image\">\n    <div class=\"search_container\">\n      <p class=\"search_container__text\">").concat(date, "</p>\n      <p class=\"search_container__title\">").concat(title, "</p>\n      <p class=\"search_container__text\">").concat(place, "</p>\n      <a href=\"").concat(url, "\" class=\"search_container__btn align-self-end\">\n        <span>\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</span>\n        <img src=\"img/arrow-more.svg\" alt=\"\">\n      </a>\n    </div>\n  </div>");
   return template;
 }
+
+$('.modal-k__btn, .modal-k__overlay').on('click', function () {
+  $('.modal-k').removeClass('active');
+});
+$("form").on("submit", function (e) {
+  // НАЗВАНИЕ КЛАССА ФОРМЫ
+  e.preventDefault(); // let response = grecaptcha.getResponse();
+  // if(response.length == 0) {
+  //   alert("Пожалуйста, подтвердите что вы не робот")
+  //   return false
+  // }
+
+  var url = $(this).attr('action');
+  var switcher;
+  var thatForm = $(this); // let url = "/";
+
+  var $inputArr = $(this).find(".required_input"); // МАССИВ ИНПУТОВ ИЛИ СЕЛЕКТОВ (КОТОРЫЕ ДОЛЖНЫ ВАЛИДИРОВАТЬСЯ)
+
+  var dataObject = {};
+  $inputArr.each(function (key, el) {
+    var inputName = $(el).attr("name");
+    var inputVal = $(el).val();
+
+    if ($(el).val() === "" || $(el).val() === null) {
+      $(el).addClass("error"); // ПОВЕСИТЬ СТИЛИ НА ЭТОТ КЛАСС
+
+      $(el).removeClass("success");
+    } else {
+      $(el).removeClass("error");
+      $(el).addClass("success"); //   console.log(inputName);
+
+      dataObject[inputName] = inputVal; // ОБЯЗАТЕЛЬНО ВСЕМ ИНПУТАМИ ПРИСВОИТЬ АТТРИБУТ "name"
+    }
+  });
+  switcher = !$inputArr.hasClass("error");
+
+  if (switcher === true) {
+    //     var msg   = $('#formX').serialize();
+    $.ajax({
+      // url: url,
+      type: "POST",
+      url: url,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: dataObject,
+      success: function success(data) {
+        thatForm.find('input').val('');
+        $('.modal-k').addClass('active');
+      },
+      error: function error() {
+        alert("Ошибка при отправке данных"); // ДЕЙСТВИЕ ПРИ ОШИБКЕ ОТПРАВКИ
+      }
+    }); //.then(responce => console.log(responce))
+    //.catch(err => console.log(err))
+  }
+});
 
 /***/ }),
 
@@ -441,6 +499,55 @@ function linkTrigger() {
   }
 }
 
+function eventTemplate(_ref) {
+  var image = _ref.image,
+      date = _ref.date,
+      title = _ref.title,
+      description = _ref.description,
+      place = _ref.place,
+      city = _ref.city,
+      priceBefore = _ref.priceBefore,
+      payLink = _ref.payLink,
+      eventUrl = _ref.eventUrl;
+  var template = "<div class=\"col-12 col-md-6 col-lg-3 mb-10 mb-lg-30\">\n                    <div class=\"events-section__card aos-init aos-animate\" data-aos=\"fade-up\" data-aos-once=\"true\" data-aos-delay=\"50\" data-aos-duration=\"1000\">\n                        <div class=\"row events-section__box\">\n                            <div class=\"col-6 col-lg-12 events-section__image-box\">\n                                <img src=\"".concat(image, "\" alt=\"\" class=\"events-section__image\">\n                            </div>\n                            <div class=\"col-6 col-lg-12 events-section__text d-flex flex-column\">\n                                <p class=\"events-section__date\">").concat(date, "</p>\n                                <p class=\"events-section__name\">").concat(title, "</p>\n                                <p class=\"events-section__date\">").concat(city, ", ").concat(place, "</p>\n                                <p class=\"events-section__cost mb-15 mb-lg-0\">").concat(priceBefore, "</p>\n                                <a href=\"").concat(payLink, "\" class=\"events-section__btn mb-10 d-lg-none\">\u041A\u0443\u043F\u0438\u0442\u044C \u0431\u0438\u043B\u0435\u0442</a>\n                                <a href=\"").concat(eventUrl, "\" class=\"events-section__link d-lg-none\">\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 <img src=\"./img/public/arrow-more.svg\" alt=\"\"></a>\n                            </div>\n                        </div>\n\n                        <div class=\"events-section__overlay d-none d-lg-flex flex-column justify-content-between\">\n                            <div class=\"box d-flex flex-column\">\n                                <p class=\"events-section__overlay-date mb-15\">").concat(date, "</p>\n                                <p class=\"events-section__overlay-name\">").concat(title, "</p>\n                                <p class=\"events-section__overlay-text\">").concat(description, " </p>\n                                <p class=\"events-section__overlay-date\">").concat(place, "</p>\n                            </div>\n                            <div class=\"box d-flex flex-column\">\n                                <a href=\"").concat(eventUrl, "\" class=\"events-section__overlay-btn blue-btn mb-15\">\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</a>\n                                <a href=\"").concat(payLink, "\" class=\"events-section__overlay-link red-btn\">\u041A\u0443\u043F\u0438\u0442\u044C \u0431\u0438\u043B\u0435\u0442</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>");
+  return template;
+}
+
+function appendElem(parent, elem) {
+  parent.append(elem);
+}
+
+function showMore() {
+  $('.events-section__more').on('click', function () {
+    var that = $(this);
+    var url = that.attr('data-url');
+    var dataId = that.attr('data-id');
+    var parent = $('.events-section .event-section-parent');
+    $.ajax({
+      method: 'GET',
+      data: {
+        dataId: dataId
+      },
+      url: url,
+      success: function success(data) {
+        data.forEach(function (item) {
+          appendElem(parent, eventTemplate(item));
+        });
+        dataId = Number(dataId) + data.length;
+        that.attr('data-id', dataId);
+
+        if (data.length < 1) {
+          that.remove();
+        }
+      },
+      erorr: function erorr(err) {
+        console.log(err);
+      }
+    });
+  });
+}
+
+showMore();
 linkTrigger();
 initSlider(); // export {initSlider}
 

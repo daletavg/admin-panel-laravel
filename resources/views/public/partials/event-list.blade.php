@@ -7,7 +7,7 @@
            data-aos-delay="150"
            data-aos-duration="1000"
         >{{getTranslate('poster.general')}}</p>
-        <div class="row">
+        <div class="row event-section-parent">
             @foreach($items as $item)
                 <div class="col-12 col-md-6 col-lg-3 mb-10 mb-lg-30">
                     <div class="events-section__card"
@@ -56,11 +56,13 @@
 
             {{$items->links('public.layouts.partials.pagination')}}
         @else
-            <a href="#"
+            <a
                data-aos="fade-up"
                data-aos-once="true"
                data-aos-delay="200"
                data-aos-duration="1000"
+               data-id="8"
+               data-url="{{route('home.show-more')}}"
                class="events-section__more blue-btn">{{getTranslate('show_more.general')}}</a>
         @endif
     </div>
