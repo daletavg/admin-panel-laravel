@@ -10,17 +10,7 @@ abstract class BaseController extends Controller
     protected $data = [];
     private $baseView;
     private $content = null;
-//    abstract public function main();
 
-    protected function setContent($contnent)
-    {
-        $this->content= $contnent;
-    }
-
-    protected function getContent()
-    {
-        return $this->content;
-    }
 
     protected function setSections($sections)
     {

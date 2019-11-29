@@ -8,6 +8,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
         Route::post('logout', 'LoginController@logout')->name('logout');
     });
     Route::group(['middleware'=>'auth'],function (){
+
+        Route::resource('/services','ServicesController',['except'=>'show']);
+
+
+
+
         Route::get('/', 'IndexController@index')->name('index');
         Route::get('/clear-cache', 'IndexController@clearCache')->name('index.clear-cache');
 

@@ -90,12 +90,35 @@ class LanguageRepository extends BaseRepository
         $lang = $lang->where('locale',getCurrentLocale());
         $lang=Arr::first($lang);
 
-        return $lang->id??1;
+        return $lang->id?? self::getLocaleIdByLocaleIfDoesntEnable(config('app.locale'));
     }
 
     static function getCountLanguages()
     {
         return count(self::getLanguage());
+    }
+
+    private static function getAllLocalesIfDoesntEnable()
+    {
+        $data = null;
+
+        if(!Cache::has('getAllLocalesIfDoesntEnable'))
+        {
+            $data = Language::all();
+            Cache::forever('getAllLocalesIfDoesntEnable',$data);
+        }
+        return Cache::get('getAllLocalesIfDoesntEnable');
+    }
+    private static function getLocaleIdByLocaleIfDoesntEnable(string $locale)
+    {
+        $lang = self::getAllLocalesIfDoesntEnable();
+        $lang = $lang->where('locale',$locale);
+        $lang=Arr::first($lang);
+        try {
+            return $lang->getAttribute('id');
+        }catch (\Exception $e){
+            return null;
+        }
     }
 
 

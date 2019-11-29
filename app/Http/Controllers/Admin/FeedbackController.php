@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Contracts\Repository\Criterias\OrderByDescCriteria;
+
+use App\Repository\Criterias\OrderByDescCriteria;
 use App\Repository\RequestsRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,6 @@ class FeedbackController extends AdminController
         $this->setCardTitle(__('admin.feedback'));
         $this->itemRepository->pushCriteria(new OrderByDescCriteria());
         $vars['items'] = $this->itemRepository->paginate(15);
-//        dd($vars['items']);
         return view('admin.feedback.index',$vars);
     }
 

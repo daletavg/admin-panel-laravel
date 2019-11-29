@@ -66,5 +66,11 @@ return [
     'power'=>[
         'enable'=>'Enable',
         'disable'=>'Disable'
+    ],
+    'setvices'=>[
+        'service'=>'Services',
+        'edit'=>'Edit service',
+        'create'=>'Create service',
+        'name'=>'Name'
     ]
 ];

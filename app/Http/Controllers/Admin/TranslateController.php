@@ -25,7 +25,6 @@ class TranslateController extends AdminController
         $this->setCardTitle(__('admin.localization'));
         $vars['groups'] = Translate::getGroups();
 
-        $this->setContent(view('admin.translates.index', $vars));
         return view('admin.translates.index',$vars);
     }
 

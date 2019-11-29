@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Contracts\Repository\Criterias;
+namespace App\Repository\Criterias;
 
 
 use Prettus\Repository\Contracts\CriteriaInterface;

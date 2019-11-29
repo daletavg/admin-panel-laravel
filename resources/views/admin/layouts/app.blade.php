@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/admin/color-picker.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/select2.min.css')}}">
     <script type="text/javascript" src="{{ asset( 'js/core/jquery.min.js') }}"></script>
-
+    @yield('styles')
 </head>
 <body>
 
@@ -23,7 +23,7 @@
          data-image="">
         <div class="logo text-center">
             <a href="{{ route('admin.index')}}" class="simple-text logo-normal">{{env('APP_NAME')}}</a>
-            <small>{{ Auth::user()->name }}</small>
+            <small>{{ Auth::user()->getAttribute('name') }}</small>
         </div>
         <div class="sidebar-wrapper position-static">
             @include('admin.layouts.partials.menu')
@@ -43,7 +43,6 @@
                                 </div>
                                 <div class="card-body">
                                     @yield('content')
-                                    {!! $content ?? '' !!}
                                 </div>
                             </div>
                         </div>
