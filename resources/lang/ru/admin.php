@@ -55,5 +55,16 @@ return [
     ],
     'generate'=>[
         'sitemap'=>'sitemap.xml успешно сгенерирован!'
+    ],
+    'languages'=>[
+        'locale'=>'Locale',
+        'name'=>'Название',
+        'active'=>'Состояние',
+        'languages'=>'Языки',
+        'languages_management'=>'Управление языками'
+    ],
+    'power'=>[
+        'enable'=>'Включено',
+        'disable'=>'Выключено'
     ]
 ];

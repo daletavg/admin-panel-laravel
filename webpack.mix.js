@@ -19,7 +19,7 @@ const mix = require('laravel-mix');
 //     .sass('resources/sass/admin/admin-main.scss', 'public/css/admin')
 //     .sass('resources/sass/admin/styles.scss', 'public/css/admin');
 //
-// mix.js('resources/js/admin/index.js', 'public/js/admin/admin.js');
+mix.js('resources/js/admin/index.js', 'public/js/admin/admin.js');
 //
 //
 // mix.scripts([
@@ -32,15 +32,15 @@ const mix = require('laravel-mix');
 //     'public/js/lib/Sortable.min.js',
 // ], 'public/js/admin/libraries.js');
 
-mix.copyDirectory('resources/img/public', 'public/img/public');
-mix.copyDirectory('resources/fonts/public', 'public/fonts/public');
-mix.sass('resources/sass/public/style.scss', 'public/css/public').options({
-    autoprefixer: {
-        options: {
-            browsers: [
-                'last 6 versions',
-            ]
-        }
-    }
-});
-mix.js('resources/js/public/index.js', 'public/js/public');
+// mix.copyDirectory('resources/img/public', 'public/img/public');
+// mix.copyDirectory('resources/fonts/public', 'public/fonts/public');
+// mix.sass('resources/sass/public/style.scss', 'public/css/public').options({
+//     autoprefixer: {
+//         options: {
+//             browsers: [
+//                 'last 6 versions',
+//             ]
+//         }
+//     }
+// });
+// mix.js('resources/js/public/index.js', 'public/js/public');

@@ -1,30 +1,23 @@
-<ul class="nav nav-pills nav-pills-primary" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist" aria-expanded="true">
-            RU - Русский
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#link2" role="tablist" aria-expanded="false">
-            UK - Украинский
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#link3" role="tablist" aria-expanded="false">
-            EN - Английский
-        </a>
-    </li>
-</ul>
+@if(count($locales)>1)
+    <ul class="nav nav-pills nav-pills-primary" role="tablist">
+        @foreach($locales as $name=>$locale)
+            <li class="nav-item">
+                <a class="nav-link {{$loop->iteration==1?'active':''}}" data-toggle="tab" href="#link-{{$locale}}"
+                   role="tablist" aria-expanded="true">
+                    {{strtoupper($locale??'')}} - {{ucfirst($name??'')}}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+@endif
 
 
 <div class="tab-content tab-space">
-    <div class="tab-pane active" id="link1" aria-expanded="true">
-        {!! $tabs[0] ??''!!}
-    </div>
-    <div class="tab-pane" id="link2" aria-expanded="false">
-        {!! $tabs[1] ??''!!}
-    </div>
-    <div class="tab-pane" id="link3" aria-expanded="false">
-        {!! $tabs[2] ??''!!}
-    </div>
+    @foreach($locales as $name=>$locale)
+        @if(\Illuminate\Support\Arr::has($tabs,$locale))
+            <div class="tab-pane {{$loop->iteration==1?'active':''}}" id="link-{{$locale}}" aria-expanded="true">
+                {!! \Illuminate\Support\Arr::get($tabs,$locale) !!}
+            </div>
+        @endif
+    @endforeach
 </div>

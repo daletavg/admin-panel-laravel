@@ -1,59 +1,64 @@
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>FROM</th>
-            <th>TO</th>
-            <th>Код редиректа</th>
-            <th class="text-right">
-                <a href="{{route('admin.seo.redirects.create')}}" class="btn btn-primary">@lang('admin.create')</a>
-            </th>
-        </tr>
-        </thead>
-        <tbody >
-        @isset($items)
-            @foreach($items as $item)
-                <tr>
-                    <th>{{$loop->iteration}}</th>
+@extends('admin.layouts.app')
+@section('content')
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>FROM</th>
+                <th>TO</th>
+                <th>Код редиректа</th>
+                <th class="text-right">
+                    <a href="{{route('admin.seo.redirects.create')}}" class="btn btn-primary">@lang('admin.create')</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @isset($items)
+                @foreach($items as $item)
+                    <tr>
+                        <th>{{$loop->iteration}}</th>
 
-                    <td>
-                        {{ $item->from }}
-                    </td>
-                    <td>
-                        {{ $item->to }}
-                    </td>
-                    <td>
-                        {{ $item->code }}
-                    </td>
+                        <td>
+                            {{ $item->from }}
+                        </td>
+                        <td>
+                            {{ $item->to }}
+                        </td>
+                        <td>
+                            {{ $item->code }}
+                        </td>
 
-                    <td class="text-primary text-right">
-                        <div class="dropdown menu_drop">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">menu</i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
-                                <a href="{{route('admin.seo.redirects.edit',$item)}}" class="dropdown-item">@lang('admin.edit')</a>
-                                <form method="POST" action={{route('admin.seo.redirects.destroy',$item)}}""
-                                      accept-charset="UTF-8"
-                                      onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item">@lang('admin.delete')</button>
-                                </form>
+                        <td class="text-primary text-right">
+                            <div class="dropdown menu_drop">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton_1"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">menu</i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_1">
+                                    <a href="{{route('admin.seo.redirects.edit',$item)}}"
+                                       class="dropdown-item">@lang('admin.edit')</a>
+                                    <form method="POST" action={{route('admin.seo.redirects.destroy',$item)}}""
+                                          accept-charset="UTF-8"
+                                          onsubmit="return confirm(&quot;Вы уверены что хотите удалить запись?&quot;)">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item">@lang('admin.delete')</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
 
-                </tr>
-            @endforeach
-        @endisset
-        </tbody>
-    </table>
-    {{$items->links()}}
-</div>
+                    </tr>
+                @endforeach
+            @endisset
+            </tbody>
+        </table>
+        {{$items->links()}}
+    </div>
+@endsection
 @section('javascript')
     <script type="text/javascript" defer>
         $(document).ready(function (e) {

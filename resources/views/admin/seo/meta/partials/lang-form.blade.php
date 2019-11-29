@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                @include('admin.layouts.partials.inputs.default-input',['name'=>$metaName,'title'=>'Meta title','value'=>$metaValue??''])
+                @include('admin.layouts.partials.inputs.default-input',['name'=>$titleName,'title'=>'Meta title','value'=>$titleValue??''])
             </div>
         </div>
         <div class="row">
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$headName,'title'=>'Текст в head','value'=>$headValue??''])
+                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$headerName,'title'=>'Текст в head','value'=>$headerValue??''])
             </div>
         </div>
         <div class="row">
@@ -35,12 +35,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$upTextName,'title'=>'Текст в верху страници','value'=>$upTextValue??''])
+                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$text_topName,'title'=>'Текст в верху страници','value'=>$text_topValue??''])
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$downTextName,'title'=>'Текст в низу страници','value'=>$downTextValue??''])
+                @include('admin.layouts.partials.inputs.default-textaria',['name'=>$text_bottomName,'title'=>'Текст в низу страници','value'=>$text_bottomValue??''])
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ class GeneralSeoSettingsController extends AdminController
 {
     public function __construct(GlobalSeoSettingsRepository $repository)
     {
+        parent::__construct();
         $this->itemRepository = $repository;
     }
 
@@ -25,8 +26,7 @@ class GeneralSeoSettingsController extends AdminController
         $this->setCardTitle('Глобальные настройки SEO');
         $vars['edit']= $this->itemRepository->first();
         $vars['codes']= GlobalSeoSetting::getCodes();
-        $this->setContent(view('admin.seo.seo-settings.index',$vars));
-        return $this->main();
+        return view('admin.seo.seo-settings.index',$vars);
     }
 
 

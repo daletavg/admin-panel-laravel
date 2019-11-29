@@ -17,7 +17,7 @@ class CreateLanguagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('locale');
             $table->string('name');
-            $table->boolean('power')->default(false);
+            $table->boolean('active')->default(false);
         });
     }
 

@@ -11,6 +11,7 @@ class SettingsController extends AdminController
 
     public function __construct(SettingsRepository $settingsRepository)
     {
+        parent::__construct();
         $this->itemRepository = $settingsRepository;
     }
 
@@ -23,11 +24,8 @@ class SettingsController extends AdminController
     {
         $data = $vars = [];
         $vars['groupSettings'] = GroupSetting::all()->load('settings.lang');
-//        dd($vars['groutSettings']);
-//        $vars['settings']=Setting::getData();
         $this->setCardTitle(__('admin.settings'));
-        $this->setContent(view('admin.settings.index',$vars));
-        return $this->main();
+        return view('admin.settings.index',$vars);
     }
 
 

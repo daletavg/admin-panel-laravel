@@ -48,5 +48,15 @@ flatpickr("[flatpicker-date]", {
 //     altFormat: "F j, Y",
 //     dateFormat: "Y-m-d",
 // });
-
+$(document).ready(function () {
+    $('.active-lang').on('change',function () {
+        let that = this;
+        let url = $('tbody[data-url-changed]').attr('data-url-changed');
+        let dataId = $(that).attr('data-id');
+        let active = $(that).children("option:selected").val();
+        $.get(url,{dataId,active}).done(function (data) {
+            message('Success updated','success');
+        });
+    });
+});
 

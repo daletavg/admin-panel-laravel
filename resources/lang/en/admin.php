@@ -28,7 +28,7 @@ return [
     'save' => 'Save',
     'create' => 'Create',
     'save_close' => 'Save and close',
-    'open'=>'Open',
+    'open' => 'Open',
     'profile' => [
         'profile' => 'Profile',
         'edit' => 'Profile Editing',
@@ -47,13 +47,24 @@ return [
         'delete' => 'Record deleted successfully!',
         'edit' => 'Record edited successfully!',
         'create' => 'Record created successfully!',
-        'edit_name'=>'Username updated successfully!',
-        'edit_password'=>'Password updated successfully!',
-        'edit_settings'=>'Settings updated successfully!',
-        'edit_robots'=>'robots.txt edited successfully!',
-        'edit_sitemap'=>'sitemap successfully changed!'
+        'edit_name' => 'Username updated successfully!',
+        'edit_password' => 'Password updated successfully!',
+        'edit_settings' => 'Settings updated successfully!',
+        'edit_robots' => 'robots.txt edited successfully!',
+        'edit_sitemap' => 'sitemap successfully changed!'
     ],
-    'generate'=>[
-        'sitemap'=>'sitemap.xml successfully generated!'
+    'generate' => [
+        'sitemap' => 'sitemap.xml successfully generated!'
+    ],
+    'languages' => [
+        'locale'=>'Locale',
+        'name'=>'Name',
+        'active'=>'Active',
+        'languages' => 'Languages',
+        'languages_management' => 'Language management'
+    ],
+    'power'=>[
+        'enable'=>'Enable',
+        'disable'=>'Disable'
     ]
 ];

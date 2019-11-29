@@ -1,45 +1,55 @@
 @php
+    $allLocales = \Illuminate\Support\Arr::pluck(\App\Repository\LanguageRepository::getLanguage(),'locale','name');
 
     if(isset($edit))
     {
-        $langs = $edit->langs()->get()->toArray();
+        $edit = $edit->langs->sortBy('language.id');
     }
+
     $dataLang = [];
-    foreach (\App\Repository\LanguageRepository::getLanguage() as $key=>$lng)
+
+    foreach ($allLocales as $nameLocale =>$locale)
     {
-        array_push($dataLang,view('admin.seo.meta.partials.lang-form',
+        $data = isset($edit)?$edit->where('language.locale',$locale)->first():null;
+
+        $dataLang +=
         [
-            'langName'=>$lng->name,
+        $locale=>view('admin.seo.meta.partials.lang-form',
 
+        [
+            'langName'=>$nameLocale,
 
-            'h1Name'=>'data['.$lng->locale.'][h1]',
-            'h1Value'=>$langs[$key]['h1']??'',
+            'h1Name'=>'data['.$locale.'][h1]',
+            'h1Value'=>is_null($data)?'':$data->getAttribute('h1'),
 
-            'metaName'=>'data['.$lng->locale.'][title]',
-            'metaValue'=>$langs[$key]['title']??'',
+            'metaName'=>'data['.$locale.'][title]',
+            'metaValue'=>is_null($data)?'':$data->getAttribute('title'),
 
-            'keywordsName'=>'data['.$lng->locale.'][keywords]',
-            'keywordsValue'=>$langs[$key]['keywords']??'',
+            'keywordsName'=>'data['.$locale.'][keywords]',
+            'keywordsValue'=>is_null($data)?'':$data->getAttribute('keywords'),
 
-            'descriptionName'=>'data['.$lng->locale.'][description]',
-            'descriptionValue'=>$langs[$key]['description']??'',
+            'descriptionName'=>'data['.$locale.'][description]',
+            'descriptionValue'=>is_null($data)?'':$data->getAttribute('description'),
 
-            'headName'=>'data['.$lng->locale.'][header]',
-            'headValue'=>$langs[$key]['header']??'',
+            'headName'=>'data['.$locale.'][header]',
+            'headValue'=>is_null($data)?'':$data->getAttribute('header'),
 
-            'footerName'=>'data['.$lng->locale.'][footer]',
-            'footerValue'=>$langs[$key]['footer']??'',
+            'footerName'=>'data['.$locale.'][footer]',
+            'footerValue'=>is_null($data)?'':$data->getAttribute('footer'),
 
-            'upTextName'=>'data['.$lng->locale.'][text_top]',
-            'upTextValue'=>$langs[$key]['text_top']??'',
+            'upTextName'=>'data['.$locale.'][text_top]',
+            'upTextValue'=>is_null($data)?'':$data->getAttribute('text_top'),
 
-            'downTextName'=>'data['.$lng->locale.'][text_bottom]',
-            'downTextValue'=>$langs[$key]['text_bottom']??'',
+            'downTextName'=>'data['.$locale.'][text_bottom]',
+            'downTextValue'=>is_null($data)?'':$data->getAttribute('text_bottom'),
         ]
-        ));
+        )];
+
+
     }
+
 
 @endphp
 
 
-@include('admin.layouts.partials.tabs.lang-tab',['tabs'=>$dataLang])
+@include('admin.layouts.partials.tabs.lang-tab',['locales'=>$allLocales,'tabs'=>$dataLang])

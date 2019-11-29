@@ -18,6 +18,7 @@ class RedirectsController extends AdminController
      */
     public function __construct(RedirectsRepository $redirectsRepository)
     {
+        parent::__construct();
         $this->itemRepository = $redirectsRepository;
     }
 
@@ -30,8 +31,8 @@ class RedirectsController extends AdminController
 
 
         $vars['items']= $this->itemRepository->paginate(15);
-        $this->setContent(view('admin.seo.redirects.index',$vars));
-        return $this->main();
+
+        return view('admin.seo.redirects.index',$vars);
     }
 
     /**
@@ -43,9 +44,8 @@ class RedirectsController extends AdminController
     {
         $this->setCardTitle('Создание перенаправления');
         $vars['codes'] = Redirect::getCodes();
-        $this->setContent(view('admin.seo.redirects.create',$vars));
 
-        return $this->main();
+        return view('admin.seo.redirects.create',$vars);
     }
 
     /**
@@ -85,8 +85,8 @@ class RedirectsController extends AdminController
         $vars['edit']=$this->itemRepository->find($id);
         $vars['codes'] = Redirect::getCodes();
         $this->setCardTitle('Редактирование перенаправления');
-        $this->setContent(view('admin.seo.redirects.edit',$vars));
-        return $this->main();
+
+        return view('admin.seo.redirects.edit',$vars);
     }
 
     /**

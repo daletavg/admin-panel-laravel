@@ -23,8 +23,8 @@ class CreateMetaTable extends Migration
         });
 
         Schema::create($this->tableLang, function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer($this->foreign)->unsigned();
-
             $table->string('h1', 255)->nullable();
             $table->string('title', 255)->nullable();
             $table->string('keywords', 500)->nullable();

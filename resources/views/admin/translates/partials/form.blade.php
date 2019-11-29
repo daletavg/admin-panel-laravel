@@ -1,26 +1,3 @@
-@php
-
-    if(isset($edit))
-    {
-        $langs = $edit->langs()->get()->toArray();
-    }
-    $dataLang = [];
-    foreach (\App\Repository\LanguageRepository::getLanguage() as $key=>$lng)
-    {
-        array_push($dataLang,view('admin.translates.partials.lang-form',
-        [
-            'langName'=>$lng->name,
-
-            'dataName'=>'data['.$lng->locale.'][data]',
-            'dataValue'=>$langs[$key]['data']??'',
-
-            'lang'=>$lng->locale
-        ]
-        ));
-    }
-
-@endphp
-
 
 <div class="row">
     <div class="col-md-6">
@@ -58,7 +35,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        @include('admin.layouts.partials.tabs.lang-tab',['tabs'=>$dataLang])
+        {!! $langData??'' !!}
     </div>
 </div>
 
@@ -74,6 +51,10 @@
                 },
                 dropdownCssClass: 'select2-hidden'
             });
+
+
+
+
             let number = $('#type').children("option:selected").val();
             let langs =['ru','uk','en'];
             checkInput(number,langs)
@@ -86,13 +67,13 @@
         });
 
         function checkInput(val,langs) {
-            if (val == 'textaria') {
+            if (val === 'textaria') {
                 setNewInput(langs, getTextariaLang);
             }
-            if (val == 'input') {
+            if (val === 'input') {
                 setNewInput(langs, getInputLang);
             }
-            if(val == 'ckeditor')
+            if(val === 'ckeditor')
             {
                 setNewInput(langs,getCKEDitorLang);
                 setCKEDITOR(langs);
@@ -102,16 +83,16 @@
         function getTextariaLang(lang, value) {
             let data = `
                     <div class="form-group">
-                        <label for="data[` + lang + `][data]" class=" control-label">Заначение</label>
-                        <textarea class="form-control" name="data[` + lang + `][data]" id="data[` + lang + `][data]" cols="30" rows="10">`+value+`</textarea>
+                        <label for="`+lang+`" class=" control-label">Заначение</label>
+                        <textarea class="form-control lang-changer" name="`+lang+`" id="`+lang+`" cols="30" rows="10">`+value+`</textarea>
                     </div>`;
             return data;
         }
 
         function getInputLang(lang,value) {
             let data = `<div class="form-group">
-                            <label for="data[` + lang + `][data]" class=" control-label">Заначение</label>
-                            <input type="text" id="data[` + lang + `][data]" name="data[` + lang + `][data]" class="form-control" autocomplete="off" value="`+value+`">
+                            <label for="`+lang+`" class=" control-label">Заначение</label>
+                            <input type="text" id="`+lang+`" name="`+lang+`" class="form-control lang-changer" autocomplete="off" value="`+value+`">
                         </div>`;
             return data;
         }
@@ -119,8 +100,8 @@
         function getCKEDitorLang(lang, value) {
             let data = `
                     <div class="form-group">
-                        <label for="data[` + lang + `][data]" class=" control-label">Заначение</label>
-                        <textarea class="form-control" name="data[` + lang + `][data]" id="data[` + lang + `][data]" cols="30" rows="10">`+value+`</textarea>
+                        <label for="`+lang+`" class=" control-label">Заначение</label>
+                        <textarea class="form-control lang-changer" name="`+lang+`" id="`+lang+`" cols="30" rows="10">`+value+`</textarea>
                     </div>`;
             // for(name in CKEDITOR.instances)
             // {
@@ -130,12 +111,15 @@
         }
 
         function setNewInput(languages, inputFunc) {
-            languages.map(function (lang) {
-                let elem = $('#lang-' + lang);
-                let id ='data['+lang+'][data]';
-                let data = document.getElementById(id).value;
-                $(elem).children('.form-group').remove();
-                $(elem).append(inputFunc(lang,data))
+
+            $('.lang-changer').map(function () {
+                let name = $(this).attr('name');
+
+                let parent =$(this).parent();
+                let data = $(this).val();
+                parent.children().remove();
+
+                 $(parent).append(inputFunc(name,data))
             });
         }
 

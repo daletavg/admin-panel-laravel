@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class SeoController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $vars['items'] =[
@@ -35,7 +40,7 @@ class SeoController extends AdminController
 
         ];
         $this->setCardTitle('SEO');
-        $this->setContent(view('admin.seo.index',$vars));
-        return $this->main();
+
+        return view('admin.seo.index',$vars);
     }
 }

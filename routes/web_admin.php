@@ -14,20 +14,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
         Route::get('/feedback','FeedbackController@index')->name('feedback.index');
         Route::delete('/feedback/{testimonial}','FeedbackController@destroy')->name('feedback.destroy');
 
-        Route::resource('/tour','GroupController',['except'=>['show']]);
 
-        Route::resource('/posters','PosterController',['except'=>['show']]);
-        Route::get('/posters/search','PosterController@search')->name('posters.search');
+        Route::get('/language-manager','LanguageManagerController@index')->name('language-manager.index');
 
-        Route::get('/leave-group','PosterController@leaveGroup')->name('posters.leave-group');
 
-        Route::get('/city-places','PosterController@getCityPlaces')->name('posters.city-places');
-        Route::resource('/partners','PartnerController',['except'=>['show']]);
-        Route::resource('/cities','CityController',['except'=>['show']]);
-        Route::group(['as'=>'about.'], function () {
-            Route::get('/about', 'AboutController@index')->name('index');
-            Route::put('/about', 'AboutController@update')->name('update');
-        });
+
 
 
         Route::group(['as'=>'profile.'],function () {

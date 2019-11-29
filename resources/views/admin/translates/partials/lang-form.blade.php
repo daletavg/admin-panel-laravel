@@ -5,9 +5,9 @@
     <div class="m-4">
         <div class="row">
             <div class="col-md-12">
-                <div id="lang-{{$lang??''}}">
-                    @include('admin.layouts.partials.inputs.default-input',['name'=>$dataName,'title'=>'Заначение','value'=>$dataValue??''])
-                </div>
+
+                    @include('admin.layouts.partials.inputs.default-input',['name'=>$dataName,'title'=>'Заначение','value'=>$dataValue??'','inputClass'=>'form-control lang-changer'])
+
             </div>
         </div>
     </div>

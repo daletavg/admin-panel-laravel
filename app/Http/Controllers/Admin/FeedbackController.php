@@ -11,6 +11,7 @@ class FeedbackController extends AdminController
 {
     public function __construct(RequestsRepository $requestsRepository)
     {
+        parent::__construct();
         $this->itemRepository = $requestsRepository;
     }
 
@@ -20,8 +21,7 @@ class FeedbackController extends AdminController
         $this->itemRepository->pushCriteria(new OrderByDescCriteria());
         $vars['items'] = $this->itemRepository->paginate(15);
 //        dd($vars['items']);
-        $this->setContent(view('admin.feedback.index',$vars));
-        return $this->main();
+        return view('admin.feedback.index',$vars);
     }
 
     public function destroy(int $id){

@@ -7,6 +7,7 @@ use App\Models\Translate\Translate;
 use App\Repository\TranslateRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TranslateController extends AdminController
 {
@@ -14,7 +15,9 @@ class TranslateController extends AdminController
 
     public function __construct(TranslateRepository $redirectsRepository)
     {
+        parent::__construct();
         $this->itemRepository = $redirectsRepository;
+
     }
 
     public function index()
@@ -23,7 +26,7 @@ class TranslateController extends AdminController
         $vars['groups'] = Translate::getGroups();
 
         $this->setContent(view('admin.translates.index', $vars));
-        return $this->main();
+        return view('admin.translates.index',$vars);
     }
 
     /**
@@ -39,8 +42,9 @@ class TranslateController extends AdminController
         if ($request->has('group')) {
             $vars['checkGroup'] = $request->get('group');
         }
-        $this->setContent(view('admin.translates.create', $vars));
-        return $this->main();
+
+        $vars+=$this->setLanguagesData('admin.translates.partials.lang-form',$this->itemRepository->langModel());
+        return view('admin.translates.create', $vars);
     }
 
     public function store(TranslateRequest $request)
@@ -71,9 +75,8 @@ class TranslateController extends AdminController
         $vars['edit'] = $this->itemRepository->find($id);
         $vars['groups'] = Translate::getGroups();
         $this->setCardTitle('Редактирование локализации');
-
-        $this->setContent(view('admin.translates.edit', $vars));
-        return $this->main();
+        $vars += $this->setLanguagesData('admin.translates.partials.lang-form',$this->itemRepository->langModel(),$vars['edit']->langs);
+        return view('admin.translates.edit', $vars);
     }
 
     /**
