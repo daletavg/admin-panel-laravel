@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <div class="table-responsive">
     <table class="table">
         @isset($items)
@@ -20,4 +22,4 @@
         @endisset
     </table>
 </div>
-
+@endsection

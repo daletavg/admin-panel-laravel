@@ -15,17 +15,17 @@ class LanguagesSeeder extends Seeder
           [
               'name'=>'Русский',
               'locale'=>'ru',
-              'power'=>true
+              'active'=>true
           ],
             [
                 'name'=>'Українська',
                 'locale'=>'uk',
-                'power'=>true
+                'active'=>true
             ],
             [
                 'name'=>'English',
                 'locale'=>'en',
-                'power'=>true
+                'active'=>true
             ]
 
         ];

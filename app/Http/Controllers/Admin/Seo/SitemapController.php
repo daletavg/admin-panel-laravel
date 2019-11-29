@@ -17,8 +17,7 @@ class SitemapController extends AdminController
             return redirect()->route('admin.seo.sitemap.index')->with('success',__('admin.generate.sitemap'));
         }
         $this->setCardTitle(__('admin.SEO.sitemap'));
-        $this->setContent(view('admin.seo.sitemap.index'));
-        return $this->main();
+        return view('admin.seo.sitemap.index');
     }
 
     public function edit()
@@ -30,9 +29,9 @@ class SitemapController extends AdminController
         $vars['item'] = (string)file_get_contents(public_path('sitemap.xml'));
 
         $this->setCardTitle('Редактирование sitemap.xml');
-        $this->setContent(view('admin.seo.sitemap.edit',$vars));
 
-        return $this->main();
+
+        return view('admin.seo.sitemap.edit',$vars);
     }
     public function update(Request $request)
     {

@@ -6,16 +6,39 @@ use Illuminate\Http\Request;
 
 abstract class BaseController extends Controller
 {
+
     protected $data = [];
-    abstract public function main();
+    private $baseView;
+    private $content = null;
+//    abstract public function main();
 
     protected function setContent($contnent)
     {
-        $this->data['content']= $contnent;
+        $this->content= $contnent;
+    }
+
+    protected function getContent()
+    {
+        return $this->content;
     }
 
     protected function setSections($sections)
     {
         $this->data['sections'] = $sections;
+    }
+
+    protected function setBaseViewName(string $viewName){
+        $this->baseView = $viewName;
+    }
+
+    protected function getBaseViewName(){
+        return $this->baseView;
+    }
+
+    protected function setDataOnBaseView(array $data){
+        \View::composer($this->getBaseViewName(), function($view) use ($data)
+        {
+            $view->with($data);
+        });
     }
 }

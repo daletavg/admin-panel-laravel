@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Artisan;
 class IndexController extends AdminController
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $this->setCardTitle('Главная страница');
-        $this->setContent(view('admin.index.index'));
-        return $this->main();
+        return view('admin.index.index');
     }
 
     public function clearCache()

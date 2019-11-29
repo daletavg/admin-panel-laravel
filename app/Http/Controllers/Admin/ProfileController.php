@@ -12,13 +12,17 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $data = $vars = [];
         $vars['user']= Auth::user();
         $this->setCardTitle(__('admin.profile.edit'));
-         $this->setContent(view('admin.profile.index',$vars));
-        return $this->main();
+        return view('admin.profile.index',$vars);
     }
 
     public function updateUserData(UpdateUserDataRequest $request,User $user)

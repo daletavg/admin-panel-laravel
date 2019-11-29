@@ -7,6 +7,6 @@
         @include('admin.layouts.partials.checkboxes.active-checkbox')
     </div>
 </div>
-@include('admin.seo.meta.partials.seo-lang-form')
+{!! $langData??'' !!}
 
 

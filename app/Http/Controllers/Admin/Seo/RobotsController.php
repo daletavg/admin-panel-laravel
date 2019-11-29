@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class RobotsController extends AdminController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $vars = [];
@@ -17,8 +23,8 @@ class RobotsController extends AdminController
 
         $vars['item'] = (string)file_get_contents(public_path('robots.txt'));
         $this->setCardTitle(__('admin.SEO.robots'));
-        $this->setContent(view('admin.seo.robots.index',$vars));
-        return $this->main();
+
+        return view('admin.seo.robots.index',$vars);
     }
 
     public function update(Request $request)

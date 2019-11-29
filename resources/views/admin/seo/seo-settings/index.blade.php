@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <form action="{{route('admin.seo.global-seo.update')}}" method="post">
     @csrf
     @method('put')
@@ -32,3 +34,4 @@
     </div>
     @include('admin.layouts.partials.buttons.save-save-close')
 </form>
+@endsection

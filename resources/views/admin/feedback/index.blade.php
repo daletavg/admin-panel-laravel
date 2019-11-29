@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <div class="table-responsive">
     <table class="table table-shopping">
         <thead>
@@ -55,3 +57,5 @@
     </table>
     {{$items->links()}}
 </div>
+@endsection
+

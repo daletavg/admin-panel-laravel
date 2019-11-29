@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <form method="post" action="{{route('admin.settings.update-all')}}">
     @csrf
     @method('put')
@@ -85,3 +87,4 @@
     {{--            </div>--}}
     {{--        </div>--}}
 </form>
+@endsection

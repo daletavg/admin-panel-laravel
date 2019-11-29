@@ -21,7 +21,9 @@
 <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/color-picker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/select2.full.min.js')}}"></script>
-{!! \Arr::get($sections, 'javascript')!!}
+
+@yield('javascript')
+{{--{!! \Arr::get($sections, 'javascript')!!}--}}
 
 {{--{!! $scripts !!}--}}
 

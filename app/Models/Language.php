@@ -6,7 +6,7 @@ namespace App\Models;
 class Language extends Model
 {
     protected $table = 'languages';
-    protected $fillable = ['locale', 'name', 'power'];
+    protected $fillable = ['locale', 'name', 'active'];
     public $timestamps = false;
 
 

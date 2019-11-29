@@ -2843,64 +2843,31 @@ flatpickr("[flatpicker-date]", {
 //     dateFormat: "Y-m-d",
 // });
 
-/***/ }),
-
-/***/ "./resources/sass/admin/admin-main.scss":
-/*!**********************************************!*\
-  !*** ./resources/sass/admin/admin-main.scss ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/admin/material-dashboard.scss":
-/*!******************************************************!*\
-  !*** ./resources/sass/admin/material-dashboard.scss ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/admin/styles.scss":
-/*!******************************************!*\
-  !*** ./resources/sass/admin/styles.scss ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/public/style.scss":
-/*!******************************************!*\
-  !*** ./resources/sass/public/style.scss ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+$(document).ready(function () {
+  $('.active-lang').on('change', function () {
+    var that = this;
+    var url = $('tbody[data-url-changed]').attr('data-url-changed');
+    var dataId = $(that).attr('data-id');
+    var active = $(that).children("option:selected").val();
+    $.get(url, {
+      dataId: dataId,
+      active: active
+    }).done(function (data) {
+      message('Success updated', 'success');
+    });
+  });
+});
 
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/admin/index.js ./resources/sass/admin/material-dashboard.scss ./resources/sass/admin/admin-main.scss ./resources/sass/admin/styles.scss ./resources/sass/public/style.scss ***!
-  \*******************************************************************************************************************************************************************************************************/
+/*!*******************************************!*\
+  !*** multi ./resources/js/admin/index.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/js/admin/index.js */"./resources/js/admin/index.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/sass/admin/material-dashboard.scss */"./resources/sass/admin/material-dashboard.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/sass/admin/admin-main.scss */"./resources/sass/admin/admin-main.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/sass/admin/styles.scss */"./resources/sass/admin/styles.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/tickets/resources/sass/public/style.scss */"./resources/sass/public/style.scss");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/skin-care-laser/resources/js/admin/index.js */"./resources/js/admin/index.js");
 
 
 /***/ })

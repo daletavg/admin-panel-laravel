@@ -42,6 +42,7 @@
                                     <h4 class="card-title">{{ $cardTitle ?? '' }}</h4>
                                 </div>
                                 <div class="card-body">
+                                    @yield('content')
                                     {!! $content ?? '' !!}
                                 </div>
                             </div>

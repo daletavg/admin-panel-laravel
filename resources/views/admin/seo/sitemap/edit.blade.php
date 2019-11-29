@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <form method="post" action="{{route('admin.seo.sitemap.update')}}">
     <div class="alert alert-danger" role="alert">
         При новой генерации sitemap.xml, прошлый будет затерт!
@@ -12,3 +14,4 @@
     </div>
     @include('admin.layouts.partials.buttons.save')
 </form>
+@endsection
