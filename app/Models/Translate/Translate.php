@@ -6,12 +6,12 @@ namespace App\Models\Translate;
 
 use App\Contracts\HasLangData;
 use App\Models\Model;
-use App\Traits\LangDataTrait;
-use App\Traits\Singleton;
+use App\Traits\Models\HasLangDataTrait;
+
 
 class Translate extends Model implements HasLangData
 {
-    use LangDataTrait;
+    use HasLangDataTrait;
     protected $table = 'translate';
     protected $fillable = ['key','comment','group','type'];
 

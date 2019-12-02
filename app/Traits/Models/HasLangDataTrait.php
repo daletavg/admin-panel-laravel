@@ -1,17 +1,15 @@
 <?php
 
 
-namespace App\Traits;
+namespace App\Traits\Models;
 
 
-use App\Contracts\LangDataContract;
-use App\Models\Language;
-use App\Models\PosterGroupLang;
+
 use App\Repository\LanguageRepository;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-trait LangDataTrait
+trait HasLangDataTrait
 {
     public function lang($locale = null): HasOne
     {

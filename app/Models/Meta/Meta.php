@@ -4,14 +4,14 @@ namespace App\Models\Meta;
 
 use App\Contracts\HasLangData;
 use App\Models\Model;
-use App\Traits\LangDataTrait;
+use App\Traits\Models\HasLangDataTrait;
 use App\Traits\Singleton;
 use Illuminate\Support\Arr;
 
 
 class Meta extends Model implements HasLangData
 {
-    use LangDataTrait;
+    use HasLangDataTrait;
     public const ONLY_ONE_PAGE_TYPE = 0;
     public const DEFAULT_TYPE = 1;
 

@@ -18,6 +18,16 @@ trait ImageTrait
     {
         return $this->morphMany('App\Models\Image', 'model');
     }
+    public function image()
+    {
+        return $this->morphOne('App\Models\Image', 'model');
+    }
+
+    /**
+     * @param Request $request
+     * @param string $nameKey
+     * @deprecated
+     */
 
     public function saveImage(Request $request,string $nameKey = "image"){
 
@@ -35,20 +45,4 @@ trait ImageTrait
 
 
     }
-
-
-
-
-    public function delete()
-    {
-
-        if(count($images = $this->images()->get())){
-            foreach ($images as $image){
-                ImageSaver::deleteImage($image->path);
-                $image->delete();
-            }
-        }
-        return parent::delete();
-    }
-
 }

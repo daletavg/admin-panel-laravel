@@ -7,14 +7,14 @@ namespace App\Models\Settings;
 use App\Contracts\HasLangData;
 use App\Contracts\LangDataContract;
 use App\Models\Language;
-use App\Traits\LangDataTrait;
+use App\Traits\Models\HasLangDataTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use phpDocumentor\Reflection\Types\Collection;
 
 class Setting extends Model implements HasLangData
 {
-    use LangDataTrait;
+    use HasLangDataTrait;
     protected $table = 'settings';
 
     protected $fillable = ['data','name','name_key','has_lang_data'];

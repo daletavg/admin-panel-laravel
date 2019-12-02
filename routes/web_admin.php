@@ -9,8 +9,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function() 
     });
     Route::group(['middleware'=>'auth'],function (){
 
-        Route::resource('/services','ServicesController',['except'=>'show']);
-
+        Route::resource('/services','ServicesController',['except'=>['show']]);
+        Route::resource('/banners','BannersController',['except'=>['show']]);
+        Route::resource('/users','PublicUsersController',['only'=>['index']]);
 
 
 

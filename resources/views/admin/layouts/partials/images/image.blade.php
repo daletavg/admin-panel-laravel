@@ -2,7 +2,7 @@
 
     <?php /** @var $edit \App\Models\Model */ ?>
     @php
-        $image = $edit->getAttribute('images')->first() ?? null;
+        $image = $edit->getAttribute('image') ?? null;
     @endphp
 
         <div class="form-group">

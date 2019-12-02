@@ -72,5 +72,17 @@ return [
         'edit'=>'Edit service',
         'create'=>'Create service',
         'name'=>'Name'
+    ],
+    'image'=>'Image',
+    'banner'=>[
+        'banner'=>'Banners',
+        'edit'=>'Edit banner',
+        'create'=>'Create banner',
+    ],
+    'user'=>[
+        'users'=>'Users',
+        'edit'=>'Edit user',
+        'create'=>'Create user',
     ]
+
 ];

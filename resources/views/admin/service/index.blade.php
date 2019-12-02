@@ -25,7 +25,7 @@
 
                         <th>{{$loop->iteration}}</th>
                         <td class="w-25">
-                            {{$item->getAttribute('lang')->getAttribute('name')}}
+                            {{$item->lang->name ?? ''}}
                         </td>
 
                         <td class="text-primary text-right">
