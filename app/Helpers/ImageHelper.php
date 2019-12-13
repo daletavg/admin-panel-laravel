@@ -7,7 +7,7 @@ function GetPathToPhoto(string $pathToImage,string $defaultPath = null,$storage=
         return \Illuminate\Support\Facades\Storage::disk($storage)->exists($pathToImage) ? Storage::disk($storage)->url($pathToImage) : $defaultPath;
     }
 
-    return \Illuminate\Support\Facades\Storage::disk($storage)->exists($pathToImage) ? Storage::disk($storage)->url($pathToImage) : asset('default.svg');
+    return \Illuminate\Support\Facades\Storage::disk($storage)->exists($pathToImage) ? Storage::disk($storage)->url($pathToImage) : asset('default.png');
 }
 
 

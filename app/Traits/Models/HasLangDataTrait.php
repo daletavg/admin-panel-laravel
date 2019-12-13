@@ -27,4 +27,13 @@ trait HasLangDataTrait
         return $this->hasMany($this->getLangClass());
     }
 
+    public function getLang(string $attribute)
+    {
+        if($this->lang == null){
+            return $this->lang()->first()->getAttribute($attribute);
+        }else{
+            return $this->lang->getAttribute($attribute);
+        }
+    }
+
 }

@@ -4,9 +4,9 @@ $('[data-img-delete]').on('click', function () {
         imageId: $(this).attr('data-id'),
         editId:$(this).attr('data-edit-id')
     };
-    console.log(sendData);
-    let imageName=$(this).attr('data-name');
+
     let thisItem = $(this);
+
 
     $.ajax('/admin/ajax/delete-image', {
         type: 'POST',
@@ -15,7 +15,8 @@ $('[data-img-delete]').on('click', function () {
         },
         data: sendData,
         success: function () {
-            $('#'+imageName).attr('src',window.origin+'/img/header-logo.svg');
+            let image = thisItem.parents('.image-actions').find('.upload-image-class')
+            image.attr('src', window.origin+'/default.png')
             thisItem.remove();
             alert('Изображение успешно удалено!')
         },

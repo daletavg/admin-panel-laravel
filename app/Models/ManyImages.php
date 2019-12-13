@@ -14,7 +14,7 @@ class ManyImages extends Model implements HasImageContract
 
     protected $table = 'many_images';
 
-    public function saveManyImages(Request $request,string $nameKey='image'){
+    public function saveManyImages(Request $request,string $nameKey= "image"){
         if($request->has($nameKey) && is_array($request->all()[$nameKey]))
         {
             $manyIamges = (new ImageSaver($request, $this->getTableName(),$nameKey))->saveManyImages();

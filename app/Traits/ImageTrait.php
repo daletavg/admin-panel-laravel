@@ -20,29 +20,16 @@ trait ImageTrait
     }
     public function image()
     {
-        return $this->morphOne('App\Models\Image', 'model');
+        return $this->morphOne('App\Models\Image', 'model')->where('index',0);
     }
 
-    /**
-     * @param Request $request
-     * @param string $nameKey
-     * @deprecated
-     */
-
-    public function saveImage(Request $request,string $nameKey = "image"){
-
-        if($request->has($nameKey) && $images = $this->images()->get()){
+    public function deleteImage()
+    {
+        if(count($images = $this->images()->get())){
             foreach ($images as $image){
                 ImageSaver::deleteImage($image->path);
                 $image->delete();
             }
-            $this->images()->save(
-                new Image([
-                    'path' => (new ImageSaver($request, $this->getTableName()))->saveImage()
-                ])
-            );
         }
-
-
     }
 }

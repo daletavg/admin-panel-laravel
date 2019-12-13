@@ -41,14 +41,6 @@ return [
             'provider' => 'admin',
         ],
 
-<<<<<<< HEAD
-=======
-        'users'=>[
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
->>>>>>> cc2998a69c364ab7d9ad3c135581d06f934dece1
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -77,20 +69,12 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-<<<<<<< HEAD
-        ]
-=======
-        ],
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\PublicUser::class,
-        ],
->>>>>>> cc2998a69c364ab7d9ad3c135581d06f934dece1
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+            // 'users' => [
+            //     'driver' => 'database',
+            //     'table' => 'users',
+            // ],
+        ],
     ],
 
     /*

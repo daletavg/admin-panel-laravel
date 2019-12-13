@@ -10,16 +10,6 @@ class MenuRepository
     {
 
         $data = [
-
-            ['link' => 'admin.users.index',
-                'name' => __('admin.user.users'),
-                'icon' => 'person_add'],
-            ['link' => 'admin.banners.index',
-                'name' => __('admin.banner.banner'),
-                'icon' => 'insert_photo'],
-            ['link' => 'admin.services.index',
-                'name' => __('admin.setvices.service'),
-                'icon' => 'group'],
             ['link' => 'admin.feedback.index',
                 'name' => __('admin.feedback'),
                 'icon' => 'feedback'],

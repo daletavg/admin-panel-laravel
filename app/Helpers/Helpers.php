@@ -73,3 +73,26 @@ if (!function_exists('isActive')) {
 
 }
 
+function getSpanStringFromTitle(string $string)
+{
+    if($string === null){
+        return '';
+    }
+    $string = iconv(mb_detect_encoding($string, mb_detect_order(), true), "UTF-8", $string);
+    $array = mb_str_split($string);
+    $arraySpan = [];
+    $newString = '';
+    for ($i=0;$i<count($array);$i++){
+        if(array_key_exists($i+1,$array) && $array[$i+1]===" "){
+            $newString .= "<span class='space-item'>".$array[$i]."</span>\n";
+        }else if ($array[$i]!==" ") {
+            $newString .= "<span>".$array[$i]."</span>\n";
+        }
+
+    }
+
+
+    return $newString;
+
+}
+

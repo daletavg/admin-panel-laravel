@@ -20,7 +20,7 @@ class ImageSaver
     private $request;
     private $folderName;
 
-    public function __construct(Request $request,string $folderName = 'images',string $nameKey = 'image',string $storage = 'public')
+    public function __construct(Request $request,string $folderName = "images" ,string $nameKey = "image",string $storage = 'public')
     {
         $this->storage=$storage;
         $this->nameKey = $nameKey;
@@ -45,13 +45,14 @@ class ImageSaver
 
         $images =$this->request->all()[$this->nameKey];
 
-        foreach ($images as $image){
-            array_push($imageArr,$this->save($image));
+        foreach ($images as $key=>$image){
+            $imageArr += [$key=>$this->save($image)];
         }
 
 
         return $imageArr;
     }
+
 
     public function save(UploadedFile $uploadFile):string
     {
