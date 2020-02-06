@@ -13,11 +13,11 @@ class GroupSeeder extends Seeder
     {
         $data =[
             [
-                'name'=>'Контакты',
+                'name'=>'Contacts',
                 'name_key'=>'contacts'
             ],
             [
-                'name'=>'Емейл',
+                'name'=>'Emails',
                 'name_key'=>'emails'
             ],
             [

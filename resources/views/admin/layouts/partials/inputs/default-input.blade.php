@@ -1,11 +1,9 @@
 <?php /** @var $edit \App\Models\Model */ ?>
 @php
-    $outputLabel = $labelValue ?? true;
-
+    $outputLabel = isset($labelValue)?$outputLabel: true;
     if($outputLabel){
-        echo $value = old($name, ($value ?? (isset($edit) ? $edit->getAttribute($name) : '' ) ) );
+        echo $value = old(inputLanguageName($name), ($value ?? (isset($edit) ? $edit->getAttribute($name) : '' ) ) );
     }
-
 @endphp
 <div class="form-group">
     @if ($errors->has($name)) <p class="text-danger">{{ $errors->first($name) }}</p> @endif
@@ -16,7 +14,7 @@
            class="{{ $inputClass ?? 'form-control' }}"
            autocomplete="{{ $autocomplete ?? 'off' }}"
            {!! $props ?? '' !!}
-           value="{{ $value }}"
+           value="{{ $value??old($name) }}"
     >
 </div>
 

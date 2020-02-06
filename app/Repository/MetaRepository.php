@@ -26,12 +26,15 @@ class MetaRepository extends BaseRepository implements SaveLangDataContract, Cac
      * @return string
      *  Return the model
      */
-    public function model()
+    public function model():string
     {
         return Meta::class;
     }
 
-    function langModel()
+    /**
+     * @return string
+     */
+    function langModel():string
     {
         return MetaLang::class;
     }
@@ -71,7 +74,7 @@ class MetaRepository extends BaseRepository implements SaveLangDataContract, Cac
             $meta = Cache::get($url);
         }
         else {
-            $meta = $this->model->WhereUrl($url)->Active(true)->with('langs')->first();
+            $meta = $this->model->WhereUrl($url)->Active(true)->with('lang')->first();
 
         }
         if ($meta === null) {

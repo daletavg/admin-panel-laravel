@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<div class="wrapper" >
+<div class="wrapper">
 
     <div class="sidebar" data-color="purple" data-background-color="white"
          data-image="">
@@ -32,23 +32,22 @@
     <div class="main-panel">
 
         @include('admin.layouts.partials.header')
-
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-10 offset-1 ">
-                            <div class="card">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title">{{ $cardTitle ?? '' }}</h4>
-                                </div>
-                                <div class="card-body">
-                                    @yield('content')
-                                </div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 offset-1 ">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title">{{ $cardTitle ?? '' }}</h4>
+                            </div>
+                            <div class="card-body">
+                                @yield('content')
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
 </div>

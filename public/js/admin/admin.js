@@ -2798,8 +2798,6 @@ $('[data-img-delete]').on('click', function () {
     imageId: $(this).attr('data-id'),
     editId: $(this).attr('data-edit-id')
   };
-  console.log(sendData);
-  var imageName = $(this).attr('data-name');
   var thisItem = $(this);
   $.ajax('/admin/ajax/delete-image', {
     type: 'POST',
@@ -2808,7 +2806,8 @@ $('[data-img-delete]').on('click', function () {
     },
     data: sendData,
     success: function success() {
-      $('#' + imageName).attr('src', window.origin + '/img/header-logo.svg');
+      var image = thisItem.parents('.image-actions').find('.upload-image-class');
+      image.attr('src', window.origin + '/default.png');
       thisItem.remove();
       alert('Изображение успешно удалено!');
     },
@@ -2833,15 +2832,113 @@ flatpickr("[flatpicker-date-time]", {
 flatpickr("[flatpicker-date]", {
   altInput: true,
   dateFormat: "Y-m-d"
-}); // $("[flatpicker-date]").flatpickr({
-//     enableTime: true,
-//     dateFormat: "Y-m-d H:i",
-// });
-// $("[flatpicker-date-time]").flatpickr({
-//     altInput: true,
-//     altFormat: "F j, Y",
-//     dateFormat: "Y-m-d",
-// });
+});
+flatpickr("[flatpicker-date-inline]", {
+  altInput: true,
+  dateFormat: "Y-m-d",
+  inline: true
+});
+
+var getDataFromTable = function getDataFromTable(id, userInformation, subservice, dateTime, editUrl, deleteUrl, token) {
+  return "<tr>\n\n                <th>".concat(id, "</th>\n                <td>").concat(userInformation, "</td>\n                <td>").concat(subservice, "</td>\n                <td>").concat(dateTime, "</td>\n                <td class=\"text-primary text-right\">\n                    <div class=\"dropdown menu_drop\">\n                        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\"\n                                id=\"dropdownMenuButton_1\"\n                                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                            <i class=\"material-icons\">menu</i>\n                        </button>\n                        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton_1\">\n                            <a href=\"").concat(editUrl, "\"\n                               class=\"dropdown-item\">Edit</a>\n                            <form method=\"POST\" action=\"").concat(deleteUrl, "\"\n                                  accept-charset=\"UTF-8\"\n                                  onsubmit=\"return confirm(&quot;Are you sure you want to delete the entry?&quot;)\">\n                                    <input type=\"hidden\" name=\"_token\" \"").concat(token, "\">\n                                    <input type=\"hidden\" name=\"_method\" value=\"DELETE\">\n                                <button type=\"submit\" class=\"dropdown-item\">Delete</button>\n                            </form>\n\n                        </div>\n                    </div>\n                </td>\n\n            </tr>");
+};
+
+var sendDateTimeBooking = function sendDateTimeBooking(url, date, time) {
+  var serviceLoadData = $('#services-load-data');
+  serviceLoadData.html('');
+  var createUrl = $('#make-bookie').attr('data-url');
+  $('#make-bookie').attr('href', createUrl + "?date=" + date);
+  $.get(url, {
+    date: date,
+    time: time !== undefined ? time : null
+  }).done(function (data) {
+    // console.log(data);
+    data.map(function (item) {
+      serviceLoadData.append(getDataFromTable(item.id, item.userInformation, item.subservice, item.dateTime, item.editUrl, item.deleteUrl, item.token));
+    });
+  }); // for (let i = 0; i < 10; i++) {
+  //
+  // }
+};
+
+var enabledDatepicker = $('[data-selected-datepicker=true]');
+
+if (enabledDatepicker.length) {
+  enabledDatepicker.datepicker({
+    onRenderCell: function onRenderCell(date, cellType) {
+      var currentDate = date.getDate(); // console.log(currentDate);
+      // // Добавляем вспомогательный элемент, если число содержится в `eventDates`
+      // console.log(cellType == 'day' && eventDates.indexOf(currentDate) != -1);
+      // if (cellType == 'day' ) {
+      //     return {
+      //         html: '<span class="red">'+currentDate+'</span>'
+      //     }
+      // }
+    },
+    onShow: function onShow(inst, animationCompleted) {
+      console.log(inst);
+    },
+    onSelect: function onSelect(formattedDate, date, inst) {
+      var url = enabledDatepicker.attr('data-url');
+      sendDateTimeBooking(url, enabledDatepicker[0].value);
+    }
+  });
+  var currentDate = new Date();
+  enabledDatepicker.data('datepicker').selectDate(currentDate);
+}
+
+$('div[data-selectable-time=true]').on('click', function (obj) {
+  var url = $('div[data-url-time]').attr('data-url-time');
+  var time = $(this).attr('data-time');
+  var date = enabledDatepicker[0].value;
+  sendDateTimeBooking(url, date, time);
+});
+var valueOnHideInputForDate = $('div[data-hidden-input=true]');
+
+if (valueOnHideInputForDate.length) {
+  valueOnHideInputForDate.datepicker({
+    // Можно выбрать тольо даты, идущие за сегодняшним днем, включая сегодня
+    minDate: new Date()
+  });
+  $('.time-selector').select2({
+    width: '100%'
+  });
+  valueOnHideInputForDate.datepicker({
+    onSelect: function onSelect(formattedDate, date, inst) {
+      var dateInput = $('input[data-hidden-date]');
+      var currentSelectDate = valueOnHideInputForDate[0].value;
+      dateInput.val(currentSelectDate);
+      var timeSelector = $('.time-selector');
+      var timesUrl = valueOnHideInputForDate.attr('data-times-url');
+      var sendData = {
+        date: currentSelectDate
+      };
+      var selectedTimeForEdit = timeSelector.attr('data-select-time');
+      $.get(timesUrl, sendData).done(function (times) {
+        // console.log(times);
+        timeSelector.html("");
+
+        if (selectedTimeForEdit !== undefined) {
+          var newOption = new Option(selectedTimeForEdit, selectedTimeForEdit, false, false);
+          timeSelector.append(newOption).trigger('change');
+        }
+
+        times.map(function (time) {
+          // console.log(time);
+          var newOption = new Option(time, time, false, false);
+          timeSelector.append(newOption).trigger('change'); // timeSelector.trigger('change');
+        });
+      });
+    }
+  });
+
+  var _currentDate = new Date(valueOnHideInputForDate.attr('data-selected-day'));
+
+  valueOnHideInputForDate.data('datepicker').selectDate(_currentDate);
+} // var currentDate = currentDate = new Date();
+// $('[data-selected-datepicker=true]').data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay()))
+//Activate language on dashboard Language Management
+
 
 $(document).ready(function () {
   $('.active-lang').on('change', function () {
@@ -2860,14 +2957,26 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/sass/public/style.scss":
+/*!******************************************!*\
+  !*** ./resources/sass/public/style.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*******************************************!*\
-  !*** multi ./resources/js/admin/index.js ***!
-  \*******************************************/
+/*!******************************************************************************!*\
+  !*** multi ./resources/js/admin/index.js ./resources/sass/public/style.scss ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/skin-care-laser/resources/js/admin/index.js */"./resources/js/admin/index.js");
+__webpack_require__(/*! /Applications/MAMP/htdocs/skin-care-laser/resources/js/admin/index.js */"./resources/js/admin/index.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/skin-care-laser/resources/sass/public/style.scss */"./resources/sass/public/style.scss");
 
 
 /***/ })

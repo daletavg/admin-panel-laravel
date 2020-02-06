@@ -18,9 +18,11 @@
 <script type="text/javascript" src="{{ asset('js/admin/admin-triggers.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/admin/admin-init.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/admin/init.js') }}" defer></script>
-<script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/color-picker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/admin/select2.full.min.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js"></script>
+<script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
 
 @yield('javascript')
 {{--{!! \Arr::get($sections, 'javascript')!!}--}}

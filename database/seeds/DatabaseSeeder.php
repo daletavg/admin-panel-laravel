@@ -18,7 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(GlobalSeoSettingsSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(TranslateSeeder::class);
+
+        $this->call(StocksSeeder::class);
+        $this->call(BannersSeeder::class);
+        $this->call(ClientsSeeder::class);
+        $this->call(ServicesSeeder::class);
+        $this->call(NewsSeeder::class);
+//        $this->call(TranslateSeeder::class);
 
 
     }

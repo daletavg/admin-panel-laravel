@@ -20,16 +20,15 @@ trait ImageTrait
     }
     public function image()
     {
-        return $this->morphOne('App\Models\Image', 'model')->where('index',0);
+        return $this->morphOne('App\Models\Image', 'model');
     }
 
-    public function deleteImage()
+    public function getImagePath()
     {
-        if(count($images = $this->images()->get())){
-            foreach ($images as $image){
-                ImageSaver::deleteImage($image->path);
-                $image->delete();
-            }
+        $image = $this->image??null;
+        if($image===null){
+            return GetPathToPhoto('');
         }
+        return GetPathToPhoto(imgOrig($image->path)??'');
     }
 }

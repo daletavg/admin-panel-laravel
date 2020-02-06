@@ -26,8 +26,12 @@ class MetaController extends AdminController
         $vars['items'] = $this->itemRepository->metaWithLang()->paginate(15);
         $defaultMeta = $this->itemRepository->getDefaultMeta();
         $vars['edit'] = $defaultMeta;
-        $vars += $this->setLanguagesData('admin.seo.meta.partials.lang-form', $this->itemRepository->langModel(), $defaultMeta->langs);
-
+        if($defaultMeta!==null) {
+            $defaultMeta->load('langs');
+            $vars += $this->setLanguagesData('admin.seo.meta.partials.lang-form', $this->itemRepository->langModel(),$defaultMeta->langs);
+        }else{
+            $vars += $this->setLanguagesData('admin.seo.meta.partials.lang-form', $this->itemRepository->langModel());
+        }
 
         return view('admin.seo.meta.index', $vars);
     }
@@ -36,10 +40,10 @@ class MetaController extends AdminController
     public function create()
     {
         $this->setCardTitle('Создание');
-        $this->setLanguagesData('admin.seo.meta.partials.lang-form',
+        $vars =$this->setLanguagesData('admin.seo.meta.partials.lang-form',
             $this->itemRepository->langModel());
 
-        return view('admin.seo.meta.create');
+        return view('admin.seo.meta.create',$vars);
     }
 
     public function store(Request $request)

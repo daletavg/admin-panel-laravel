@@ -20,12 +20,12 @@ class LanguagesSeeder extends Seeder
             [
                 'name'=>'Українська',
                 'locale'=>'uk',
-                'active'=>true
+                'active'=>false
             ],
             [
                 'name'=>'English',
                 'locale'=>'en',
-                'active'=>true
+                'active'=>false
             ]
 
         ];

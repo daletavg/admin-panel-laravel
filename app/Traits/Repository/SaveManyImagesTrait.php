@@ -9,26 +9,24 @@ use Illuminate\Http\Request;
 
 trait SaveManyImagesTrait
 {
-    public function saveManyImages(int $id,Request $request, string $nameKey = 'images')
+    public function saveManyImages(Request $request, string $nameKey = 'images')
     {
         if($request->has($nameKey))
         {
-            if(is_null($item =  $this->find($id)->manyImages()->first())) {
+            if(is_null( $this->manyImages()->first())) {
                 $gallery = new ManyImages();
-                $item = $this->find($id);
-                $item->manyImages()->save($gallery);
-                $item->manyImages()->first()->saveManyImages($request, $nameKey);
+                $this->manyImages()->save($gallery);
+                $this->manyImages()->first()->saveManyImages($request, $nameKey);
             }else {
-                $this->find($id)->manyImages()->first()->saveManyImages($request, $nameKey);
+                $this->manyImages()->first()->saveManyImages($request, $nameKey);
             }
 
         }
     }
-    public function deleteManyImages($id)
+    public function deleteManyImages()
     {
-        foreach ($this->find($id)->manyImages()->get() as  $item)
+        foreach ($this->manyImages()->get() as  $item)
         {
-            $item->deleteImage();
             $item->delete();
         }
     }

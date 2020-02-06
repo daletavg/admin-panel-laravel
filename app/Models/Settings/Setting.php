@@ -12,6 +12,36 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use phpDocumentor\Reflection\Types\Collection;
 
+/**
+ * App\Models\Settings\Setting
+ *
+ * @property int $id
+ * @property int $type_id
+ * @property int $group_id
+ * @property string $name
+ * @property string $name_key
+ * @property int $has_lang_data
+ * @property string|null $data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Settings\GroupSetting $group
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Settings\SettingLang[] $langs
+ * @property-read int|null $langs_count
+ * @property-read \App\Models\Settings\TypeSetting $type
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereHasLangData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereNameKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings\Setting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Setting extends Model implements HasLangData
 {
     use HasLangDataTrait;

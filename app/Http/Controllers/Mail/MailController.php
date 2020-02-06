@@ -27,7 +27,7 @@ class MailController extends Controller
             $sendData['Телефон:'] = $request->get('phone');
         }
         if($request->has('message')) {
-            $sendData['Сообщение:'] = $request->get('message');
+            $sendData['Сообщение:'] = $request->get('email');
         }
         $this->requestRepository->create([
             'name'=>$request->get('name'),

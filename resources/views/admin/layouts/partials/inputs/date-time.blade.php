@@ -1,5 +1,5 @@
 @php
-    $props = 'flatpicker-date-time';
+    $props = $props ??'flatpicker-date-time';
 @endphp
-@include('admin.layouts.partials.inputs.default-input',['props'=>$props])
+@include('admin.layouts.partials.inputs.default-input',['outputLabel'=>false,'props'=>$props])
 

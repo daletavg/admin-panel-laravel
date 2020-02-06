@@ -11,6 +11,7 @@ abstract class BaseController extends Controller
     private $baseView;
     private $content = null;
 
+
     protected function setSections($sections)
     {
         $this->data['sections'] = $sections;
@@ -30,5 +31,4 @@ abstract class BaseController extends Controller
             $view->with($data);
         });
     }
-    protected function addDataToBaseView(){}
 }

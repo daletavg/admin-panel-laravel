@@ -9,6 +9,31 @@ use App\Traits\Singleton;
 use Illuminate\Support\Arr;
 
 
+/**
+ * App\Models\Meta\Meta
+ *
+ * @property int $id
+ * @property string $url
+ * @property int $type
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Meta\MetaLang[] $langs
+ * @property-read int|null $langs_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model active($active)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta metaWithoutDefault()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Meta\Meta whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model withLang()
+ * @mixin \Eloquent
+ */
 class Meta extends Model implements HasLangData
 {
     use HasLangDataTrait;

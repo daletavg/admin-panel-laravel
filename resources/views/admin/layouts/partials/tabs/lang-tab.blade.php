@@ -16,6 +16,7 @@
     @foreach($locales as $name=>$locale)
         @if(\Illuminate\Support\Arr::has($tabs,$locale))
             <div class="tab-pane {{$loop->iteration==1?'active':''}}" id="link-{{$locale}}" aria-expanded="true">
+
                 {!! \Illuminate\Support\Arr::get($tabs,$locale) !!}
             </div>
         @endif

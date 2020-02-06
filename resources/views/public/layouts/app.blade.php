@@ -5,18 +5,16 @@
     @include('public.layouts.partials.meta')
     @include('public.layouts.partials.styles')
     <title>{{$pageTitle??env('APP_NAME')}}</title>
-    <link rel="shortcut icon" href="{{asset('img/favicon/favicon.ico')}}" type="image/x-icon">
     {!! showMeta('', 'header') !!}
 </head>
 <body>
 @include('public.partials.header')
 
- {!! $content ?? ''!!}
+@yield('content')
 
-
-@include('public.partials.footer')
 @include('public.partials.menu')
 @include('public.partials.modal')
+@include('public.partials.footer')
 <!--   Core JS Files   -->
 @include('public.layouts.partials.scripts')
 {!! showMeta('', 'footer') !!}

@@ -40,7 +40,15 @@ class PermissionSeeder extends Seeder
             \Spatie\Permission\Models\Permission::create(['name' => 'translate']),
             \Spatie\Permission\Models\Permission::create(['name' => 'create_translate']),
             \Spatie\Permission\Models\Permission::create(['name' => 'edit_translate']),
-            \Spatie\Permission\Models\Permission::create(['name' => 'remove_translate']));
+            \Spatie\Permission\Models\Permission::create(['name' => 'remove_translate']),
+
+            \Spatie\Permission\Models\Permission::create(['name' => 'languages']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'power_languages']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'add_languages']),
+            \Spatie\Permission\Models\Permission::create(['name' => 'remove_languages'])
+        );
+
+
 
         foreach ($permissions as $perm){
             $superadmin->givePermissionTo($perm);

@@ -81,7 +81,7 @@ class AjaxController extends Controller
                         \DB::table($table)->where($primary, $id)->update([ 'sort' => $sort ]);
                     }
                     $data[ 'status' ] = 'success';
-                    $data[ 'message' ] = 'Порядок сортировки успешно обновлен';
+                    $data[ 'message' ] = 'Sort successful';
                 }
             } catch ( \Exception $e ) {
                 $data[ 'message' ] = $e->getMessage();

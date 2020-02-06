@@ -70,29 +70,32 @@ if (!function_exists('isActive')) {
         $result = array_key_exists('active',$data);
         return $result;
     }
-
 }
 
-function getSpanStringFromTitle(string $string)
-{
-    if($string === null){
-        return '';
-    }
-    $string = iconv(mb_detect_encoding($string, mb_detect_order(), true), "UTF-8", $string);
-    $array = mb_str_split($string);
-    $arraySpan = [];
-    $newString = '';
-    for ($i=0;$i<count($array);$i++){
-        if(array_key_exists($i+1,$array) && $array[$i+1]===" "){
-            $newString .= "<span class='space-item'>".$array[$i]."</span>\n";
-        }else if ($array[$i]!==" ") {
-            $newString .= "<span>".$array[$i]."</span>\n";
+if(!function_exists('inputLanguageName')){
+    function inputLanguageName(string $name){
+        if(preg_match('/[a-zA-Z]*\[[a-zA-Z]*\]\[[a-zA-Z]*\]/',$name)){
+            return preg_replace('/\]/','',preg_replace('/\[|\]\[/','.',$name));
         }
-
+        return $name;
     }
-
-
-    return $newString;
-
 }
 
+if(!function_exists('activeYesNo')) {
+    function activeYesNo($active)
+    {
+        return $active ? 'Да' : 'Нет';
+    }
+}
+if(!function_exists('minimizeText')) {
+    function minimizeText($newsText, $count = 250)
+    {
+
+
+        if (\Illuminate\Support\Str::length($newsText) <= $count) {
+            return $newsText;
+        }
+        $newNewsText = \Illuminate\Support\Str::limit($newsText,$count);
+        return $newNewsText . "<span>...</span>";
+    }
+}

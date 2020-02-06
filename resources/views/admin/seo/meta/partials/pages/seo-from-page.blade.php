@@ -1,26 +1,26 @@
-<div class="panel panel-default">
-    <div class="panel-body clearfix">
-        <div class="row">
-            <div class="col-8">
-                <form action="" method="get">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-7">
-                                {{--                                @include('admin.partials.crud.default', ['name' => 'search', 'title' => 'Search', 'value' => $request->get('search'),])--}}
-                            </div>
-                            <div class="col-3">
-                                <button class="btn btn-danger" type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                    Поиск
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<div class="panel panel-default">--}}
+{{--    <div class="panel-body clearfix">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-8">--}}
+{{--                <form action="" method="get">--}}
+{{--                    <div class="form-group">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-7">--}}
+{{--                                --}}{{--                                @include('admin.partials.crud.default', ['name' => 'search', 'title' => 'Search', 'value' => $request->get('search'),])--}}
+{{--                            </div>--}}
+{{--                            <div class="col-3">--}}
+{{--                                <button class="btn btn-danger" type="submit">--}}
+{{--                                    <i class="fa fa-search" aria-hidden="true"></i>--}}
+{{--                                    Поиск--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <div class="table-responsive">
     <table class="table table-shopping">
         <thead>

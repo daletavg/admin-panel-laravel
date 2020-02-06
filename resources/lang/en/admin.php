@@ -13,6 +13,11 @@ return [
     */
 
     'localization' => 'Localization',
+    'general'=>[
+        'general'=>'General page',
+        'clear_app_cache'=>'Clear application cache',
+        'cache_successful'=>'Cache deleted successful!'
+    ],
     'settings' => 'Settings',
     'feedback' => 'Feedback',
     'SEO' => [
@@ -83,6 +88,18 @@ return [
         'users'=>'Users',
         'edit'=>'Edit user',
         'create'=>'Create user',
+    ],
+    'login'=>[
+        'username'=>'Username',
+        'password'=>'Password',
+        'remember'=>'Remember',
+        'login_in'=>'Log in',
+        'login'=>'Login'
+    ],
+    'status'=>[
+        'moderation'=>'Moderation',
+        'off'=>'Off',
+        'on'=>'On'
     ]
 
 ];

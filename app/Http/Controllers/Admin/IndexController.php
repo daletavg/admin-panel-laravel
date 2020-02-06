@@ -16,7 +16,7 @@ class IndexController extends AdminController
 
     public function index()
     {
-        $this->setCardTitle('Главная страница');
+        $this->setCardTitle(__('admin.general.general'));
         return view('admin.index.index');
     }
 
@@ -24,6 +24,12 @@ class IndexController extends AdminController
     {
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
-        return redirect()->back()->with('success','Кеш успешно очищен!');
+        return redirect()->back()->with('success',__('admin.general.cache_successful'));
+    }
+
+    public function storage()
+    {
+        Artisan::call('storage:link');
+        return redirect()->back()->with('success','Link has been created!');
     }
 }

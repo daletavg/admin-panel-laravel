@@ -7,6 +7,8 @@
                 <th></th>
                 <th>ID</th>
                 <th>@lang('admin.image')</th>
+                <th>Заголовок</th>
+                <th class="th-description">Описание</th>
                 <th class="text-right">
                     <a href="{{route('admin.banners.create')}}" class="btn btn-primary">@lang('admin.create')</a>
                 </th>
@@ -24,6 +26,12 @@
                     <th>{{ $loop->iteration }}</th>
                     <td>
                         {!!GetImageAdmin($item->getAttribute('image')->path??'')!!}
+                    </td>
+                    <td>
+                        {{$item->getAttribute('title')}}
+                    </td>
+                    <td>
+                        {{$item->getAttribute('description')}}
                     </td>
                     <td class="text-primary text-right">
                         <div class="dropdown menu_drop">

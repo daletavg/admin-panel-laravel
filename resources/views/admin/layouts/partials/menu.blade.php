@@ -4,7 +4,7 @@
     @foreach($menu as $row)
         <li class="nav-item  drop-item {!! activeLink(route($row['link']),'active')!!}">
             <a class="nav-link" href="{{route($row['link'])}}">
-                <span class="icon-left"><i class="material-icons">{{$row['icon']}}</i></span>
+                <span class="icon-left">{!!$row['icon']??''!!}</span>
                 <p>{{$row['name']}}</p>
             </a>
         </li>

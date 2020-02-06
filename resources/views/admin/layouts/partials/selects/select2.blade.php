@@ -1,6 +1,6 @@
 <div>
     <label for="{{$name ?? ''}}">{{$title ?? ''}}</label>
-    <select class="{{ $inputClass ?? '' }} w-100" id="{{$name ??''}}" name="{{$name??''}}" {!! $props ?? '' !!}>
+    <select class="{{ $inputClass ?? ''  }}" id="{{$name ??''}}" name="{{$name??''}}" {!! $props ?? '' !!}>
         @isset($values)
             @foreach($values as $value)
                 @if(isset($check) && $check == $value['id'])

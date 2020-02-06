@@ -40,13 +40,12 @@ trait ManyImagesTarit
     }
 
     /**
-     * @deprecated
+     * @deprecated 
      */
     public function deleteManyImages()
     {
         foreach ($this->manyImages()->get() as  $item)
         {
-            $item->deleteImage();
             $item->delete();
         }
     }

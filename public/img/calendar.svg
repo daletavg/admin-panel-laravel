@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>calendar</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Дизайн" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Kit" transform="translate(-2372.000000, -2659.000000)" fill="#D8D8D8" fill-rule="nonzero">
+            <path d="M2372.5,2660.5 L2372.5,2662.5 L2383.5,2662.5 L2383.5,2660.5 L2372.5,2660.5 Z M2381,2660 L2384,2660 L2384,2671 L2372,2671 L2372,2660 L2375,2660 L2375,2659 L2375.5,2659 L2375.5,2660 L2380.5,2660 L2380.5,2659 L2381,2659 L2381,2660 Z M2383.5,2670.5 L2383.5,2663 L2372.5,2663 L2372.5,2670.5 L2383.5,2670.5 Z M2372.5,2662.5 L2372.5,2660.5 L2375,2660.5 L2375,2661.5 L2375.5,2661.5 L2375.5,2660.5 L2380.5,2660.5 L2380.5,2661.5 L2381,2661.5 L2381,2660.5 L2383.5,2660.5 L2383.5,2662.5 L2372.5,2662.5 Z" id="calendar"></path>
+        </g>
+    </g>
+</svg>

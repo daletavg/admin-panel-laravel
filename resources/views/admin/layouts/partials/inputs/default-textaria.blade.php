@@ -1,6 +1,6 @@
 <?php /** @var $edit \App\Models\Model */ ?>
 @php
-    $value = old($name, ($value ?? (isset($edit) ? $edit->getAttribute($name) : '' ) ) );
+    $value = old(inputLanguageName($name), ($value ?? (isset($edit) ? $edit->getAttribute($name) : '' ) ) );
 @endphp
 <div class="form-group">
     <label for="{{ $name }}" class=" control-label">{{ $title ?? '' }}</label>
